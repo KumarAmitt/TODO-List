@@ -1,10 +1,17 @@
 const mode = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode,
   entry: ['babel-polyfill', './src/index.js'],
-  plugins: [new MiniCssExtractPlugin()],
+  plugins: [
+      new MiniCssExtractPlugin(),
+      new HtmlWebpackPlugin({
+        filename: "index.html",
+        template: "./src/index.html"
+      })
+  ],
   module: {
     rules: [
       {
