@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "NODE_ENV=production webpack --watch",
+    "build:dev": "webpack --watch",
+    "start": "webpack-dev-server --mode development --open"
   },
   "repository": {
     "type": "git",
@@ -16,5 +19,10 @@
   "bugs": {
     "url": "https://github.com/KumarAmitt/TODO-List/issues"
   },
-  "homepage": "https://github.com/KumarAmitt/TODO-List#readme"
+  "homepage": "https://github.com/KumarAmitt/TODO-List#readme",
+  "devDependencies": {
+    "webpack": "^5.36.2",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2"
+  }
 }
