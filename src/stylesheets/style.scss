@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  border: 2px solid red;
+  display: flex;
+  justify-content: space-between;
+
+  .logo {
+    color: darkblue;
+    font-size: 1.2rem;
+  }
+
+}
