@@ -14,3 +14,39 @@ nav {
   }
 
 }
+
+.sidebar {
+  width: 50%;
+  border: 2px solid blue;
+  margin-left: auto;
+  background-color: #3B8C75;
+  color: #fff;
+}
+
+.sidebar-default {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0.5em;
+}
+
+.sb-item {
+  padding: 0.2em 0.5em;
+
+  &:hover {
+    background-color: #316c5b;
+  }
+}
+
+
+.sidebar-projects {
+   h3 {
+     padding: 0.2em 0.5em;
+     background-color: #316c5b;
+   }
+
+  .sb-p-items {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+}
