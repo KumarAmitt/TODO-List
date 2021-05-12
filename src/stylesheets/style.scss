@@ -37,6 +37,7 @@ nav {
   margin-left: auto;
   background-color: #3B8C75;
   color: #fff;
+  display: none;
 }
 
 .sidebar-default {
@@ -83,4 +84,15 @@ nav {
     padding-left: 0;
   }
 
+}
+
+main {
+  margin: 0.5em;
+
+  .category {
+    font-weight: 700;
+    color: #316c5b;
+    border-bottom: 1px solid #63A693;
+    padding: 0.2em 0;
+  }
 }
