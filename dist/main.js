@@ -10796,7 +10796,9 @@ var elements = {
   menu: document.querySelector('.menu'),
   sidebar: document.querySelector('.sidebar'),
   addProject: document.querySelector('.sb-p-title'),
-  newProjectForm: document.querySelector('.new-project')
+  newProjectForm: document.querySelector('.new-project'),
+  newPSubmit: document.querySelector('.new-p-submit'),
+  projectUL: document.querySelector('.sb-p-items')
 };
 elements.menu.addEventListener('click', function () {
   elements.sidebar.classList.toggle('hide');
@@ -10804,6 +10806,19 @@ elements.menu.addEventListener('click', function () {
 elements.addProject.addEventListener('click', function () {
   var formStyle = elements.newProjectForm.style;
   if (formStyle.display === 'none') formStyle.display = 'flex';else formStyle.display = 'none';
+});
+elements.newPSubmit.addEventListener('click', function () {
+  var inputField = document.querySelector('[name = projectName]');
+  var projectName = inputField.value;
+
+  if (projectName.length === 0) {
+    inputField.placeholder = "Field can't be blank";
+  } else {
+    var markup = "<li class=\"sb-p-item sb-item\">".concat(projectName, "</li>");
+    elements.projectUL.insertAdjacentHTML("beforeend", markup);
+  }
+
+  elements.newProjectForm.reset();
 });
 }();
 /******/ })()
