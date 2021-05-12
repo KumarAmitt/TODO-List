@@ -89,7 +89,69 @@ main .category {
   font-weight: 700;
   color: #316c5b;
   border-bottom: 1px solid #63A693;
-  padding: 0.2em 0;
+  padding: 0.5em 0;
+}
+
+.td-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+.td-list-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 0.5em 0;
+  border-bottom: 1px solid #9AD9C7;
+}
+.td-list-item .info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+.td-list-item .info st-f {
+  color: red;
+}
+.td-list-item .info .status {
+  color: green;
+  margin-right: 0.2em;
+}
+.td-list-item .info .pr-h {
+  color: red;
+}
+.td-list-item .info .pr-m {
+  color: blue;
+}
+.td-list-item .info .pr-l {
+  color: goldenrod;
+}
+.td-list-item .info .st-f {
+  text-decoration: line-through;
+  color: gray;
+}
+.td-list-item .info .due-dt {
+  margin-left: 1.2em;
+}
+.td-list-item .btns span {
+  padding: 0.2em;
+}
+.td-list-item .btns .view {
+  color: #316c5b;
+}
+.td-list-item .btns .edit {
+  color: goldenrod;
+}
+.td-list-item .btns .delete {
+  color: red;
 }
 
 /*# sourceMappingURL=main.css.map*/
