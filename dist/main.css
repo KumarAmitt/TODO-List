@@ -3,6 +3,68 @@
   display: none;
 }
 
+main {
+  margin: 0.5em;
+}
+main .category {
+  font-weight: 700;
+  color: #316c5b;
+  border-bottom: 1px solid #63a693;
+  padding: 0.5em 0;
+}
+
+.td-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+.td-list-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em 0;
+  border-bottom: 1px solid #9ad9c7;
+}
+.td-list-item .check {
+  width: 8%;
+}
+.td-list-item .info {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+}
+.td-list-item .info .title {
+  cursor: pointer;
+}
+.td-list-item .info-secondary {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+.td-list-item .info-secondary .due-dt {
+  color: #316c5b;
+}
+.td-list-item .info-secondary .btns span {
+  padding: 0.3em;
+  cursor: pointer;
+}
+.td-list-item .info-secondary .btns .edit {
+  color: blue;
+}
+.td-list-item .info-secondary .btns .delete {
+  color: red;
+}
+
+.pr-h {
+  color: red;
+}
+
+.pr-m {
+  color: blue;
+}
+
+.pr-l {
+  color: gold;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -107,75 +169,6 @@ nav .menu i {
 .sidebar-projects .sb-p-items {
   list-style-type: none;
   padding-left: 0;
-}
-
-main {
-  margin: 0.5em;
-}
-main .category {
-  font-weight: 700;
-  color: #316c5b;
-  border-bottom: 1px solid #63a693;
-  padding: 0.5em 0;
-}
-
-.td-list {
-  list-style-type: none;
-  padding-left: 0;
-}
-.td-list-item {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  padding: 0.5em 0;
-  border-bottom: 1px solid #9ad9c7;
-}
-.td-list-item .info {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-.td-list-item .info .status {
-  color: green;
-  margin-right: 0.2em;
-}
-.td-list-item .info .pr-h {
-  color: red;
-}
-.td-list-item .info .pr-m {
-  color: blue;
-}
-.td-list-item .info .pr-l {
-  color: goldenrod;
-}
-.td-list-item .info .st-f {
-  text-decoration: line-through;
-  color: gray;
-}
-.td-list-item .info .due-dt {
-  margin-left: 1.2em;
-}
-.td-list-item .btns span {
-  padding: 0.2em;
-}
-.td-list-item .btns .view {
-  color: #316c5b;
-}
-.td-list-item .btns .edit {
-  color: goldenrod;
-}
-.td-list-item .btns .delete {
-  color: red;
 }
 
 /*# sourceMappingURL=main.css.map*/

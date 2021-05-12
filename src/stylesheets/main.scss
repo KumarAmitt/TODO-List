@@ -1,0 +1,79 @@
+main {
+  margin: 0.5em;
+
+  .category {
+    font-weight: 700;
+    color: #316c5b;
+    border-bottom: 1px solid #63a693;
+    padding: 0.5em 0;
+  }
+}
+
+.td-list {
+  list-style-type: none;
+  padding-left: 0;
+
+  &-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em 0;
+    border-bottom: 1px solid #9ad9c7;
+
+    .check {
+      width: 8%;
+    }
+
+    .info {
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+
+      .title {
+        cursor: pointer;
+      }
+
+      &-secondary {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.9rem;
+
+        .due-dt {
+          color: #316c5b;
+        }
+
+        .btns {
+
+
+          span {
+            padding: 0.3em;
+            cursor: pointer;
+
+            &:hover {
+
+            }
+          }
+
+          .edit {
+            color: blue;
+          }
+
+          .delete {
+            color: red;
+          }
+        }
+      }
+    }
+  }
+}
+
+.pr-h {
+  color: red;
+}
+
+.pr-m {
+  color: blue;
+}
+
+.pr-l {
+  color: gold;
+}

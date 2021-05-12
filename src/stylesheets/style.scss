@@ -1,4 +1,5 @@
 @import "components";
+@import "main";
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
@@ -107,78 +108,5 @@ nav {
   .sb-p-items {
     list-style-type: none;
     padding-left: 0;
-  }
-}
-
-main {
-  margin: 0.5em;
-
-  .category {
-    font-weight: 700;
-    color: #316c5b;
-    border-bottom: 1px solid #63a693;
-    padding: 0.5em 0;
-  }
-}
-
-.td-list {
-  list-style-type: none;
-  padding-left: 0;
-
-  &-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5em 0;
-    border-bottom: 1px solid #9ad9c7;
-
-    .info {
-      display: flex;
-      flex-direction: column;
-
-      .status {
-        color: green;
-        margin-right: 0.2em;
-      }
-
-      .pr-h {
-        color: red;
-      }
-
-      .pr-m {
-        color: blue;
-      }
-
-      .pr-l {
-        color: goldenrod;
-      }
-
-      .st-f {
-        text-decoration: line-through;
-        color: gray;
-      }
-
-      .due-dt {
-        margin-left: 1.2em;
-      }
-    }
-
-    .btns {
-      span {
-        padding: 0.2em;
-      }
-
-      .view {
-        color: #316c5b;
-      }
-
-      .edit {
-        color: goldenrod;
-      }
-
-      .delete {
-        color: red;
-      }
-    }
   }
 }
