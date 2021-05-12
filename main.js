@@ -10794,10 +10794,16 @@ __webpack_require__.r(__webpack_exports__);
 
 var elements = {
   menu: document.querySelector('.menu'),
-  sidebar: document.querySelector('.sidebar')
+  sidebar: document.querySelector('.sidebar'),
+  addProject: document.querySelector('.sb-p-title'),
+  newProjectForm: document.querySelector('.new-project')
 };
 elements.menu.addEventListener('click', function () {
   elements.sidebar.classList.toggle('hide');
+});
+elements.addProject.addEventListener('click', function () {
+  var formStyle = elements.newProjectForm.style;
+  if (formStyle.display === 'none') formStyle.display = 'flex';else formStyle.display = 'none';
 });
 }();
 /******/ })()

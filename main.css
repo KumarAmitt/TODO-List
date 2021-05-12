@@ -1,4 +1,8 @@
 @import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap);
+.hide {
+  display: none;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -42,10 +46,6 @@ nav .menu i {
   right: 0;
 }
 
-.hide {
-  display: none;
-}
-
 .sidebar-default {
   list-style-type: none;
   padding-left: 0;
@@ -81,6 +81,28 @@ nav .menu i {
 .sidebar-projects .sb-p-title h3 {
   margin: 0;
   padding: 0.2em 0.5em;
+}
+.sidebar-projects .new-project {
+  display: none;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin: 0.5em 0.2em;
+}
+.sidebar-projects .new-project input {
+  border: none;
+  padding: 0.2em;
+  width: 80%;
+  background-color: #bdf2e3;
+}
+.sidebar-projects .new-project input:focus {
+  outline: none;
+}
+.sidebar-projects .new-project i {
+  color: #bdf2e3;
+}
+.sidebar-projects .new-project i:hover {
+  color: #fff;
 }
 .sidebar-projects .sb-p-items {
   list-style-type: none;
