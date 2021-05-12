@@ -6,11 +6,11 @@ module.exports = {
   mode,
   entry: ['babel-polyfill', './src/index.js'],
   plugins: [
-      new MiniCssExtractPlugin(),
-      new HtmlWebpackPlugin({
-        filename: "index.html",
-        template: "./src/index.html"
-      })
+    new MiniCssExtractPlugin(),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: './src/index.html',
+    }),
   ],
   module: {
     rules: [

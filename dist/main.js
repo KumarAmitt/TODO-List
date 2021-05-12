@@ -10792,7 +10792,13 @@ define(String.prototype, "padRight", "".padEnd);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _stylesheets_style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./stylesheets/style.scss */ "./src/stylesheets/style.scss");
 
-console.log('Hello');
+var elements = {
+  menu: document.querySelector('.menu'),
+  sidebar: document.querySelector('.sidebar')
+};
+elements.menu.addEventListener('click', function () {
+  elements.sidebar.classList.toggle('hide');
+});
 }();
 /******/ })()
 ;
