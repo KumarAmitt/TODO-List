@@ -6,6 +6,18 @@ main {
     color: #316c5b;
     border-bottom: 1px solid #63a693;
     padding: 0.5em 0;
+    display: flex;
+    justify-content: space-between;
+
+    .new-todo {
+      color: red;
+      cursor: pointer;
+      transition: all 0.3s linear;
+
+      &:hover {
+        transform: scale(1.4);
+      }
+    }
   }
 }
 
@@ -36,6 +48,7 @@ main {
         display: flex;
         justify-content: space-between;
         font-size: 0.9rem;
+        margin-top: 0.4em;
 
         .due-dt {
           color: #316c5b;
@@ -76,4 +89,9 @@ main {
 
 .pr-l {
   color: gold;
+}
+
+.st-f {
+  text-decoration: line-through;
+  color: gray;
 }

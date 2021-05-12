@@ -11,6 +11,16 @@ main .category {
   color: #316c5b;
   border-bottom: 1px solid #63a693;
   padding: 0.5em 0;
+  display: flex;
+  justify-content: space-between;
+}
+main .category .new-todo {
+  color: red;
+  cursor: pointer;
+  transition: all 0.3s linear;
+}
+main .category .new-todo:hover {
+  transform: scale(1.4);
 }
 
 .td-list {
@@ -38,6 +48,7 @@ main .category {
   display: flex;
   justify-content: space-between;
   font-size: 0.9rem;
+  margin-top: 0.4em;
 }
 .td-list-item .info-secondary .due-dt {
   color: #316c5b;
@@ -63,6 +74,11 @@ main .category {
 
 .pr-l {
   color: gold;
+}
+
+.st-f {
+  text-decoration: line-through;
+  color: gray;
 }
 
 body {
