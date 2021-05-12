@@ -93,6 +93,71 @@ main {
     font-weight: 700;
     color: #316c5b;
     border-bottom: 1px solid #63A693;
-    padding: 0.2em 0;
+    padding: 0.5em 0;
+  }
+}
+
+.td-list {
+  list-style-type: none;
+  padding-left: 0;
+
+  &-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em 0;
+    border-bottom: 1px solid #9AD9C7;
+
+    .info {
+      display: flex;
+      flex-direction: column;
+st-f {
+        color: red;
+      }
+      .status {
+        color: green;
+        margin-right: 0.2em;
+      }
+
+      .pr-h {
+        color: red;
+      }
+
+      .pr-m {
+        color: blue;
+      }
+
+      .pr-l {
+        color: goldenrod;
+      }
+
+      .st-f {
+        text-decoration: line-through;
+        color: gray;
+      }
+
+      .due-dt {
+        margin-left: 1.2em;
+      }
+    }
+
+    .btns {
+
+      span{
+        padding: 0.2em;
+      }
+
+      .view {
+        color: #316c5b;
+      }
+
+      .edit {
+        color: goldenrod;
+      }
+
+      .delete {
+        color: red;
+      }
+    }
   }
 }
