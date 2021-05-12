@@ -1,3 +1,5 @@
+@import "components";
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
 body {
@@ -40,10 +42,6 @@ nav {
   right: 0;
 }
 
-.hide {
-  display: none;
-}
-
 .sidebar-default {
   list-style-type: none;
   padding-left: 0;
@@ -77,6 +75,31 @@ nav {
     h3 {
       margin: 0;
       padding: 0.2em 0.5em;
+    }
+  }
+
+  .new-project {
+    display: none;
+    justify-content: space-between;
+    margin: 0.5em 0.2em;
+
+    input {
+      border: none;
+      padding: 0.2em;
+      width: 80%;
+      background-color: #bdf2e3;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    i {
+      color: #bdf2e3;
+
+      &:hover {
+        color: #fff;
+      }
     }
   }
 
