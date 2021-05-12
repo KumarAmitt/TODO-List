@@ -101,6 +101,44 @@
 
   </main>
 
+  <div class="todo-form">
+    <div class="project-category">Project ONE</div>
+
+    <form>
+      <div class="todo-title">
+        <input type="text" name="title" placeholder="Title" required>
+      </div>
+
+      <div class="todo-desc">
+        <textarea name="desc" placeholder="Description" required></textarea>
+      </div>
+
+      <div class="todo-ddt">
+        <label for="due-dt">Due Date</label>
+        <input type="datetime-local" id="due-dt" required>
+      </div>
+
+      <div class="todo-priority">
+        <p>Select Priority of the Task</p>
+        <label class="high">
+          <input type="radio" name="priority" value="high">
+          High
+        </label>
+        <label class="Medium">
+          <input type="radio" name="priority" value="high">
+          Medium
+        </label>
+        <label class="Low">
+          <input type="radio" name="priority" value="high">
+          Low
+        </label>
+      </div>
+      <div class="todo-submit">
+        <input type="submit" value="Create TODO">
+      </div>
+    </form>
+  </div>
+
 
 
 <script src="https://kit.fontawesome.com/cec8e0eed3.js" crossorigin="anonymous"></script>
