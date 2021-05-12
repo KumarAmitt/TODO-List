@@ -5,6 +5,7 @@
 
 main {
   margin: 0.5em;
+  display: none;
 }
 main .category {
   font-weight: 700;
