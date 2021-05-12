@@ -102,9 +102,16 @@
   </main>
 
   <div class="todo-form">
-    <div class="project-category">Project ONE</div>
 
     <form>
+      <div class="todo-project">
+        <label for="category">Select Project</label>
+        <select id="category" name="category">
+          <option value="Project ONE" selected>Project ONE</option>
+          <option value="Project ONE">Project TWO</option>
+        </select>
+      </div>
+
       <div class="todo-title">
         <input type="text" name="title" placeholder="Title" required>
       </div>
