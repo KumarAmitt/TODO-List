@@ -1,4 +1,6 @@
 @import "components";
+@import "nav";
+@import "sidebar";
 @import "main";
 @import "todo_form";
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
@@ -7,110 +9,4 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Montserrat', sans-serif;
-}
-
-nav {
-  display: flex;
-  justify-content: space-between;
-  background-color: #3b8c75;
-  padding: 0.5em;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-
-  .logo {
-    color: #bdf2e3;
-    font-size: 1.2rem;
-    font-weight: 700;
-  }
-
-  .menu {
-    padding: 0.2em;
-    cursor: pointer;
-
-    i {
-      font-size: 1.4rem;
-      color: #bdf2e3;
-    }
-  }
-}
-
-.sidebar {
-  border: 1px solid #63a693;
-  width: 50%;
-  margin-left: auto;
-  background-color: #3b8c75;
-  color: #fff;
-  position: fixed;
-  right: 0;
-  top: 2.8em;
-}
-
-.sidebar-default {
-  list-style-type: none;
-  padding-left: 0;
-  margin-top: 0.5em;
-}
-
-.sb-item {
-  padding: 0.2em 0.5em;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #316c5b;
-  }
-}
-
-.sidebar-projects {
-  .sb-p-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-right: 1.5em;
-    //background-color: #316c5b;
-    border: 1px solid #63a693;
-    cursor: pointer;
-
-    &:hover {
-      background-color: #9ad9c7;
-      color: #316c5b;
-    }
-
-    h3 {
-      margin: 0;
-      padding: 0.2em 0.5em;
-    }
-  }
-
-  .new-project {
-    display: none;
-    justify-content: space-between;
-    margin: 0.5em 0.2em;
-
-    input {
-      border: none;
-      padding: 0.2em;
-      width: 80%;
-      background-color: #bdf2e3;
-
-      &:focus {
-        outline: none;
-      }
-    }
-
-    i {
-      color: #bdf2e3;
-
-      &:hover {
-        color: #fff;
-      }
-    }
-  }
-
-  .sb-p-items {
-    list-style-type: none;
-    padding-left: 0;
-  }
 }
