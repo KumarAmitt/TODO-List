@@ -21,6 +21,8 @@ elements.addProject.addEventListener('click', () => {
     formStyle.display = 'none';
 });
 
+const projects = {};
+
 elements.newPSubmit.addEventListener('click', () => {
   const inputField = document.querySelector('[name = projectName]');
   let projectName = inputField.value;

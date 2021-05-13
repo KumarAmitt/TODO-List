@@ -105,7 +105,6 @@
 
     <form>
       <div class="todo-project">
-        <label for="category">Select Project</label>
         <select id="category" name="category">
           <option value="Project ONE" selected>Project ONE</option>
           <option value="Project ONE">Project TWO</option>
@@ -117,7 +116,7 @@
       </div>
 
       <div class="todo-desc">
-        <textarea name="desc" placeholder="Description" required></textarea>
+        <textarea name="desc" placeholder="Description" maxlength="300" required></textarea>
       </div>
 
       <div class="todo-ddt">
@@ -127,21 +126,21 @@
 
       <div class="todo-priority">
         <p>Select Priority of the Task</p>
-        <label class="high">
+        <label class="pr-h">
           <input type="radio" name="priority" value="high">
           High
         </label>
-        <label class="Medium">
+        <label class="pr-m">
           <input type="radio" name="priority" value="high">
           Medium
         </label>
-        <label class="Low">
+        <label class="pr-l">
           <input type="radio" name="priority" value="high">
           Low
         </label>
       </div>
       <div class="todo-submit">
-        <input type="submit" value="Create TODO">
+        <input class="submit" type="submit" value="Create TODO">
       </div>
     </form>
   </div>
