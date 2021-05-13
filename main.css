@@ -4,7 +4,7 @@
 }
 
 main {
-  margin: 0.5em;
+  margin: 3.5em 0.5em 0.5em 0.5em;
   display: none;
 }
 main .category {
@@ -83,7 +83,8 @@ main .category .new-todo:hover {
 }
 
 .todo-form {
-  margin: 0.5em;
+  margin: 2.8em 0.5em;
+  border: 1px solid transparent;
 }
 
 form > * {
@@ -130,7 +131,7 @@ select:focus {
   position: fixed;
   bottom: 0;
   left: 0;
-  padding: 1em;
+  padding: 0.8em;
 }
 .todo-submit .submit:hover {
   background-color: #316c5b;
@@ -154,6 +155,10 @@ nav {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 nav .logo {
   color: #bdf2e3;
@@ -177,6 +182,7 @@ nav .menu i {
   color: #fff;
   position: fixed;
   right: 0;
+  top: 2.8em;
 }
 
 .sidebar-default {
