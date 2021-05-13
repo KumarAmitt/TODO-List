@@ -11,7 +11,20 @@ form label {
   margin-bottom: 0.5em;
 }
 
-form input:not([type='radio']), textarea, select {
+select {
+  background-color: #fff;
+}
+
+textarea {
+  height: 30vh;
+  resize: none;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+form input:not([type='radio']),
+textarea,
+select {
   width: 100%;
   box-sizing: border-box;
   padding: 0.4em;
@@ -24,26 +37,17 @@ form input:not([type='radio']), textarea, select {
   }
 }
 
-select{
-  background-color: #fff;
-}
-
-textarea {
-  height: 30vh;
-  resize: none;
-  font-size: 0.9rem;
-  line-height: 1.4;
-}
-
-.todo-submit .submit{
+.todo-submit .submit {
   border-bottom: none;
   background-color: #3b8c75;
   color: #bdf2e3;
   font-weight: 700;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 1em;
 
   &:hover {
     background-color: #316c5b;
   }
 }
-
-

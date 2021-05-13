@@ -10813,10 +10813,10 @@ elements.newPSubmit.addEventListener('click', function () {
   var projectName = inputField.value;
 
   if (projectName.length === 0) {
-    inputField.placeholder = "Field can't be blank";
+    inputField.placeholder = 'Field can\'t be blank';
   } else {
     var markup = "<li class=\"sb-p-item sb-item\">".concat(projectName, "</li>");
-    elements.projectUL.insertAdjacentHTML("beforeend", markup);
+    elements.projectUL.insertAdjacentHTML('beforeend', markup);
   }
 
   elements.newProjectForm.reset();
