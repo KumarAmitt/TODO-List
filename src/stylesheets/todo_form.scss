@@ -1,5 +1,6 @@
 .todo-form {
-  margin: 0.5em;
+  margin: 2.8em 0.5em;
+  border: 1px solid transparent;
 }
 
 form > * {
@@ -45,7 +46,7 @@ select {
   position: fixed;
   bottom: 0;
   left: 0;
-  padding: 1em;
+  padding: 0.8em;
 
   &:hover {
     background-color: #316c5b;

@@ -15,6 +15,10 @@ nav {
   background-color: #3b8c75;
   padding: 0.5em;
   align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 
   .logo {
     color: #bdf2e3;
@@ -41,6 +45,7 @@ nav {
   color: #fff;
   position: fixed;
   right: 0;
+  top: 2.8em;
 }
 
 .sidebar-default {
