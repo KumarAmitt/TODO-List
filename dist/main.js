@@ -10809,6 +10809,12 @@ elements.addProject.addEventListener('click', function () {
   if (formStyle.display === 'none') formStyle.display = 'flex';else formStyle.display = 'none';
 });
 var projects = [];
+
+var updateProjectOptions = function updateProjectOptions(projectName) {
+  var markup = "<option value=\"".concat(projectName, "\">").concat(projectName, "</option>");
+  elements.category.insertAdjacentHTML("beforeend", markup);
+};
+
 elements.newPSubmit.addEventListener('click', function () {
   var inputField = document.querySelector('[name = projectName]');
   var projectName = inputField.value;
@@ -10819,6 +10825,7 @@ elements.newPSubmit.addEventListener('click', function () {
     var markup = "<li class=\"sb-p-item sb-item\">".concat(projectName, "</li>");
     elements.projectUL.insertAdjacentHTML('beforeend', markup);
     projects.push(projectName);
+    updateProjectOptions(projectName);
   }
 
   elements.newProjectForm.reset();

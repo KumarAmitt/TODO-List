@@ -22,7 +22,10 @@ elements.addProject.addEventListener('click', () => {
 
 const projects = [];
 
-
+const updateProjectOptions = (projectName) => {
+  const markup = `<option value="${projectName}">${projectName}</option>`;
+  elements.category.insertAdjacentHTML("beforeend", markup);
+}
 
 elements.newPSubmit.addEventListener('click', () => {
   const inputField = document.querySelector('[name = projectName]');
@@ -34,7 +37,7 @@ elements.newPSubmit.addEventListener('click', () => {
     const markup = `<li class="sb-p-item sb-item">${projectName}</li>`;
     elements.projectUL.insertAdjacentHTML('beforeend', markup);
     projects.push(projectName);
-
+    updateProjectOptions(projectName);
   }
   elements.newProjectForm.reset();
 });
