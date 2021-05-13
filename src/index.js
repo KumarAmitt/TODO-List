@@ -1,6 +1,7 @@
 import './stylesheets/style.scss';
 import elements from './js/base'
-import uniqid from 'uniqid';
+import Todo from "./js/Todo";
+
 
 const projects = {
   'Project I': {
@@ -30,7 +31,7 @@ const projects = {
       ddt: '2021-05-14',
       priority: 'low'
     }
-  },
+  }
 }
 
 elements.menu.addEventListener('click', () => {
@@ -59,7 +60,7 @@ elements.newPSubmit.addEventListener('click', () => {
     const markup = `<li class="sb-p-item sb-item">${projectName}</li>`;
     elements.projectUL.insertAdjacentHTML('beforeend', markup);
     projects[projectName] = {}
-    updateProjectOptions(projectName);
+    updateProjectOptions(projects);
   }
   elements.newProjectForm.reset();
 });
@@ -77,5 +78,6 @@ document.getElementById('todoForm').addEventListener('submit', (e) => {
   console.log(`Desc: ${desc}`);
   console.log(`Due date: ${ddt}`);
   console.log(`Priority: ${priority}`);
+
 
 })
