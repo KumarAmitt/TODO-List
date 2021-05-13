@@ -10715,6 +10715,46 @@ __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
 
+/***/ }),
+
+/***/ "./node_modules/uniqid/index.js":
+/*!**************************************!*\
+  !*** ./node_modules/uniqid/index.js ***!
+  \**************************************/
+/***/ (function(module) {
+
+/* 
+(The MIT License)
+Copyright (c) 2014-2021 Halász Ádám <adam@aimform.com>
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+//  Unique Hexatridecimal ID Generator
+// ================================================
+
+//  Dependencies
+// ================================================
+var pid = typeof process !== 'undefined' && process.pid ? process.pid.toString(36) : '' ;
+var address = '';
+if(false){ var i, mac, networkInterfaces; } 
+
+//  Exports
+// ================================================
+module.exports = module.exports.default = function(prefix, suffix){ return (prefix ? prefix : '') + address + pid + now().toString(36) + (suffix ? suffix : ''); }
+module.exports.process = function(prefix, suffix){ return (prefix ? prefix : '') + pid + now().toString(36) + (suffix ? suffix : ''); }
+module.exports.time    = function(prefix, suffix){ return (prefix ? prefix : '') + now().toString(36) + (suffix ? suffix : ''); }
+
+//  Helpers
+// ================================================
+function now(){
+    var time = Date.now();
+    var last = now.last || time;
+    return now.last = time > last ? time : last + 1;
+}
+
+
 /***/ })
 
 /******/ 	});
@@ -10744,6 +10784,30 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	!function() {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = function(module) {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				function() { return module['default']; } :
+/******/ 				function() { return module; };
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	!function() {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = function(exports, definition) {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	}();
+/******/ 	
 /******/ 	/* webpack/runtime/global */
 /******/ 	!function() {
 /******/ 		__webpack_require__.g = (function() {
@@ -10754,6 +10818,11 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 				if (typeof window === 'object') return window;
 /******/ 			}
 /******/ 		})();
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	!function() {
+/******/ 		__webpack_require__.o = function(obj, prop) { return Object.prototype.hasOwnProperty.call(obj, prop); }
 /******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
@@ -10813,8 +10882,41 @@ define(String.prototype, "padRight", "".padEnd);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _stylesheets_style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./stylesheets/style.scss */ "./src/stylesheets/style.scss");
 /* harmony import */ var _js_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/base */ "./src/js/base.js");
+/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! uniqid */ "./node_modules/uniqid/index.js");
+/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_2__);
 
 
+
+var projects = {
+  'Project I': {
+    'id1': {
+      title: 'Project 1, Task 1',
+      desc: 'Say hi to everyone',
+      ddt: '2021-05-14',
+      priority: 'high'
+    },
+    'id2': {
+      title: 'Project 1, Task 2',
+      desc: 'Say hello to everyone',
+      ddt: '2021-05-14',
+      priority: 'medium'
+    }
+  },
+  'Project II': {
+    'id11': {
+      title: 'Project 2, Task 1',
+      desc: 'Say bye to everyone',
+      ddt: '2021-05-14',
+      priority: 'high'
+    },
+    'id12': {
+      title: 'Project 2, Task 2',
+      desc: 'Say good bye to everyone',
+      ddt: '2021-05-14',
+      priority: 'low'
+    }
+  }
+};
 _js_base__WEBPACK_IMPORTED_MODULE_1__.default.menu.addEventListener('click', function () {
   _js_base__WEBPACK_IMPORTED_MODULE_1__.default.sidebar.classList.toggle('hide');
 });
@@ -10822,7 +10924,6 @@ _js_base__WEBPACK_IMPORTED_MODULE_1__.default.addProject.addEventListener('click
   var formStyle = _js_base__WEBPACK_IMPORTED_MODULE_1__.default.newProjectForm.style;
   if (formStyle.display === 'none') formStyle.display = 'flex';else formStyle.display = 'none';
 });
-var projects = [];
 
 var updateProjectOptions = function updateProjectOptions(projectName) {
   var markup = "<option value=\"".concat(projectName, "\">").concat(projectName, "</option>");
@@ -10838,7 +10939,7 @@ _js_base__WEBPACK_IMPORTED_MODULE_1__.default.newPSubmit.addEventListener('click
   } else {
     var markup = "<li class=\"sb-p-item sb-item\">".concat(projectName, "</li>");
     _js_base__WEBPACK_IMPORTED_MODULE_1__.default.projectUL.insertAdjacentHTML('beforeend', markup);
-    projects.push(projectName);
+    projects[projectName] = {};
     updateProjectOptions(projectName);
   }
 
