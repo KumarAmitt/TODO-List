@@ -1,5 +1,37 @@
 import './stylesheets/style.scss';
 import elements from './js/base'
+import uniqid from 'uniqid';
+
+const projects = {
+  'Project I': {
+   'id1' : {
+     title: 'Project 1, Task 1',
+     desc: 'Say hi to everyone',
+     ddt: '2021-05-14',
+     priority: 'high'
+   },
+    'id2': {
+      title: 'Project 1, Task 2',
+      desc: 'Say hello to everyone',
+      ddt: '2021-05-14',
+      priority: 'medium'
+    }
+  },
+  'Project II': {
+    'id11' : {
+      title: 'Project 2, Task 1',
+      desc: 'Say bye to everyone',
+      ddt: '2021-05-14',
+      priority: 'high'
+    },
+    'id12': {
+      title: 'Project 2, Task 2',
+      desc: 'Say good bye to everyone',
+      ddt: '2021-05-14',
+      priority: 'low'
+    }
+  },
+}
 
 elements.menu.addEventListener('click', () => {
   elements.sidebar.classList.toggle('hide');
@@ -11,7 +43,6 @@ elements.addProject.addEventListener('click', () => {
   else formStyle.display = 'none';
 });
 
-const projects = [];
 
 const updateProjectOptions = (projectName) => {
   const markup = `<option value="${projectName}">${projectName}</option>`;
@@ -27,7 +58,7 @@ elements.newPSubmit.addEventListener('click', () => {
   } else {
     const markup = `<li class="sb-p-item sb-item">${projectName}</li>`;
     elements.projectUL.insertAdjacentHTML('beforeend', markup);
-    projects.push(projectName);
+    projects[projectName] = {}
     updateProjectOptions(projectName);
   }
   elements.newProjectForm.reset();
@@ -40,7 +71,6 @@ document.getElementById('todoForm').addEventListener('submit', (e) => {
   const desc = document.getElementById('desc').value;
   const ddt = document.getElementById('due-dt').value;
   const priority = document.getElementById('todoForm').elements.priority.value
-
 
   console.log(`project: ${project}`);
   console.log(`Title: ${title}`);
