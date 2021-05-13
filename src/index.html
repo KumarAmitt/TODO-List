@@ -103,25 +103,25 @@
 
   <div class="todo-form">
 
-    <form>
+    <form id="todoForm">
       <div class="todo-project">
         <select id="category" name="category">
           <option value="Project ONE" selected>Project ONE</option>
-          <option value="Project ONE">Project TWO</option>
+          <option value="Project TWO">Project TWO</option>
         </select>
       </div>
 
       <div class="todo-title">
-        <input type="text" name="title" placeholder="Title" required>
+        <input type="text" name="title" id="title" placeholder="Title">
       </div>
 
       <div class="todo-desc">
-        <textarea name="desc" placeholder="Write more about your TODO..." maxlength="300" required></textarea>
+        <textarea name="desc" id="desc" placeholder="Write more about your TODO..." maxlength="300"></textarea>
       </div>
 
       <div class="todo-ddt">
         <label for="due-dt">Due Date</label>
-        <input type="datetime-local" id="due-dt" required>
+        <input type="datetime-local" id="due-dt">
       </div>
 
       <div class="todo-priority">
@@ -131,11 +131,11 @@
           High
         </label>
         <label class="pr-m">
-          <input type="radio" name="priority" value="high">
+          <input type="radio" name="priority" value="medium">
           Medium
         </label>
         <label class="pr-l">
-          <input type="radio" name="priority" value="high">
+          <input type="radio" name="priority" value="low">
           Low
         </label>
       </div>

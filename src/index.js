@@ -7,6 +7,7 @@ const elements = {
   newProjectForm: document.querySelector('.new-project'),
   newPSubmit: document.querySelector('.new-p-submit'),
   projectUL: document.querySelector('.sb-p-items'),
+  category: document.getElementById('category')
 };
 
 elements.menu.addEventListener('click', () => {
@@ -19,7 +20,9 @@ elements.addProject.addEventListener('click', () => {
   else formStyle.display = 'none';
 });
 
-const projects = {};
+const projects = [];
+
+
 
 elements.newPSubmit.addEventListener('click', () => {
   const inputField = document.querySelector('[name = projectName]');
@@ -30,7 +33,25 @@ elements.newPSubmit.addEventListener('click', () => {
   } else {
     const markup = `<li class="sb-p-item sb-item">${projectName}</li>`;
     elements.projectUL.insertAdjacentHTML('beforeend', markup);
-  }
+    projects.push(projectName);
 
+  }
   elements.newProjectForm.reset();
 });
+
+document.getElementById('todoForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const project = document.getElementById('category').value;
+  const title = document.getElementById('title').value
+  const desc = document.getElementById('desc').value;
+  const ddt = document.getElementById('due-dt').value;
+  const priority = document.getElementById('todoForm').elements.priority.value
+
+
+  console.log(`project: ${project}`);
+  console.log(`Title: ${title}`);
+  console.log(`Desc: ${desc}`);
+  console.log(`Due date: ${ddt}`);
+  console.log(`Priority: ${priority}`);
+
+})
