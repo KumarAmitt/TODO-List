@@ -10798,7 +10798,8 @@ var elements = {
   addProject: document.querySelector('.sb-p-title'),
   newProjectForm: document.querySelector('.new-project'),
   newPSubmit: document.querySelector('.new-p-submit'),
-  projectUL: document.querySelector('.sb-p-items')
+  projectUL: document.querySelector('.sb-p-items'),
+  category: document.getElementById('category')
 };
 elements.menu.addEventListener('click', function () {
   elements.sidebar.classList.toggle('hide');
@@ -10807,7 +10808,7 @@ elements.addProject.addEventListener('click', function () {
   var formStyle = elements.newProjectForm.style;
   if (formStyle.display === 'none') formStyle.display = 'flex';else formStyle.display = 'none';
 });
-var projects = {};
+var projects = [];
 elements.newPSubmit.addEventListener('click', function () {
   var inputField = document.querySelector('[name = projectName]');
   var projectName = inputField.value;
@@ -10817,9 +10818,23 @@ elements.newPSubmit.addEventListener('click', function () {
   } else {
     var markup = "<li class=\"sb-p-item sb-item\">".concat(projectName, "</li>");
     elements.projectUL.insertAdjacentHTML('beforeend', markup);
+    projects.push(projectName);
   }
 
   elements.newProjectForm.reset();
+});
+document.getElementById('todoForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var project = document.getElementById('category').value;
+  var title = document.getElementById('title').value;
+  var desc = document.getElementById('desc').value;
+  var ddt = document.getElementById('due-dt').value;
+  var priority = document.getElementById('todoForm').elements.priority.value;
+  console.log("project: ".concat(project));
+  console.log("Title: ".concat(title));
+  console.log("Desc: ".concat(desc));
+  console.log("Due date: ".concat(ddt));
+  console.log("Priority: ".concat(priority));
 });
 }();
 /******/ })()
