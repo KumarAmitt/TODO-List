@@ -3,6 +3,23 @@
   display: none;
 }
 
+.pr-h {
+  color: red;
+}
+
+.pr-m {
+  color: royalblue;
+}
+
+.pr-l {
+  color: green;
+}
+
+.st-f {
+  text-decoration: line-through;
+  color: gray;
+}
+
 nav {
   display: flex;
   justify-content: space-between;
@@ -154,23 +171,6 @@ main .category .new-todo:hover {
 }
 .td-list-item .info-secondary .btns .delete {
   color: red;
-}
-
-.pr-h {
-  color: red;
-}
-
-.pr-m {
-  color: blue;
-}
-
-.pr-l {
-  color: green;
-}
-
-.st-f {
-  text-decoration: line-through;
-  color: gray;
 }
 
 .todo-form {
