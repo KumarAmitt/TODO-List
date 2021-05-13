@@ -1,6 +1,27 @@
 /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/js/base.js":
+/*!************************!*\
+  !*** ./src/js/base.js ***!
+  \************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var elements = {
+  menu: document.querySelector('.menu'),
+  sidebar: document.querySelector('.sidebar'),
+  addProject: document.querySelector('.sb-p-title'),
+  newProjectForm: document.querySelector('.new-project'),
+  newPSubmit: document.querySelector('.new-p-submit'),
+  projectUL: document.querySelector('.sb-p-items'),
+  category: document.getElementById('category')
+};
+/* harmony default export */ __webpack_exports__["default"] = (elements);
+
+/***/ }),
+
 /***/ "./node_modules/babel-polyfill/node_modules/regenerator-runtime/runtime.js":
 /*!*********************************************************************************!*\
   !*** ./node_modules/babel-polyfill/node_modules/regenerator-runtime/runtime.js ***!
@@ -10791,31 +10812,24 @@ define(String.prototype, "padRight", "".padEnd);
   \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _stylesheets_style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./stylesheets/style.scss */ "./src/stylesheets/style.scss");
+/* harmony import */ var _js_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/base */ "./src/js/base.js");
 
-var elements = {
-  menu: document.querySelector('.menu'),
-  sidebar: document.querySelector('.sidebar'),
-  addProject: document.querySelector('.sb-p-title'),
-  newProjectForm: document.querySelector('.new-project'),
-  newPSubmit: document.querySelector('.new-p-submit'),
-  projectUL: document.querySelector('.sb-p-items'),
-  category: document.getElementById('category')
-};
-elements.menu.addEventListener('click', function () {
-  elements.sidebar.classList.toggle('hide');
+
+_js_base__WEBPACK_IMPORTED_MODULE_1__.default.menu.addEventListener('click', function () {
+  _js_base__WEBPACK_IMPORTED_MODULE_1__.default.sidebar.classList.toggle('hide');
 });
-elements.addProject.addEventListener('click', function () {
-  var formStyle = elements.newProjectForm.style;
+_js_base__WEBPACK_IMPORTED_MODULE_1__.default.addProject.addEventListener('click', function () {
+  var formStyle = _js_base__WEBPACK_IMPORTED_MODULE_1__.default.newProjectForm.style;
   if (formStyle.display === 'none') formStyle.display = 'flex';else formStyle.display = 'none';
 });
 var projects = [];
 
 var updateProjectOptions = function updateProjectOptions(projectName) {
   var markup = "<option value=\"".concat(projectName, "\">").concat(projectName, "</option>");
-  elements.category.insertAdjacentHTML("beforeend", markup);
+  _js_base__WEBPACK_IMPORTED_MODULE_1__.default.category.insertAdjacentHTML("beforeend", markup);
 };
 
-elements.newPSubmit.addEventListener('click', function () {
+_js_base__WEBPACK_IMPORTED_MODULE_1__.default.newPSubmit.addEventListener('click', function () {
   var inputField = document.querySelector('[name = projectName]');
   var projectName = inputField.value;
 
@@ -10823,12 +10837,12 @@ elements.newPSubmit.addEventListener('click', function () {
     inputField.placeholder = 'Field can\'t be blank';
   } else {
     var markup = "<li class=\"sb-p-item sb-item\">".concat(projectName, "</li>");
-    elements.projectUL.insertAdjacentHTML('beforeend', markup);
+    _js_base__WEBPACK_IMPORTED_MODULE_1__.default.projectUL.insertAdjacentHTML('beforeend', markup);
     projects.push(projectName);
     updateProjectOptions(projectName);
   }
 
-  elements.newProjectForm.reset();
+  _js_base__WEBPACK_IMPORTED_MODULE_1__.default.newProjectForm.reset();
 });
 document.getElementById('todoForm').addEventListener('submit', function (e) {
   e.preventDefault();
