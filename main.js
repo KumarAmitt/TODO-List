@@ -1,6 +1,46 @@
 /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/js/Todo.js":
+/*!************************!*\
+  !*** ./src/js/Todo.js ***!
+  \************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ Todo; }
+/* harmony export */ });
+/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! uniqid */ "./node_modules/uniqid/index.js");
+/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_0__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var Todo = /*#__PURE__*/function () {
+  function Todo() {
+    _classCallCheck(this, Todo);
+
+    this.todos = [];
+  }
+
+  _createClass(Todo, [{
+    key: "addTODO",
+    value: function addTODO() {}
+  }]);
+
+  return Todo;
+}();
+
+
+
+/***/ }),
+
 /***/ "./src/js/base.js":
 /*!************************!*\
   !*** ./src/js/base.js ***!
@@ -10882,8 +10922,7 @@ define(String.prototype, "padRight", "".padEnd);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _stylesheets_style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./stylesheets/style.scss */ "./src/stylesheets/style.scss");
 /* harmony import */ var _js_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/base */ "./src/js/base.js");
-/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! uniqid */ "./node_modules/uniqid/index.js");
-/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _js_Todo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/Todo */ "./src/js/Todo.js");
 
 
 
@@ -10940,7 +10979,7 @@ _js_base__WEBPACK_IMPORTED_MODULE_1__.default.newPSubmit.addEventListener('click
     var markup = "<li class=\"sb-p-item sb-item\">".concat(projectName, "</li>");
     _js_base__WEBPACK_IMPORTED_MODULE_1__.default.projectUL.insertAdjacentHTML('beforeend', markup);
     projects[projectName] = {};
-    updateProjectOptions(projectName);
+    updateProjectOptions(projects);
   }
 
   _js_base__WEBPACK_IMPORTED_MODULE_1__.default.newProjectForm.reset();
