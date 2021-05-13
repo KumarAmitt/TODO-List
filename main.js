@@ -10807,6 +10807,7 @@ elements.addProject.addEventListener('click', function () {
   var formStyle = elements.newProjectForm.style;
   if (formStyle.display === 'none') formStyle.display = 'flex';else formStyle.display = 'none';
 });
+var projects = {};
 elements.newPSubmit.addEventListener('click', function () {
   var inputField = document.querySelector('[name = projectName]');
   var projectName = inputField.value;
