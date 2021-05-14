@@ -187,6 +187,13 @@ main .category .new-todo:hover {
   line-height: 1.5;
   color: slategray;
 }
+.td-list-item .info .desc span {
+  display: block;
+  color: #3b8c75;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-align: right;
+}
 
 .todo-form {
   margin: 2.8em 0.5em;
