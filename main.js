@@ -11035,12 +11035,26 @@ document.querySelector('.sb-all').addEventListener('click', function () {
   });
 }); //Helper
 
-var renderTODOs = function renderTODOs(clsName, projectName) {
+var renderTODOs = function renderTODOs(clsName, project) {
   document.querySelector(".".concat(clsName)).onclick = function () {
     cleanMainUI();
-    displayProjectTitle(projectName);
+    displayProjectTitle(project[0]);
     var ul = document.querySelector('.td-list');
     ul.textContent = '';
+    Object.entries(project[1]).forEach(function (todos) {
+      var todo = todos[1];
+      var tid = todos[0];
+      var projectName = project[0];
+      var title = todo.title;
+      var desc = todo.desc;
+      var ddt = todo.ddt;
+      var priorityClass = todo.priority === 'high' ? 'pr-h' : todo.priority === 'low' ? 'pr-l' : 'pr-m';
+      displayTODOs(tid, projectName, title, desc, ddt, priorityClass, ul);
+
+      document.querySelector(".title-".concat(todos[0])).onclick = function () {
+        document.querySelector(".desc-".concat(todos[0])).classList.toggle('hide');
+      };
+    });
   };
 }; //Project List in sidebar Menu
 
@@ -11049,7 +11063,7 @@ Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects).forEach(function 
   var pid = uniqid__WEBPACK_IMPORTED_MODULE_1___default()();
   var markup = "<li class=\"sb-p-item sb-item sb-item-".concat(pid, "\">").concat(project[0], "</li>");
   _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.projectUL.insertAdjacentHTML("beforeend", markup);
-  renderTODOs("sb-item-".concat(pid), project[0]);
+  renderTODOs("sb-item-".concat(pid), project);
 });
 }();
 /******/ })()
