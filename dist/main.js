@@ -10915,13 +10915,18 @@ document.querySelector('.sb-all').addEventListener('click', function () {
   _js_base__WEBPACK_IMPORTED_MODULE_1__.elements.sidebar.classList.add('hide');
   document.querySelector('.category-title').textContent = 'All TODOs';
   var ul = document.querySelector('.td-list');
+  ul.textContent = '';
   Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_1__.projects).forEach(function (project) {
     var pjt = project[0];
     Object.entries(project[1]).forEach(function (todos) {
       var todo = todos[1];
       var statusClass = todo.priority === 'high' ? 'pr-h' : todo.priority === 'low' ? 'pr-l' : 'pr-m';
-      var markup = "<li class=\"td-list-item\">\n                        <div class=\"check\">\n                          <span class=\"status ".concat(statusClass, "\"><i class=\"fas fa-square\"></i></span>\n                        </div>\n                \n                        <div class=\"info\">\n                          <div class=\"title\">").concat(todo.title, "</div>\n                          <div class=\"info-secondary\">\n                            <div class=\"due-dt\">").concat(todo.ddt, "</div>\n                            <div class=\"btns\">\n                              <span class=\"edit\"><i class=\"fas fa-edit\"></i></span>\n                              <span class=\"delete\"><i class=\"fas fa-trash-alt\"></i></span>\n                            </div>\n                          </div>\n                        </div>\n                      </li>");
+      var markup = "<li class=\"td-list-item\">\n                        <div class=\"check\">\n                          <span class=\"status ".concat(statusClass, "\"><i class=\"fas fa-square\"></i></span>\n                        </div>\n                \n                        <div class=\"info\">\n                          <div class=\"title title-").concat(todos[0], "\">").concat(todo.title, "</div>\n                          <div class=\"info-secondary\">\n                            <div class=\"due-dt\">").concat(todo.ddt, "</div>\n                            <div class=\"btns\">\n                              <span class=\"edit\"><i class=\"fas fa-edit\"></i></span>\n                              <span class=\"delete\"><i class=\"fas fa-trash-alt\"></i></span>\n                            </div>\n                          </div>\n                           <div class=\"desc desc-").concat(todos[0], " hide\">").concat(todo.desc, "</div>\n                        </div>\n                      </li>");
       ul.insertAdjacentHTML('beforeend', markup);
+
+      document.querySelector(".title-".concat(todos[0])).onclick = function () {
+        document.querySelector(".desc-".concat(todos[0])).classList.toggle('hide');
+      };
     });
   });
 });

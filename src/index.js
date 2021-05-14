@@ -57,6 +57,7 @@ document.querySelector('.sb-all').addEventListener('click', () => {
   document.querySelector('.category-title').textContent = 'All TODOs';
 
   const ul = document.querySelector('.td-list');
+  ul.textContent = '';
 
   Object.entries(projects).forEach((project) => {
     let pjt = project[0]
@@ -70,7 +71,7 @@ document.querySelector('.sb-all').addEventListener('click', () => {
                         </div>
                 
                         <div class="info">
-                          <div class="title">${todo.title}</div>
+                          <div class="title title-${todos[0]}">${todo.title}</div>
                           <div class="info-secondary">
                             <div class="due-dt">${todo.ddt}</div>
                             <div class="btns">
@@ -78,10 +79,15 @@ document.querySelector('.sb-all').addEventListener('click', () => {
                               <span class="delete"><i class="fas fa-trash-alt"></i></span>
                             </div>
                           </div>
+                           <div class="desc desc-${todos[0]} hide">${todo.desc}</div>
                         </div>
                       </li>`;
 
       ul.insertAdjacentHTML('beforeend', markup);
+
+      document.querySelector(`.title-${todos[0]}`).onclick = () => {
+        document.querySelector(`.desc-${todos[0]}`).classList.toggle('hide');
+      }
     });
   });
 });

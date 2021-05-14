@@ -121,7 +121,6 @@ nav .menu i {
 
 main {
   margin: 3.5em 0.5em 0.5em 0.5em;
-  display: none;
 }
 main .category {
   font-weight: 700;
@@ -180,10 +179,19 @@ main .category .new-todo:hover {
 .td-list-item .info-secondary .btns .delete {
   color: red;
 }
+.td-list-item .info .desc {
+  border-top: 1px solid lightgrey;
+  margin-top: 0.5em;
+  padding: 0.5em 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: slategray;
+}
 
 .todo-form {
   margin: 2.8em 0.5em;
   border: 1px solid transparent;
+  display: none;
 }
 
 form > * {
