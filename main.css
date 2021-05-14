@@ -104,6 +104,7 @@ nav .menu i {
   padding: 0.2em;
   width: 80%;
   background-color: #bdf2e3;
+  font-size: 0.8rem;
 }
 .sidebar-projects .new-project input:focus {
   outline: none;
@@ -117,6 +118,7 @@ nav .menu i {
 .sidebar-projects .sb-p-items {
   list-style-type: none;
   padding-left: 0;
+  font-size: 0.9rem;
 }
 
 main {
