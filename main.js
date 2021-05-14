@@ -49,6 +49,10 @@ var Todo = /*#__PURE__*/function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "elements": function() { return /* binding */ elements; },
+/* harmony export */   "projects": function() { return /* binding */ projects; }
+/* harmony export */ });
 var elements = {
   menu: document.querySelector('.menu'),
   sidebar: document.querySelector('.sidebar'),
@@ -58,7 +62,36 @@ var elements = {
   projectUL: document.querySelector('.sb-p-items'),
   category: document.getElementById('category')
 };
-/* harmony default export */ __webpack_exports__["default"] = (elements);
+var projects = {
+  'Project I': {
+    'id1': {
+      title: 'Project 1, Task 1',
+      desc: 'Say hi to everyone',
+      ddt: '2021-05-14',
+      priority: 'high'
+    },
+    'id2': {
+      title: 'Project 1, Task 2',
+      desc: 'Say hello to everyone',
+      ddt: '2021-05-14',
+      priority: 'medium'
+    }
+  },
+  'Project II': {
+    'id11': {
+      title: 'Project 2, Task 1',
+      desc: 'Say bye to everyone',
+      ddt: '2021-05-14',
+      priority: 'high'
+    },
+    'id12': {
+      title: 'Project 2, Task 2',
+      desc: 'Say good bye to everyone',
+      ddt: '2021-05-14',
+      priority: 'low'
+    }
+  }
+};
 
 /***/ }),
 
@@ -10926,50 +10959,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var projects = {
-  'Project I': {
-    'id1': {
-      title: 'Project 1, Task 1',
-      desc: 'Say hi to everyone',
-      ddt: '2021-05-14',
-      priority: 'high'
-    },
-    'id2': {
-      title: 'Project 1, Task 2',
-      desc: 'Say hello to everyone',
-      ddt: '2021-05-14',
-      priority: 'medium'
-    }
-  },
-  'Project II': {
-    'id11': {
-      title: 'Project 2, Task 1',
-      desc: 'Say bye to everyone',
-      ddt: '2021-05-14',
-      priority: 'high'
-    },
-    'id12': {
-      title: 'Project 2, Task 2',
-      desc: 'Say good bye to everyone',
-      ddt: '2021-05-14',
-      priority: 'low'
-    }
-  }
-};
-_js_base__WEBPACK_IMPORTED_MODULE_1__.default.menu.addEventListener('click', function () {
-  _js_base__WEBPACK_IMPORTED_MODULE_1__.default.sidebar.classList.toggle('hide');
+_js_base__WEBPACK_IMPORTED_MODULE_1__.elements.menu.addEventListener('click', function () {
+  _js_base__WEBPACK_IMPORTED_MODULE_1__.elements.sidebar.classList.toggle('hide');
 });
-_js_base__WEBPACK_IMPORTED_MODULE_1__.default.addProject.addEventListener('click', function () {
-  var formStyle = _js_base__WEBPACK_IMPORTED_MODULE_1__.default.newProjectForm.style;
+_js_base__WEBPACK_IMPORTED_MODULE_1__.elements.addProject.addEventListener('click', function () {
+  var formStyle = _js_base__WEBPACK_IMPORTED_MODULE_1__.elements.newProjectForm.style;
   if (formStyle.display === 'none') formStyle.display = 'flex';else formStyle.display = 'none';
 });
 
 var updateProjectOptions = function updateProjectOptions(projectName) {
   var markup = "<option value=\"".concat(projectName, "\">").concat(projectName, "</option>");
-  _js_base__WEBPACK_IMPORTED_MODULE_1__.default.category.insertAdjacentHTML("beforeend", markup);
+  _js_base__WEBPACK_IMPORTED_MODULE_1__.elements.category.insertAdjacentHTML("beforeend", markup);
 };
 
-_js_base__WEBPACK_IMPORTED_MODULE_1__.default.newPSubmit.addEventListener('click', function () {
+_js_base__WEBPACK_IMPORTED_MODULE_1__.elements.newPSubmit.addEventListener('click', function () {
   var inputField = document.querySelector('[name = projectName]');
   var projectName = inputField.value;
 
@@ -10977,12 +10980,12 @@ _js_base__WEBPACK_IMPORTED_MODULE_1__.default.newPSubmit.addEventListener('click
     inputField.placeholder = 'Field can\'t be blank';
   } else {
     var markup = "<li class=\"sb-p-item sb-item\">".concat(projectName, "</li>");
-    _js_base__WEBPACK_IMPORTED_MODULE_1__.default.projectUL.insertAdjacentHTML('beforeend', markup);
-    projects[projectName] = {};
-    updateProjectOptions(projects);
+    _js_base__WEBPACK_IMPORTED_MODULE_1__.elements.projectUL.insertAdjacentHTML('beforeend', markup);
+    _js_base__WEBPACK_IMPORTED_MODULE_1__.projects[projectName] = {};
+    updateProjectOptions(projectName);
   }
 
-  _js_base__WEBPACK_IMPORTED_MODULE_1__.default.newProjectForm.reset();
+  _js_base__WEBPACK_IMPORTED_MODULE_1__.elements.newProjectForm.reset();
 });
 document.getElementById('todoForm').addEventListener('submit', function (e) {
   e.preventDefault();
@@ -10997,6 +11000,7 @@ document.getElementById('todoForm').addEventListener('submit', function (e) {
   console.log("Due date: ".concat(ddt));
   console.log("Priority: ".concat(priority));
 });
+console.log(_js_base__WEBPACK_IMPORTED_MODULE_1__.projects);
 }();
 /******/ })()
 ;
