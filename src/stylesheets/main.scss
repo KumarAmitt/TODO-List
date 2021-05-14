@@ -43,6 +43,10 @@ main {
 
       .title {
         cursor: pointer;
+
+        &:hover {
+          color: #3b8c75;
+        }
       }
 
       &-secondary {
@@ -84,7 +88,7 @@ main {
           color: #3b8c75;
           font-size: 0.7rem;
           font-weight: 700;
-         text-align: right;
+          text-align: right;
         }
       }
     }

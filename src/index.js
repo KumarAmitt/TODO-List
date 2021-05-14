@@ -78,7 +78,6 @@ const displayProjectTitle = (title) => {
 document.querySelector('.sb-all').addEventListener('click', () => {
   cleanMainUI();
   displayProjectTitle('ALL TODOs')
-  // document.querySelector('.category-title').textContent = 'All TODOs';
 
   const ul = document.querySelector('.td-list');
   ul.textContent = '';
@@ -123,6 +122,11 @@ const renderTODOs = (clsName, projectName) => {
   document.querySelector(`.${clsName}`).onclick = () => {
     cleanMainUI();
     displayProjectTitle(projectName)
+
+    const ul = document.querySelector('.td-list');
+    ul.textContent = '';
+
+
   }
 }
 

@@ -10988,8 +10988,7 @@ var displayProjectTitle = function displayProjectTitle(title) {
 
 document.querySelector('.sb-all').addEventListener('click', function () {
   cleanMainUI();
-  displayProjectTitle('ALL TODOs'); // document.querySelector('.category-title').textContent = 'All TODOs';
-
+  displayProjectTitle('ALL TODOs');
   var ul = document.querySelector('.td-list');
   ul.textContent = '';
   Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects).forEach(function (project) {
@@ -11010,6 +11009,8 @@ var renderTODOs = function renderTODOs(clsName, projectName) {
   document.querySelector(".".concat(clsName)).onclick = function () {
     cleanMainUI();
     displayProjectTitle(projectName);
+    var ul = document.querySelector('.td-list');
+    ul.textContent = '';
   };
 }; //Project List in sidebar Menu
 
