@@ -151,13 +151,31 @@ document.querySelector('.sb-all').addEventListener('click', () => {
 
 
 //Helper
-const renderTODOs = (clsName, projectName) => {
+const renderTODOs = (clsName, project) => {
   document.querySelector(`.${clsName}`).onclick = () => {
     cleanMainUI();
-    displayProjectTitle(projectName)
+    displayProjectTitle(project[0])
 
     const ul = document.querySelector('.td-list');
     ul.textContent = '';
+
+    Object.entries(project[1]).forEach(todos => {
+      const todo = todos[1];
+
+      const tid = todos[0];
+      const projectName = project[0];
+      const title = todo.title;
+      const desc = todo.desc;
+      const ddt = todo.ddt;
+      const priorityClass = todo.priority === 'high' ? 'pr-h' : todo.priority === 'low' ? 'pr-l' : 'pr-m';
+
+      displayTODOs(tid, projectName, title, desc, ddt, priorityClass, ul);
+
+      document.querySelector(`.title-${todos[0]}`).onclick = () => {
+        document.querySelector(`.desc-${todos[0]}`).classList.toggle('hide');
+      }
+
+    });
 
 
   }
@@ -170,5 +188,5 @@ Object.entries(projects).forEach( project => {
 
   elements.projectUL.insertAdjacentHTML("beforeend", markup);
 
-  renderTODOs(`sb-item-${pid}`, project[0])
+  renderTODOs(`sb-item-${pid}`, project)
 });
