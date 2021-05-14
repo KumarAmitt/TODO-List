@@ -13,10 +13,21 @@ elements.addProject.addEventListener('click', () => {
   else formStyle.display = 'none';
 });
 
+//Helper
 const updateProjectOptions = (projectName) => {
   const markup = `<option value="${projectName}">${projectName}</option>`;
   elements.category.insertAdjacentHTML('beforeend', markup);
 };
+
+//Helper
+const checkUniqueness = (projectName) => {
+  let flag = false
+  Object.entries(projects).forEach( project => {
+     if (project[0] === projectName)
+       flag = true;
+  });
+ return flag;
+}
 
 elements.newPSubmit.addEventListener('click', () => {
   const inputField = document.querySelector('[name = projectName]');
@@ -24,6 +35,8 @@ elements.newPSubmit.addEventListener('click', () => {
 
   if (projectName.length === 0) {
     inputField.placeholder = 'Field can\'t be blank';
+  } else if(checkUniqueness(projectName)) {
+    inputField.placeholder = 'Project already exists';
   } else {
     const markup = `<li class="sb-p-item sb-item">${projectName}</li>`;
     elements.projectUL.insertAdjacentHTML('beforeend', markup);
@@ -31,7 +44,7 @@ elements.newPSubmit.addEventListener('click', () => {
     updateProjectOptions(projectName);
   }
   elements.newProjectForm.reset();
-  // console.log(projects);
+  console.log(projects);
 });
 
 document.getElementById('todoForm').addEventListener('submit', (e) => {
