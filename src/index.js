@@ -62,10 +62,15 @@ document.getElementById('todoForm').addEventListener('submit', (e) => {
   console.log(`Priority: ${priority}`);
 });
 
-document.querySelector('.sb-all').addEventListener('click', () => {
+//Helper
+const cleanMainUI = () => {
   elements.main.style.display = 'block';
   document.getElementById('todoForm').style.display = 'none';
   elements.sidebar.classList.add('hide');
+}
+
+document.querySelector('.sb-all').addEventListener('click', () => {
+  cleanMainUI();
 
   document.querySelector('.category-title').textContent = 'All TODOs';
 
@@ -106,11 +111,19 @@ document.querySelector('.sb-all').addEventListener('click', () => {
   });
 });
 
+
+//Helper
+const renderTODOs = (clsName) => {
+  document.querySelector(`.${clsName}`).onclick = () => {
+    cleanMainUI();
+  }
+}
+
 //Project List in sidebar Menu
 Object.entries(projects).forEach( project => {
   let pid = uniqid();
-  const markup = `<li class="sb-p-item sb-item">${project[0]}</li>`;
+  const markup = `<li class="sb-p-item sb-item sb-item-${pid}">${project[0]}</li>`;
 
   elements.projectUL.insertAdjacentHTML("beforeend", markup);
-
+  renderTODOs(`sb-item-${pid}`)
 });

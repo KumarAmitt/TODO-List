@@ -10973,11 +10973,16 @@ document.getElementById('todoForm').addEventListener('submit', function (e) {
   console.log("Desc: ".concat(desc));
   console.log("Due date: ".concat(ddt));
   console.log("Priority: ".concat(priority));
-});
-document.querySelector('.sb-all').addEventListener('click', function () {
+}); //Helper
+
+var cleanMainUI = function cleanMainUI() {
   _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.main.style.display = 'block';
   document.getElementById('todoForm').style.display = 'none';
   _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.sidebar.classList.add('hide');
+};
+
+document.querySelector('.sb-all').addEventListener('click', function () {
+  cleanMainUI();
   document.querySelector('.category-title').textContent = 'All TODOs';
   var ul = document.querySelector('.td-list');
   ul.textContent = '';
@@ -10993,12 +10998,20 @@ document.querySelector('.sb-all').addEventListener('click', function () {
       };
     });
   });
-}); //Project List in sidebar Menu
+}); //Helper
+
+var renderTODOs = function renderTODOs(clsName) {
+  document.querySelector(".".concat(clsName)).onclick = function () {
+    cleanMainUI();
+  };
+}; //Project List in sidebar Menu
+
 
 Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects).forEach(function (project) {
   var pid = uniqid__WEBPACK_IMPORTED_MODULE_1___default()();
-  var markup = "<li class=\"sb-p-item sb-item\">".concat(project[0], "</li>");
+  var markup = "<li class=\"sb-p-item sb-item sb-item-".concat(pid, "\">").concat(project[0], "</li>");
   _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.projectUL.insertAdjacentHTML("beforeend", markup);
+  renderTODOs("sb-item-".concat(pid));
 });
 }();
 /******/ })()
