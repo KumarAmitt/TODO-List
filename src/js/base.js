@@ -5,36 +5,37 @@ export const elements = {
   newProjectForm: document.querySelector('.new-project'),
   newPSubmit: document.querySelector('.new-p-submit'),
   projectUL: document.querySelector('.sb-p-items'),
-  category: document.getElementById('category')
+  category: document.getElementById('category'),
+  main: document.querySelector('main'),
 };
 
 export const projects = {
   'Project I': {
-    'id1' : {
+    id1: {
       title: 'Project 1, Task 1',
       desc: 'Say hi to everyone',
       ddt: '2021-05-14',
-      priority: 'high'
+      priority: 'high',
     },
-    'id2': {
+    id2: {
       title: 'Project 1, Task 2',
       desc: 'Say hello to everyone',
       ddt: '2021-05-14',
-      priority: 'medium'
-    }
+      priority: 'medium',
+    },
   },
   'Project II': {
-    'id11' : {
+    id11: {
       title: 'Project 2, Task 1',
       desc: 'Say bye to everyone',
       ddt: '2021-05-14',
-      priority: 'high'
+      priority: 'high',
     },
-    'id12': {
+    id12: {
       title: 'Project 2, Task 2',
       desc: 'Say good bye to everyone',
       ddt: '2021-05-14',
-      priority: 'low'
-    }
-  }
-}
+      priority: 'low',
+    },
+  },
+};

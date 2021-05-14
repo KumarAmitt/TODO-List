@@ -1,46 +1,6 @@
 /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/js/Todo.js":
-/*!************************!*\
-  !*** ./src/js/Todo.js ***!
-  \************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ Todo; }
-/* harmony export */ });
-/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! uniqid */ "./node_modules/uniqid/index.js");
-/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_0__);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-var Todo = /*#__PURE__*/function () {
-  function Todo() {
-    _classCallCheck(this, Todo);
-
-    this.todos = [];
-  }
-
-  _createClass(Todo, [{
-    key: "addTODO",
-    value: function addTODO() {}
-  }]);
-
-  return Todo;
-}();
-
-
-
-/***/ }),
-
 /***/ "./src/js/base.js":
 /*!************************!*\
   !*** ./src/js/base.js ***!
@@ -60,17 +20,18 @@ var elements = {
   newProjectForm: document.querySelector('.new-project'),
   newPSubmit: document.querySelector('.new-p-submit'),
   projectUL: document.querySelector('.sb-p-items'),
-  category: document.getElementById('category')
+  category: document.getElementById('category'),
+  main: document.querySelector('main')
 };
 var projects = {
   'Project I': {
-    'id1': {
+    id1: {
       title: 'Project 1, Task 1',
       desc: 'Say hi to everyone',
       ddt: '2021-05-14',
       priority: 'high'
     },
-    'id2': {
+    id2: {
       title: 'Project 1, Task 2',
       desc: 'Say hello to everyone',
       ddt: '2021-05-14',
@@ -78,13 +39,13 @@ var projects = {
     }
   },
   'Project II': {
-    'id11': {
+    id11: {
       title: 'Project 2, Task 1',
       desc: 'Say bye to everyone',
       ddt: '2021-05-14',
       priority: 'high'
     },
-    'id12': {
+    id12: {
       title: 'Project 2, Task 2',
       desc: 'Say good bye to everyone',
       ddt: '2021-05-14',
@@ -10788,46 +10749,6 @@ __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
 
-/***/ }),
-
-/***/ "./node_modules/uniqid/index.js":
-/*!**************************************!*\
-  !*** ./node_modules/uniqid/index.js ***!
-  \**************************************/
-/***/ (function(module) {
-
-/* 
-(The MIT License)
-Copyright (c) 2014-2021 Halász Ádám <adam@aimform.com>
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
-
-//  Unique Hexatridecimal ID Generator
-// ================================================
-
-//  Dependencies
-// ================================================
-var pid = typeof process !== 'undefined' && process.pid ? process.pid.toString(36) : '' ;
-var address = '';
-if(false){ var i, mac, networkInterfaces; } 
-
-//  Exports
-// ================================================
-module.exports = module.exports.default = function(prefix, suffix){ return (prefix ? prefix : '') + address + pid + now().toString(36) + (suffix ? suffix : ''); }
-module.exports.process = function(prefix, suffix){ return (prefix ? prefix : '') + pid + now().toString(36) + (suffix ? suffix : ''); }
-module.exports.time    = function(prefix, suffix){ return (prefix ? prefix : '') + now().toString(36) + (suffix ? suffix : ''); }
-
-//  Helpers
-// ================================================
-function now(){
-    var time = Date.now();
-    var last = now.last || time;
-    return now.last = time > last ? time : last + 1;
-}
-
-
 /***/ })
 
 /******/ 	});
@@ -10857,18 +10778,6 @@ function now(){
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	!function() {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = function(module) {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				function() { return module['default']; } :
-/******/ 				function() { return module; };
-/******/ 			__webpack_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	}();
-/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	!function() {
 /******/ 		// define getter functions for harmony exports
@@ -10955,9 +10864,9 @@ define(String.prototype, "padRight", "".padEnd);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _stylesheets_style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./stylesheets/style.scss */ "./src/stylesheets/style.scss");
 /* harmony import */ var _js_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/base */ "./src/js/base.js");
-/* harmony import */ var _js_Todo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/Todo */ "./src/js/Todo.js");
+ // import uniqid from 'uniqid';
 
-
+ // import Todo from './js/Todo';
 
 _js_base__WEBPACK_IMPORTED_MODULE_1__.elements.menu.addEventListener('click', function () {
   _js_base__WEBPACK_IMPORTED_MODULE_1__.elements.sidebar.classList.toggle('hide');
@@ -10969,7 +10878,7 @@ _js_base__WEBPACK_IMPORTED_MODULE_1__.elements.addProject.addEventListener('clic
 
 var updateProjectOptions = function updateProjectOptions(projectName) {
   var markup = "<option value=\"".concat(projectName, "\">").concat(projectName, "</option>");
-  _js_base__WEBPACK_IMPORTED_MODULE_1__.elements.category.insertAdjacentHTML("beforeend", markup);
+  _js_base__WEBPACK_IMPORTED_MODULE_1__.elements.category.insertAdjacentHTML('beforeend', markup);
 };
 
 _js_base__WEBPACK_IMPORTED_MODULE_1__.elements.newPSubmit.addEventListener('click', function () {
@@ -10985,7 +10894,7 @@ _js_base__WEBPACK_IMPORTED_MODULE_1__.elements.newPSubmit.addEventListener('clic
     updateProjectOptions(projectName);
   }
 
-  _js_base__WEBPACK_IMPORTED_MODULE_1__.elements.newProjectForm.reset();
+  _js_base__WEBPACK_IMPORTED_MODULE_1__.elements.newProjectForm.reset(); // console.log(projects);
 });
 document.getElementById('todoForm').addEventListener('submit', function (e) {
   e.preventDefault();
@@ -11000,7 +10909,22 @@ document.getElementById('todoForm').addEventListener('submit', function (e) {
   console.log("Due date: ".concat(ddt));
   console.log("Priority: ".concat(priority));
 });
-console.log(_js_base__WEBPACK_IMPORTED_MODULE_1__.projects);
+document.querySelector('.sb-all').addEventListener('click', function () {
+  _js_base__WEBPACK_IMPORTED_MODULE_1__.elements.main.style.display = 'block';
+  document.getElementById('todoForm').style.display = 'none';
+  _js_base__WEBPACK_IMPORTED_MODULE_1__.elements.sidebar.classList.add('hide');
+  document.querySelector('.category-title').textContent = 'All TODOs';
+  var ul = document.querySelector('.td-list');
+  Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_1__.projects).forEach(function (project) {
+    var pjt = project[0];
+    Object.entries(project[1]).forEach(function (todos) {
+      var todo = todos[1];
+      var statusClass = todo.priority === 'high' ? 'pr-h' : todo.priority === 'low' ? 'pr-l' : 'pr-m';
+      var markup = "<li class=\"td-list-item\">\n                        <div class=\"check\">\n                          <span class=\"status ".concat(statusClass, "\"><i class=\"fas fa-square\"></i></span>\n                        </div>\n                \n                        <div class=\"info\">\n                          <div class=\"title\">").concat(todo.title, "</div>\n                          <div class=\"info-secondary\">\n                            <div class=\"due-dt\">").concat(todo.ddt, "</div>\n                            <div class=\"btns\">\n                              <span class=\"edit\"><i class=\"fas fa-edit\"></i></span>\n                              <span class=\"delete\"><i class=\"fas fa-trash-alt\"></i></span>\n                            </div>\n                          </div>\n                        </div>\n                      </li>");
+      ul.insertAdjacentHTML('beforeend', markup);
+    });
+  });
+});
 }();
 /******/ })()
 ;

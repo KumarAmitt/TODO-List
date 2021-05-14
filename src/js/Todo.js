@@ -1,11 +1,11 @@
-import uniqid from 'uniqid'
+import uniqid from 'uniqid';
 
 export default class Todo {
-  constructor(){
+  constructor() {
     this.todos = [];
   }
 
-  addTODO(){
+  addTODO() {
 
   }
 }
