@@ -1,5 +1,5 @@
 import './stylesheets/style.scss';
-// import uniqid from 'uniqid';
+import uniqid from 'uniqid';
 import { elements, projects } from './js/base';
 // import Todo from './js/Todo';
 
@@ -44,7 +44,7 @@ elements.newPSubmit.addEventListener('click', () => {
     updateProjectOptions(projectName);
   }
   elements.newProjectForm.reset();
-  console.log(projects);
+  // console.log(projects);
 });
 
 document.getElementById('todoForm').addEventListener('submit', (e) => {
@@ -104,4 +104,13 @@ document.querySelector('.sb-all').addEventListener('click', () => {
       }
     });
   });
+});
+
+//Project List in sidebar Menu
+Object.entries(projects).forEach( project => {
+  let pid = uniqid();
+  const markup = `<li class="sb-p-item sb-item">${project[0]}</li>`;
+
+  elements.projectUL.insertAdjacentHTML("beforeend", markup);
+
 });
