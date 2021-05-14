@@ -78,6 +78,14 @@ main {
         font-size: 0.9rem;
         line-height: 1.5;
         color: slategray;
+
+        span {
+          display: block;
+          color: #3b8c75;
+          font-size: 0.7rem;
+          font-weight: 700;
+         text-align: right;
+        }
       }
     }
   }

@@ -60,7 +60,6 @@ document.querySelector('.sb-all').addEventListener('click', () => {
   ul.textContent = '';
 
   Object.entries(projects).forEach((project) => {
-    let pjt = project[0]
     Object.entries(project[1]).forEach((todos) => {
       const todo = todos[1];
       const statusClass = todo.priority === 'high' ? 'pr-h' : todo.priority === 'low' ? 'pr-l' : 'pr-m';
@@ -79,7 +78,9 @@ document.querySelector('.sb-all').addEventListener('click', () => {
                               <span class="delete"><i class="fas fa-trash-alt"></i></span>
                             </div>
                           </div>
-                           <div class="desc desc-${todos[0]} hide">${todo.desc}</div>
+                           <div class="desc desc-${todos[0]} hide">${todo.desc}
+                             <span>${project[0]}</span>
+                           </div>
                         </div>
                       </li>`;
 
