@@ -10979,11 +10979,17 @@ var cleanMainUI = function cleanMainUI() {
   _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.main.style.display = 'block';
   document.getElementById('todoForm').style.display = 'none';
   _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.sidebar.classList.add('hide');
+}; //Helper
+
+
+var displayProjectTitle = function displayProjectTitle(title) {
+  document.querySelector('.category-title').textContent = title;
 };
 
 document.querySelector('.sb-all').addEventListener('click', function () {
   cleanMainUI();
-  document.querySelector('.category-title').textContent = 'All TODOs';
+  displayProjectTitle('ALL TODOs'); // document.querySelector('.category-title').textContent = 'All TODOs';
+
   var ul = document.querySelector('.td-list');
   ul.textContent = '';
   Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects).forEach(function (project) {
@@ -11000,9 +11006,10 @@ document.querySelector('.sb-all').addEventListener('click', function () {
   });
 }); //Helper
 
-var renderTODOs = function renderTODOs(clsName) {
+var renderTODOs = function renderTODOs(clsName, projectName) {
   document.querySelector(".".concat(clsName)).onclick = function () {
     cleanMainUI();
+    displayProjectTitle(projectName);
   };
 }; //Project List in sidebar Menu
 
@@ -11011,7 +11018,7 @@ Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects).forEach(function 
   var pid = uniqid__WEBPACK_IMPORTED_MODULE_1___default()();
   var markup = "<li class=\"sb-p-item sb-item sb-item-".concat(pid, "\">").concat(project[0], "</li>");
   _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.projectUL.insertAdjacentHTML("beforeend", markup);
-  renderTODOs("sb-item-".concat(pid));
+  renderTODOs("sb-item-".concat(pid), project[0]);
 });
 }();
 /******/ })()

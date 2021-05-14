@@ -69,10 +69,16 @@ const cleanMainUI = () => {
   elements.sidebar.classList.add('hide');
 }
 
+//Helper
+const displayProjectTitle = (title) => {
+  document.querySelector('.category-title').textContent = title;
+}
+
+
 document.querySelector('.sb-all').addEventListener('click', () => {
   cleanMainUI();
-
-  document.querySelector('.category-title').textContent = 'All TODOs';
+  displayProjectTitle('ALL TODOs')
+  // document.querySelector('.category-title').textContent = 'All TODOs';
 
   const ul = document.querySelector('.td-list');
   ul.textContent = '';
@@ -113,9 +119,10 @@ document.querySelector('.sb-all').addEventListener('click', () => {
 
 
 //Helper
-const renderTODOs = (clsName) => {
+const renderTODOs = (clsName, projectName) => {
   document.querySelector(`.${clsName}`).onclick = () => {
     cleanMainUI();
+    displayProjectTitle(projectName)
   }
 }
 
@@ -125,5 +132,6 @@ Object.entries(projects).forEach( project => {
   const markup = `<li class="sb-p-item sb-item sb-item-${pid}">${project[0]}</li>`;
 
   elements.projectUL.insertAdjacentHTML("beforeend", markup);
-  renderTODOs(`sb-item-${pid}`)
+
+  renderTODOs(`sb-item-${pid}`, project[0])
 });
