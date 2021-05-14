@@ -1,38 +1,7 @@
 import './stylesheets/style.scss';
-import elements from './js/base'
+import {elements, projects} from './js/base'
 import Todo from "./js/Todo";
 
-
-const projects = {
-  'Project I': {
-   'id1' : {
-     title: 'Project 1, Task 1',
-     desc: 'Say hi to everyone',
-     ddt: '2021-05-14',
-     priority: 'high'
-   },
-    'id2': {
-      title: 'Project 1, Task 2',
-      desc: 'Say hello to everyone',
-      ddt: '2021-05-14',
-      priority: 'medium'
-    }
-  },
-  'Project II': {
-    'id11' : {
-      title: 'Project 2, Task 1',
-      desc: 'Say bye to everyone',
-      ddt: '2021-05-14',
-      priority: 'high'
-    },
-    'id12': {
-      title: 'Project 2, Task 2',
-      desc: 'Say good bye to everyone',
-      ddt: '2021-05-14',
-      priority: 'low'
-    }
-  }
-}
 
 elements.menu.addEventListener('click', () => {
   elements.sidebar.classList.toggle('hide');
@@ -60,7 +29,7 @@ elements.newPSubmit.addEventListener('click', () => {
     const markup = `<li class="sb-p-item sb-item">${projectName}</li>`;
     elements.projectUL.insertAdjacentHTML('beforeend', markup);
     projects[projectName] = {}
-    updateProjectOptions(projects);
+    updateProjectOptions(projectName);
   }
   elements.newProjectForm.reset();
 });
@@ -79,5 +48,6 @@ document.getElementById('todoForm').addEventListener('submit', (e) => {
   console.log(`Due date: ${ddt}`);
   console.log(`Priority: ${priority}`);
 
-
 })
+
+console.log(projects)
