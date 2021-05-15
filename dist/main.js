@@ -11063,14 +11063,14 @@ document.getElementById('todoForm').addEventListener('submit', function (e) {
   var desc = document.getElementById('desc').value;
   var ddt = document.getElementById('due-dt').value;
   var priority = document.getElementById('todoForm').elements.priority.value;
-  console.log("project: ".concat(project));
-  console.log("Title: ".concat(title));
-  console.log("Desc: ".concat(desc));
-  console.log("Due date: ".concat(ddt));
-  console.log("Priority: ".concat(priority));
-}); //++++++++++++++++
-// let t = document.querySelector('select > option[value="Project II"]').selected = "true"
-// console.log(t)
+  var pid = uniqid__WEBPACK_IMPORTED_MODULE_1___default()();
+  _js_base__WEBPACK_IMPORTED_MODULE_2__.projects[project][pid] = {
+    title: title,
+    desc: desc,
+    ddt: ddt,
+    priority: priority
+  };
+});
 }();
 /******/ })()
 ;

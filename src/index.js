@@ -194,15 +194,13 @@ document.getElementById('todoForm').addEventListener('submit', (e) => {
   const ddt = document.getElementById('due-dt').value;
   const priority = document.getElementById('todoForm').elements.priority.value;
 
-  console.log(`project: ${project}`);
-  console.log(`Title: ${title}`);
-  console.log(`Desc: ${desc}`);
-  console.log(`Due date: ${ddt}`);
-  console.log(`Priority: ${priority}`);
+  let pid = uniqid()
+
+  projects[project][pid] = {
+      title: title,
+      desc: desc,
+      ddt: ddt,
+      priority: priority
+  }
+
 });
-
-
-//++++++++++++++++
-
-// let t = document.querySelector('select > option[value="Project II"]').selected = "true"
-// console.log(t)
