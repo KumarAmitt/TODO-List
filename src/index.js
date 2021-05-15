@@ -2,6 +2,7 @@ import './stylesheets/style.scss';
 import uniqid from 'uniqid';
 import { elements, projects } from './js/base';
 import Todo from "./js/Todo";
+import Project from './js/Project'
 
 
 elements.menu.addEventListener('click', () => {
@@ -30,16 +31,6 @@ updateProjectOptions();
 
 
 //Helper
-const checkUniqueness = (projectName) => {
-  let flag = false
-  Object.entries(projects).forEach( project => {
-     if (project[0] === projectName)
-       flag = true;
-  });
- return flag;
-}
-
-//Helper
 const refreshProjectList = () => {
   Object.entries(projects).forEach( project => {
     let pid = uniqid();
@@ -51,13 +42,33 @@ const refreshProjectList = () => {
   });
 }
 
+// elements.newPSubmit.addEventListener('click', () => {
+//   const inputField = document.querySelector('[name = projectName]');
+//   const projectName = inputField.value;
+//
+//   if (projectName.length === 0) {
+//     inputField.placeholder = 'Field can\'t be blank';
+//   } else if(checkUniqueness(projectName)) {
+//     inputField.placeholder = 'Project already exists';
+//   } else {
+//     elements.projectUL.textContent = '';
+//     projects[projectName] = {};
+//     refreshProjectList();
+//     updateProjectOptions();
+//   }
+//   elements.newProjectForm.reset();
+//   console.log(projects);
+// });
+
 elements.newPSubmit.addEventListener('click', () => {
   const inputField = document.querySelector('[name = projectName]');
   const projectName = inputField.value;
 
-  if (projectName.length === 0) {
+  let project = new Project(projectName);
+
+  if (project.validate()) {
     inputField.placeholder = 'Field can\'t be blank';
-  } else if(checkUniqueness(projectName)) {
+  } else if(project.checkUniqueness()) {
     inputField.placeholder = 'Project already exists';
   } else {
     elements.projectUL.textContent = '';

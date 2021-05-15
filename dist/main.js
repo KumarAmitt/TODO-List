@@ -1,6 +1,56 @@
 /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/js/Project.js":
+/*!***************************!*\
+  !*** ./src/js/Project.js ***!
+  \***************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ Project; }
+/* harmony export */ });
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var Project = /*#__PURE__*/function () {
+  function Project(name) {
+    _classCallCheck(this, Project);
+
+    this.name = name;
+  }
+
+  _createClass(Project, [{
+    key: "validate",
+    value: function validate() {
+      return this.name.length === 0;
+    }
+  }, {
+    key: "checkUniqueness",
+    value: function checkUniqueness() {
+      var _this = this;
+
+      return Object.entries(_base__WEBPACK_IMPORTED_MODULE_0__.projects).some(function (project) {
+        return project[0] === _this.name;
+      });
+    }
+  }]);
+
+  return Project;
+}();
+
+
+
+/***/ }),
+
 /***/ "./src/js/Todo.js":
 /*!************************!*\
   !*** ./src/js/Todo.js ***!
@@ -10974,6 +11024,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _js_base__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/base */ "./src/js/base.js");
 /* harmony import */ var _js_Todo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/Todo */ "./src/js/Todo.js");
+/* harmony import */ var _js_Project__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/Project */ "./src/js/Project.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -10985,6 +11036,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -11008,15 +11060,6 @@ var updateProjectOptions = function updateProjectOptions() {
 
 updateProjectOptions(); //Helper
 
-var checkUniqueness = function checkUniqueness(projectName) {
-  var flag = false;
-  Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects).forEach(function (project) {
-    if (project[0] === projectName) flag = true;
-  });
-  return flag;
-}; //Helper
-
-
 var refreshProjectList = function refreshProjectList() {
   Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects).forEach(function (project) {
     var pid = uniqid__WEBPACK_IMPORTED_MODULE_1___default()();
@@ -11024,15 +11067,33 @@ var refreshProjectList = function refreshProjectList() {
     _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.projectUL.insertAdjacentHTML("beforeend", markup);
     renderTODOs("sb-item-".concat(pid), project);
   });
-};
+}; // elements.newPSubmit.addEventListener('click', () => {
+//   const inputField = document.querySelector('[name = projectName]');
+//   const projectName = inputField.value;
+//
+//   if (projectName.length === 0) {
+//     inputField.placeholder = 'Field can\'t be blank';
+//   } else if(checkUniqueness(projectName)) {
+//     inputField.placeholder = 'Project already exists';
+//   } else {
+//     elements.projectUL.textContent = '';
+//     projects[projectName] = {};
+//     refreshProjectList();
+//     updateProjectOptions();
+//   }
+//   elements.newProjectForm.reset();
+//   console.log(projects);
+// });
+
 
 _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.newPSubmit.addEventListener('click', function () {
   var inputField = document.querySelector('[name = projectName]');
   var projectName = inputField.value;
+  var project = new _js_Project__WEBPACK_IMPORTED_MODULE_4__.default(projectName);
 
-  if (projectName.length === 0) {
+  if (project.validate()) {
     inputField.placeholder = 'Field can\'t be blank';
-  } else if (checkUniqueness(projectName)) {
+  } else if (project.checkUniqueness()) {
     inputField.placeholder = 'Project already exists';
   } else {
     _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.projectUL.textContent = '';
