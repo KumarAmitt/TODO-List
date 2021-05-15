@@ -99,6 +99,26 @@ const displayTODOs = (tid, projectName, title, desc, ddt, priorityClass, parent)
   parent.insertAdjacentHTML('beforeend', markup);
 }
 
+//Helper
+const callDisplayTODOs= (project, ul) => {
+
+  Object.entries(project[1]).forEach((todos) => {
+    const todo = todos[1];
+
+    const tid = todos[0];
+    const projectName = project[0];
+    const title = todo.title;
+    const desc = todo.desc;
+    const ddt = todo.ddt;
+    const priorityClass = todo.priority === 'high' ? 'pr-h' : todo.priority === 'low' ? 'pr-l' : 'pr-m';
+
+    displayTODOs(tid, projectName, title, desc, ddt, priorityClass, ul);
+
+    document.querySelector(`.title-${todos[0]}`).onclick = () => {
+      document.querySelector(`.desc-${todos[0]}`).classList.toggle('hide');
+    }
+  });
+}
 
 document.querySelector('.sb-all').addEventListener('click', () => {
   cleanMainUI();
@@ -108,44 +128,7 @@ document.querySelector('.sb-all').addEventListener('click', () => {
   ul.textContent = '';
 
   Object.entries(projects).forEach((project) => {
-    Object.entries(project[1]).forEach((todos) => {
-      const todo = todos[1];
-
-      const tid = todos[0];
-      const projectName = project[0];
-      const title = todo.title;
-      const desc = todo.desc;
-      const ddt = todo.ddt;
-      const priorityClass = todo.priority === 'high' ? 'pr-h' : todo.priority === 'low' ? 'pr-l' : 'pr-m';
-
-      displayTODOs(tid, projectName, title, desc, ddt, priorityClass, ul);
-
-      // const markup = `<li class="td-list-item">
-      //                   <div class="check">
-      //                     <span class="status ${priorityClass}"><i class="fas fa-square"></i></span>
-      //                   </div>
-      //
-      //                   <div class="info">
-      //                     <div class="title title-${todos[0]}">${todo.title}</div>
-      //                     <div class="info-secondary">
-      //                       <div class="due-dt">${todo.ddt}</div>
-      //                       <div class="btns">
-      //                         <span class="edit"><i class="fas fa-edit"></i></span>
-      //                         <span class="delete"><i class="fas fa-trash-alt"></i></span>
-      //                       </div>
-      //                     </div>
-      //                      <div class="desc desc-${todos[0]} hide">${todo.desc}
-      //                        <span>${project[0]}</span>
-      //                      </div>
-      //                   </div>
-      //                 </li>`;
-      //
-      // ul.insertAdjacentHTML('beforeend', markup);
-
-      document.querySelector(`.title-${todos[0]}`).onclick = () => {
-        document.querySelector(`.desc-${todos[0]}`).classList.toggle('hide');
-      }
-    });
+    callDisplayTODOs(project, ul);
   });
 });
 
@@ -158,26 +141,7 @@ const renderTODOs = (clsName, project) => {
 
     const ul = document.querySelector('.td-list');
     ul.textContent = '';
-
-    Object.entries(project[1]).forEach(todos => {
-      const todo = todos[1];
-
-      const tid = todos[0];
-      const projectName = project[0];
-      const title = todo.title;
-      const desc = todo.desc;
-      const ddt = todo.ddt;
-      const priorityClass = todo.priority === 'high' ? 'pr-h' : todo.priority === 'low' ? 'pr-l' : 'pr-m';
-
-      displayTODOs(tid, projectName, title, desc, ddt, priorityClass, ul);
-
-      document.querySelector(`.title-${todos[0]}`).onclick = () => {
-        document.querySelector(`.desc-${todos[0]}`).classList.toggle('hide');
-      }
-
-    });
-
-
+    callDisplayTODOs(project, ul);
   }
 }
 
