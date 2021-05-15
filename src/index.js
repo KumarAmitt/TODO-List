@@ -1,7 +1,7 @@
 import './stylesheets/style.scss';
 import uniqid from 'uniqid';
 import { elements, projects } from './js/base';
-// import Todo from './js/Todo';
+
 
 elements.menu.addEventListener('click', () => {
   elements.sidebar.classList.toggle('hide');
@@ -29,6 +29,18 @@ const checkUniqueness = (projectName) => {
  return flag;
 }
 
+//Helper
+const refreshProjectList = () => {
+  Object.entries(projects).forEach( project => {
+    let pid = uniqid();
+    const markup = `<li class="sb-p-item sb-item sb-item-${pid}">${project[0]}</li>`;
+
+    elements.projectUL.insertAdjacentHTML("beforeend", markup);
+
+    renderTODOs(`sb-item-${pid}`, project)
+  });
+}
+
 elements.newPSubmit.addEventListener('click', () => {
   const inputField = document.querySelector('[name = projectName]');
   const projectName = inputField.value;
@@ -38,9 +50,9 @@ elements.newPSubmit.addEventListener('click', () => {
   } else if(checkUniqueness(projectName)) {
     inputField.placeholder = 'Project already exists';
   } else {
-    const markup = `<li class="sb-p-item sb-item">${projectName}</li>`;
-    elements.projectUL.insertAdjacentHTML('beforeend', markup);
+    elements.projectUL.textContent = '';
     projects[projectName] = {};
+    refreshProjectList();
     updateProjectOptions(projectName);
   }
   elements.newProjectForm.reset();
@@ -132,20 +144,11 @@ const renderTODOs = (clsName, project) => {
   }
 }
 
-//Project List in sidebar Menu
-Object.entries(projects).forEach( project => {
-  let pid = uniqid();
-  const markup = `<li class="sb-p-item sb-item sb-item-${pid}">${project[0]}</li>`;
-
-  elements.projectUL.insertAdjacentHTML("beforeend", markup);
-
-  renderTODOs(`sb-item-${pid}`, project)
-});
+refreshProjectList();
 
 //---------------------------
 
 //TODAY
-
 document.querySelector('.sb-today').addEventListener('click', () => {
   cleanMainUI();
   displayProjectTitle('Today');
@@ -154,6 +157,8 @@ document.querySelector('.sb-today').addEventListener('click', () => {
   ul.textContent = '';
 
 })
+
+//---------------------------
 
 document.getElementById('todoForm').addEventListener('submit', (e) => {
   e.preventDefault();

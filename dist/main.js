@@ -10920,7 +10920,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_base__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/base */ "./src/js/base.js");
 
 
- // import Todo from './js/Todo';
 
 _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.menu.addEventListener('click', function () {
   _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.sidebar.classList.toggle('hide');
@@ -10942,6 +10941,16 @@ var checkUniqueness = function checkUniqueness(projectName) {
     if (project[0] === projectName) flag = true;
   });
   return flag;
+}; //Helper
+
+
+var refreshProjectList = function refreshProjectList() {
+  Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects).forEach(function (project) {
+    var pid = uniqid__WEBPACK_IMPORTED_MODULE_1___default()();
+    var markup = "<li class=\"sb-p-item sb-item sb-item-".concat(pid, "\">").concat(project[0], "</li>");
+    _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.projectUL.insertAdjacentHTML("beforeend", markup);
+    renderTODOs("sb-item-".concat(pid), project);
+  });
 };
 
 _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.newPSubmit.addEventListener('click', function () {
@@ -10953,9 +10962,9 @@ _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.newPSubmit.addEventListener('clic
   } else if (checkUniqueness(projectName)) {
     inputField.placeholder = 'Project already exists';
   } else {
-    var markup = "<li class=\"sb-p-item sb-item\">".concat(projectName, "</li>");
-    _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.projectUL.insertAdjacentHTML('beforeend', markup);
+    _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.projectUL.textContent = '';
     _js_base__WEBPACK_IMPORTED_MODULE_2__.projects[projectName] = {};
+    refreshProjectList();
     updateProjectOptions(projectName);
   }
 
@@ -11017,15 +11026,9 @@ var renderTODOs = function renderTODOs(clsName, project) {
     ul.textContent = '';
     callDisplayTODOs(project, ul);
   };
-}; //Project List in sidebar Menu
+};
 
-
-Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects).forEach(function (project) {
-  var pid = uniqid__WEBPACK_IMPORTED_MODULE_1___default()();
-  var markup = "<li class=\"sb-p-item sb-item sb-item-".concat(pid, "\">").concat(project[0], "</li>");
-  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.projectUL.insertAdjacentHTML("beforeend", markup);
-  renderTODOs("sb-item-".concat(pid), project);
-}); //---------------------------
+refreshProjectList(); //---------------------------
 //TODAY
 
 document.querySelector('.sb-today').addEventListener('click', function () {
@@ -11033,7 +11036,8 @@ document.querySelector('.sb-today').addEventListener('click', function () {
   displayProjectTitle('Today');
   var ul = document.querySelector('.td-list');
   ul.textContent = '';
-});
+}); //---------------------------
+
 document.getElementById('todoForm').addEventListener('submit', function (e) {
   e.preventDefault();
   var project = document.getElementById('category').value;
