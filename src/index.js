@@ -14,10 +14,19 @@ elements.addProject.addEventListener('click', () => {
 });
 
 //Helper
-const updateProjectOptions = (projectName) => {
-  const markup = `<option value="${projectName}">${projectName}</option>`;
-  elements.category.insertAdjacentHTML('beforeend', markup);
+const updateProjectOptions = () => {
+  elements.category.textContent = '';
+
+  Object.entries(projects).forEach( project => {
+    const markup = `<option value="${project[0]}">${project[0]}</option>`;
+
+    elements.category.insertAdjacentHTML("beforeend", markup);
+  });
+
 };
+
+updateProjectOptions();
+
 
 //Helper
 const checkUniqueness = (projectName) => {
@@ -53,7 +62,7 @@ elements.newPSubmit.addEventListener('click', () => {
     elements.projectUL.textContent = '';
     projects[projectName] = {};
     refreshProjectList();
-    updateProjectOptions(projectName);
+    updateProjectOptions();
   }
   elements.newProjectForm.reset();
   console.log(projects);
@@ -85,7 +94,7 @@ const updateProjectTitle = (title) => {
     elements.todoForm.classList.remove('hide');
 
     if (title !== 'All TODOs' && title !== 'Today'){
-      console.log(title);
+      document.querySelector(`select > option[value="${title}"]`).selected = "true";
     }
   })
 }
@@ -194,3 +203,6 @@ document.getElementById('todoForm').addEventListener('submit', (e) => {
 
 
 //++++++++++++++++
+
+// let t = document.querySelector('select > option[value="Project II"]').selected = "true"
+// console.log(t)
