@@ -10930,11 +10930,15 @@ _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.addProject.addEventListener('clic
   if (formStyle.display === 'none') formStyle.display = 'flex';else formStyle.display = 'none';
 }); //Helper
 
-var updateProjectOptions = function updateProjectOptions(projectName) {
-  var markup = "<option value=\"".concat(projectName, "\">").concat(projectName, "</option>");
-  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.category.insertAdjacentHTML('beforeend', markup);
-}; //Helper
+var updateProjectOptions = function updateProjectOptions() {
+  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.category.textContent = '';
+  Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects).forEach(function (project) {
+    var markup = "<option value=\"".concat(project[0], "\">").concat(project[0], "</option>");
+    _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.category.insertAdjacentHTML("beforeend", markup);
+  });
+};
 
+updateProjectOptions(); //Helper
 
 var checkUniqueness = function checkUniqueness(projectName) {
   var flag = false;
@@ -10966,7 +10970,7 @@ _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.newPSubmit.addEventListener('clic
     _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.projectUL.textContent = '';
     _js_base__WEBPACK_IMPORTED_MODULE_2__.projects[projectName] = {};
     refreshProjectList();
-    updateProjectOptions(projectName);
+    updateProjectOptions();
   }
 
   _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.newProjectForm.reset();
@@ -10993,7 +10997,7 @@ var updateProjectTitle = function updateProjectTitle(title) {
     _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.todoForm.classList.remove('hide');
 
     if (title !== 'All TODOs' && title !== 'Today') {
-      console.log(title);
+      document.querySelector("select > option[value=\"".concat(title, "\"]")).selected = "true";
     }
   });
 }; //Helper
@@ -11065,6 +11069,8 @@ document.getElementById('todoForm').addEventListener('submit', function (e) {
   console.log("Due date: ".concat(ddt));
   console.log("Priority: ".concat(priority));
 }); //++++++++++++++++
+// let t = document.querySelector('select > option[value="Project II"]').selected = "true"
+// console.log(t)
 }();
 /******/ })()
 ;
