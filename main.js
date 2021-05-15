@@ -10990,6 +10990,24 @@ var displayProjectTitle = function displayProjectTitle(title) {
 var displayTODOs = function displayTODOs(tid, projectName, title, desc, ddt, priorityClass, parent) {
   var markup = "<li class=\"td-list-item\">\n                        <div class=\"check\">\n                          <span class=\"status ".concat(priorityClass, "\"><i class=\"fas fa-square\"></i></span>\n                        </div>\n                \n                        <div class=\"info\">\n                          <div class=\"title title-").concat(tid, "\">").concat(title, "</div>\n                          <div class=\"info-secondary\">\n                            <div class=\"due-dt\">").concat(ddt, "</div>\n                            <div class=\"btns\">\n                              <span class=\"edit\"><i class=\"fas fa-edit\"></i></span>\n                              <span class=\"delete\"><i class=\"fas fa-trash-alt\"></i></span>\n                            </div>\n                          </div>\n                           <div class=\"desc desc-").concat(tid, " hide\">").concat(desc, "\n                             <span>").concat(projectName, "</span>\n                           </div>\n                        </div>\n                      </li>");
   parent.insertAdjacentHTML('beforeend', markup);
+}; //Helper
+
+
+var callDisplayTODOs = function callDisplayTODOs(project, ul) {
+  Object.entries(project[1]).forEach(function (todos) {
+    var todo = todos[1];
+    var tid = todos[0];
+    var projectName = project[0];
+    var title = todo.title;
+    var desc = todo.desc;
+    var ddt = todo.ddt;
+    var priorityClass = todo.priority === 'high' ? 'pr-h' : todo.priority === 'low' ? 'pr-l' : 'pr-m';
+    displayTODOs(tid, projectName, title, desc, ddt, priorityClass, ul);
+
+    document.querySelector(".title-".concat(todos[0])).onclick = function () {
+      document.querySelector(".desc-".concat(todos[0])).classList.toggle('hide');
+    };
+  });
 };
 
 document.querySelector('.sb-all').addEventListener('click', function () {
@@ -10998,40 +11016,7 @@ document.querySelector('.sb-all').addEventListener('click', function () {
   var ul = document.querySelector('.td-list');
   ul.textContent = '';
   Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects).forEach(function (project) {
-    Object.entries(project[1]).forEach(function (todos) {
-      var todo = todos[1];
-      var tid = todos[0];
-      var projectName = project[0];
-      var title = todo.title;
-      var desc = todo.desc;
-      var ddt = todo.ddt;
-      var priorityClass = todo.priority === 'high' ? 'pr-h' : todo.priority === 'low' ? 'pr-l' : 'pr-m';
-      displayTODOs(tid, projectName, title, desc, ddt, priorityClass, ul); // const markup = `<li class="td-list-item">
-      //                   <div class="check">
-      //                     <span class="status ${priorityClass}"><i class="fas fa-square"></i></span>
-      //                   </div>
-      //
-      //                   <div class="info">
-      //                     <div class="title title-${todos[0]}">${todo.title}</div>
-      //                     <div class="info-secondary">
-      //                       <div class="due-dt">${todo.ddt}</div>
-      //                       <div class="btns">
-      //                         <span class="edit"><i class="fas fa-edit"></i></span>
-      //                         <span class="delete"><i class="fas fa-trash-alt"></i></span>
-      //                       </div>
-      //                     </div>
-      //                      <div class="desc desc-${todos[0]} hide">${todo.desc}
-      //                        <span>${project[0]}</span>
-      //                      </div>
-      //                   </div>
-      //                 </li>`;
-      //
-      // ul.insertAdjacentHTML('beforeend', markup);
-
-      document.querySelector(".title-".concat(todos[0])).onclick = function () {
-        document.querySelector(".desc-".concat(todos[0])).classList.toggle('hide');
-      };
-    });
+    callDisplayTODOs(project, ul);
   });
 }); //Helper
 
@@ -11041,20 +11026,7 @@ var renderTODOs = function renderTODOs(clsName, project) {
     displayProjectTitle(project[0]);
     var ul = document.querySelector('.td-list');
     ul.textContent = '';
-    Object.entries(project[1]).forEach(function (todos) {
-      var todo = todos[1];
-      var tid = todos[0];
-      var projectName = project[0];
-      var title = todo.title;
-      var desc = todo.desc;
-      var ddt = todo.ddt;
-      var priorityClass = todo.priority === 'high' ? 'pr-h' : todo.priority === 'low' ? 'pr-l' : 'pr-m';
-      displayTODOs(tid, projectName, title, desc, ddt, priorityClass, ul);
-
-      document.querySelector(".title-".concat(todos[0])).onclick = function () {
-        document.querySelector(".desc-".concat(todos[0])).classList.toggle('hide');
-      };
-    });
+    callDisplayTODOs(project, ul);
   };
 }; //Project List in sidebar Menu
 
