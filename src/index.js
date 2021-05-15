@@ -1,6 +1,7 @@
 import './stylesheets/style.scss';
 import uniqid from 'uniqid';
 import { elements, projects } from './js/base';
+import Todo from "./js/Todo";
 
 
 elements.menu.addEventListener('click', () => {
@@ -186,21 +187,23 @@ document.querySelector('.sb-today').addEventListener('click', () => {
 
 //---------------------------
 
-document.getElementById('todoForm').addEventListener('submit', (e) => {
-  e.preventDefault();
+//Helper
+
+const readFormInput = () => {
   const project = document.getElementById('category').value;
   const title = document.getElementById('title').value;
   const desc = document.getElementById('desc').value;
   const ddt = document.getElementById('due-dt').value;
   const priority = document.getElementById('todoForm').elements.priority.value;
 
-  let pid = uniqid()
+  return [project, title, desc, ddt, priority];
+}
 
-  projects[project][pid] = {
-      title: title,
-      desc: desc,
-      ddt: ddt,
-      priority: priority
-  }
+document.getElementById('todoForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const [project, title, desc, ddt, priority] = readFormInput();
+
+  let todo = new Todo(project, title, desc, ddt, priority);
+  todo.addTODO();
 
 });

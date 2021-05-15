@@ -1,6 +1,60 @@
 /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/js/Todo.js":
+/*!************************!*\
+  !*** ./src/js/Todo.js ***!
+  \************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ Todo; }
+/* harmony export */ });
+/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! uniqid */ "./node_modules/uniqid/index.js");
+/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+var Todo = /*#__PURE__*/function () {
+  function Todo(project, title, desc, ddt, priority) {
+    _classCallCheck(this, Todo);
+
+    this.pid = uniqid__WEBPACK_IMPORTED_MODULE_0___default()();
+    this.project = project;
+    this.title = title;
+    this.desc = desc;
+    this.ddt = ddt;
+    this.priority = priority;
+  }
+
+  _createClass(Todo, [{
+    key: "addTODO",
+    value: function addTODO() {
+      _base__WEBPACK_IMPORTED_MODULE_1__.projects[this.project][this.pid] = {
+        title: this.title,
+        desc: this.desc,
+        ddt: this.ddt,
+        priority: this.priority
+      };
+    }
+  }]);
+
+  return Todo;
+}();
+
+
+
+/***/ }),
+
 /***/ "./src/js/base.js":
 /*!************************!*\
   !*** ./src/js/base.js ***!
@@ -10919,6 +10973,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! uniqid */ "./node_modules/uniqid/index.js");
 /* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _js_base__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/base */ "./src/js/base.js");
+/* harmony import */ var _js_Todo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/Todo */ "./src/js/Todo.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 
 
@@ -11055,21 +11123,30 @@ document.querySelector('.sb-today').addEventListener('click', function () {
   var ul = document.querySelector('.td-list');
   ul.textContent = '';
 }); //---------------------------
+//Helper
 
-document.getElementById('todoForm').addEventListener('submit', function (e) {
-  e.preventDefault();
+var readFormInput = function readFormInput() {
   var project = document.getElementById('category').value;
   var title = document.getElementById('title').value;
   var desc = document.getElementById('desc').value;
   var ddt = document.getElementById('due-dt').value;
   var priority = document.getElementById('todoForm').elements.priority.value;
-  var pid = uniqid__WEBPACK_IMPORTED_MODULE_1___default()();
-  _js_base__WEBPACK_IMPORTED_MODULE_2__.projects[project][pid] = {
-    title: title,
-    desc: desc,
-    ddt: ddt,
-    priority: priority
-  };
+  return [project, title, desc, ddt, priority];
+};
+
+document.getElementById('todoForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  var _readFormInput = readFormInput(),
+      _readFormInput2 = _slicedToArray(_readFormInput, 5),
+      project = _readFormInput2[0],
+      title = _readFormInput2[1],
+      desc = _readFormInput2[2],
+      ddt = _readFormInput2[3],
+      priority = _readFormInput2[4];
+
+  var todo = new _js_Todo__WEBPACK_IMPORTED_MODULE_3__.default(project, title, desc, ddt, priority);
+  todo.addTODO();
 });
 }();
 /******/ })()
