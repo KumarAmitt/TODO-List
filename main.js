@@ -10980,8 +10980,16 @@ var cleanMainUI = function cleanMainUI() {
 }; //Helper
 
 
-var displayProjectTitle = function displayProjectTitle(title) {
-  document.querySelector('.category-title').textContent = title;
+var updateProjectTitle = function updateProjectTitle(title) {
+  var id = uniqid__WEBPACK_IMPORTED_MODULE_1___default()();
+  var category = document.querySelector('.category');
+  category.textContent = '';
+  var markup = "<div class=\"category-title\">".concat(title, "</div>\n                  <div class=\"new-todo new-todo-").concat(id, "\"><i class=\"fas fa-plus\"></i></div>");
+  category.insertAdjacentHTML("beforeend", markup);
+
+  document.querySelector(".new-todo-".concat(id)).onclick = function () {
+    console.log("new-todo-".concat(id));
+  };
 }; //Helper
 
 
@@ -11010,7 +11018,7 @@ var callDisplayTODOs = function callDisplayTODOs(project, ul) {
 
 document.querySelector('.sb-all').addEventListener('click', function () {
   cleanMainUI();
-  displayProjectTitle('ALL TODOs');
+  updateProjectTitle('All TODOs');
   var ul = document.querySelector('.td-list');
   ul.textContent = '';
   Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects).forEach(function (project) {
@@ -11021,7 +11029,7 @@ document.querySelector('.sb-all').addEventListener('click', function () {
 var renderTODOs = function renderTODOs(clsName, project) {
   document.querySelector(".".concat(clsName)).onclick = function () {
     cleanMainUI();
-    displayProjectTitle(project[0]);
+    updateProjectTitle(project[0]);
     var ul = document.querySelector('.td-list');
     ul.textContent = '';
     callDisplayTODOs(project, ul);
@@ -11033,7 +11041,7 @@ refreshProjectList(); //---------------------------
 
 document.querySelector('.sb-today').addEventListener('click', function () {
   cleanMainUI();
-  displayProjectTitle('Today');
+  updateProjectTitle('Today');
   var ul = document.querySelector('.td-list');
   ul.textContent = '';
 }); //---------------------------
@@ -11050,7 +11058,7 @@ document.getElementById('todoForm').addEventListener('submit', function (e) {
   console.log("Desc: ".concat(desc));
   console.log("Due date: ".concat(ddt));
   console.log("Priority: ".concat(priority));
-});
+}); //++++++++++++++++
 }();
 /******/ })()
 ;
