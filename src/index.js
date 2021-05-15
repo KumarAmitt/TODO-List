@@ -72,7 +72,7 @@ elements.newPSubmit.addEventListener('click', () => {
     inputField.placeholder = 'Project already exists';
   } else {
     elements.projectUL.textContent = '';
-    projects[projectName] = {};
+    project.addProject();
     refreshProjectList();
     updateProjectOptions();
   }

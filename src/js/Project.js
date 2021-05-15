@@ -5,6 +5,10 @@ export default class Project {
     this.name = name;
   }
 
+  addProject(){
+    projects[this.name] = {};
+  }
+
   validate(){
     return this.name.length === 0
   }
