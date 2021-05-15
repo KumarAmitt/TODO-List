@@ -69,8 +69,19 @@ const cleanMainUI = () => {
 }
 
 //Helper
-const displayProjectTitle = (title) => {
-  document.querySelector('.category-title').textContent = title;
+const updateProjectTitle = (title) => {
+  let id = uniqid();
+  const category = document.querySelector('.category');
+  category.textContent = '';
+
+  const markup = `<div class="category-title">${title}</div>
+                  <div class="new-todo new-todo-${id}"><i class="fas fa-plus"></i></div>`;
+
+  category.insertAdjacentHTML("beforeend", markup);
+
+  document.querySelector(`.new-todo-${id}`).onclick = () => {
+    console.log(`new-todo-${id}`);
+  }
 }
 
 //Helper
@@ -121,7 +132,7 @@ const callDisplayTODOs= (project, ul) => {
 
 document.querySelector('.sb-all').addEventListener('click', () => {
   cleanMainUI();
-  displayProjectTitle('ALL TODOs')
+  updateProjectTitle('All TODOs');
 
   const ul = document.querySelector('.td-list');
   ul.textContent = '';
@@ -136,7 +147,7 @@ document.querySelector('.sb-all').addEventListener('click', () => {
 const renderTODOs = (clsName, project) => {
   document.querySelector(`.${clsName}`).onclick = () => {
     cleanMainUI();
-    displayProjectTitle(project[0])
+    updateProjectTitle(project[0])
 
     const ul = document.querySelector('.td-list');
     ul.textContent = '';
@@ -151,7 +162,7 @@ refreshProjectList();
 //TODAY
 document.querySelector('.sb-today').addEventListener('click', () => {
   cleanMainUI();
-  displayProjectTitle('Today');
+  updateProjectTitle('Today');
 
   const ul = document.querySelector('.td-list');
   ul.textContent = '';
@@ -174,3 +185,6 @@ document.getElementById('todoForm').addEventListener('submit', (e) => {
   console.log(`Due date: ${ddt}`);
   console.log(`Priority: ${priority}`);
 });
+
+
+//++++++++++++++++
