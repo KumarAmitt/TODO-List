@@ -44,23 +44,10 @@ elements.newPSubmit.addEventListener('click', () => {
     updateProjectOptions(projectName);
   }
   elements.newProjectForm.reset();
-  // console.log(projects);
+  console.log(projects);
 });
 
-document.getElementById('todoForm').addEventListener('submit', (e) => {
-  e.preventDefault();
-  const project = document.getElementById('category').value;
-  const title = document.getElementById('title').value;
-  const desc = document.getElementById('desc').value;
-  const ddt = document.getElementById('due-dt').value;
-  const priority = document.getElementById('todoForm').elements.priority.value;
-
-  console.log(`project: ${project}`);
-  console.log(`Title: ${title}`);
-  console.log(`Desc: ${desc}`);
-  console.log(`Due date: ${ddt}`);
-  console.log(`Priority: ${priority}`);
-});
+//-------------------------
 
 //Helper
 const cleanMainUI = () => {
@@ -153,4 +140,32 @@ Object.entries(projects).forEach( project => {
   elements.projectUL.insertAdjacentHTML("beforeend", markup);
 
   renderTODOs(`sb-item-${pid}`, project)
+});
+
+//---------------------------
+
+//TODAY
+
+document.querySelector('.sb-today').addEventListener('click', () => {
+  cleanMainUI();
+  displayProjectTitle('Today');
+
+  const ul = document.querySelector('.td-list');
+  ul.textContent = '';
+
+})
+
+document.getElementById('todoForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const project = document.getElementById('category').value;
+  const title = document.getElementById('title').value;
+  const desc = document.getElementById('desc').value;
+  const ddt = document.getElementById('due-dt').value;
+  const priority = document.getElementById('todoForm').elements.priority.value;
+
+  console.log(`project: ${project}`);
+  console.log(`Title: ${title}`);
+  console.log(`Desc: ${desc}`);
+  console.log(`Due date: ${ddt}`);
+  console.log(`Priority: ${priority}`);
 });

@@ -10959,21 +10959,10 @@ _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.newPSubmit.addEventListener('clic
     updateProjectOptions(projectName);
   }
 
-  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.newProjectForm.reset(); // console.log(projects);
-});
-document.getElementById('todoForm').addEventListener('submit', function (e) {
-  e.preventDefault();
-  var project = document.getElementById('category').value;
-  var title = document.getElementById('title').value;
-  var desc = document.getElementById('desc').value;
-  var ddt = document.getElementById('due-dt').value;
-  var priority = document.getElementById('todoForm').elements.priority.value;
-  console.log("project: ".concat(project));
-  console.log("Title: ".concat(title));
-  console.log("Desc: ".concat(desc));
-  console.log("Due date: ".concat(ddt));
-  console.log("Priority: ".concat(priority));
-}); //Helper
+  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.newProjectForm.reset();
+  console.log(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects);
+}); //-------------------------
+//Helper
 
 var cleanMainUI = function cleanMainUI() {
   _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.main.style.display = 'block';
@@ -11036,6 +11025,27 @@ Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects).forEach(function 
   var markup = "<li class=\"sb-p-item sb-item sb-item-".concat(pid, "\">").concat(project[0], "</li>");
   _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.projectUL.insertAdjacentHTML("beforeend", markup);
   renderTODOs("sb-item-".concat(pid), project);
+}); //---------------------------
+//TODAY
+
+document.querySelector('.sb-today').addEventListener('click', function () {
+  cleanMainUI();
+  displayProjectTitle('Today');
+  var ul = document.querySelector('.td-list');
+  ul.textContent = '';
+});
+document.getElementById('todoForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var project = document.getElementById('category').value;
+  var title = document.getElementById('title').value;
+  var desc = document.getElementById('desc').value;
+  var ddt = document.getElementById('due-dt').value;
+  var priority = document.getElementById('todoForm').elements.priority.value;
+  console.log("project: ".concat(project));
+  console.log("Title: ".concat(title));
+  console.log("Desc: ".concat(desc));
+  console.log("Due date: ".concat(ddt));
+  console.log("Priority: ".concat(priority));
 });
 }();
 /******/ })()
