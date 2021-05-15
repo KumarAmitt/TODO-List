@@ -21,7 +21,8 @@ var elements = {
   newPSubmit: document.querySelector('.new-p-submit'),
   projectUL: document.querySelector('.sb-p-items'),
   category: document.getElementById('category'),
-  main: document.querySelector('main')
+  main: document.querySelector('main'),
+  todoForm: document.querySelector('.todo-form')
 };
 var projects = {
   'Project I': {
@@ -10975,7 +10976,7 @@ _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.newPSubmit.addEventListener('clic
 
 var cleanMainUI = function cleanMainUI() {
   _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.main.style.display = 'block';
-  document.getElementById('todoForm').style.display = 'none';
+  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.todoForm.classList.add('hide');
   _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.sidebar.classList.add('hide');
 }; //Helper
 
@@ -10986,10 +10987,15 @@ var updateProjectTitle = function updateProjectTitle(title) {
   category.textContent = '';
   var markup = "<div class=\"category-title\">".concat(title, "</div>\n                  <div class=\"new-todo new-todo-").concat(id, "\"><i class=\"fas fa-plus\"></i></div>");
   category.insertAdjacentHTML("beforeend", markup);
-
-  document.querySelector(".new-todo-".concat(id)).onclick = function () {
+  document.querySelector(".new-todo-".concat(id)).addEventListener('click', function () {
     console.log("new-todo-".concat(id));
-  };
+    _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.main.style.display = 'none';
+    _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.todoForm.classList.remove('hide');
+
+    if (title !== 'All TODOs' && title !== 'Today') {
+      console.log(title);
+    }
+  });
 }; //Helper
 
 

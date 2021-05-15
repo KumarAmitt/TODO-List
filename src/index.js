@@ -64,7 +64,7 @@ elements.newPSubmit.addEventListener('click', () => {
 //Helper
 const cleanMainUI = () => {
   elements.main.style.display = 'block';
-  document.getElementById('todoForm').style.display = 'none';
+  elements.todoForm.classList.add('hide');
   elements.sidebar.classList.add('hide');
 }
 
@@ -79,9 +79,15 @@ const updateProjectTitle = (title) => {
 
   category.insertAdjacentHTML("beforeend", markup);
 
-  document.querySelector(`.new-todo-${id}`).onclick = () => {
+  document.querySelector(`.new-todo-${id}`).addEventListener('click', () => {
     console.log(`new-todo-${id}`);
-  }
+    elements.main.style.display = 'none';
+    elements.todoForm.classList.remove('hide');
+
+    if (title !== 'All TODOs' && title !== 'Today'){
+      console.log(title);
+    }
+  })
 }
 
 //Helper
