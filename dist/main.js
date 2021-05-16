@@ -138,7 +138,7 @@ __webpack_require__.r(__webpack_exports__);
 var elements = {
   menu: document.querySelector('.menu'),
   sidebar: document.querySelector('.sidebar'),
-  addProject: document.querySelector('.sb-p-title'),
+  addProjects: document.querySelector('.sb-p-title'),
   newProjectForm: document.querySelector('.new-project'),
   newPSubmit: document.querySelector('.new-p-submit'),
   projectUL: document.querySelector('.sb-p-items'),
@@ -13975,7 +13975,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.menu.addEventListener('click', function () {
   _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.sidebar.classList.toggle('hide');
 });
-_js_base__WEBPACK_IMPORTED_MODULE_2__.elements.addProject.addEventListener('click', function (e) {
+_js_base__WEBPACK_IMPORTED_MODULE_2__.elements.addProjects.addEventListener('click', function (e) {
   var formStyle = _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.newProjectForm.style;
   formStyle.display = formStyle.display === 'flex' ? 'none' : 'flex';
 }); //Helper
@@ -14026,13 +14026,25 @@ var updateProjectTitle = function updateProjectTitle(title) {
 }; //Helper
 
 
-var renderTODOs = function renderTODOs(clsName, project) {
+var renderProjectTODOs = function renderProjectTODOs(clsName, title) {
   document.querySelector(".".concat(clsName)).onclick = function () {
     prepareMainUI();
-    updateProjectTitle(project[0]);
+    updateProjectTitle(title);
     var ul = document.querySelector('.td-list');
     ul.textContent = '';
-    callDisplayTODOs(project, ul);
+    Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects[title]).forEach(function (todo) {
+      var projectName = title;
+      var tid = todo[0];
+      var title = todo[1].title;
+      var desc = todo[1].desc;
+      var ddt = todo[1].ddt;
+      var priorityClass = todo[1].priority === 'high' ? 'pr-h' : todo[1].priority === 'low' ? 'pr-l' : 'pr-m';
+      displayTODOs(tid, projectName, title, desc, ddt, priorityClass, ul);
+
+      document.querySelector(".title-".concat(tid)).onclick = function () {
+        document.querySelector(".desc-".concat(tid)).classList.toggle('hide');
+      };
+    });
   };
 }; //Helper
 
@@ -14042,7 +14054,7 @@ var refreshProjectList = function refreshProjectList() {
     var pid = uniqid__WEBPACK_IMPORTED_MODULE_1___default()();
     var markup = "<li class=\"sb-p-item sb-item sb-item-".concat(pid, "\">").concat(project[0], "</li>");
     _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.projectUL.insertAdjacentHTML("beforeend", markup);
-    renderTODOs("sb-item-".concat(pid), project);
+    renderProjectTODOs("sb-item-".concat(pid), project[0]);
   });
 };
 

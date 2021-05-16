@@ -10,7 +10,7 @@ elements.menu.addEventListener('click', () => {
   elements.sidebar.classList.toggle('hide');
 });
 
-elements.addProject.addEventListener('click', (e) => {
+elements.addProjects.addEventListener('click', (e) => {
   const formStyle = elements.newProjectForm.style;
   formStyle.display = formStyle.display === 'flex' ? 'none' : 'flex';
 });
@@ -71,14 +71,30 @@ const updateProjectTitle = (title) => {
 }
 
 //Helper
-const renderTODOs = (clsName, project) => {
+const renderProjectTODOs = (clsName, title) => {
   document.querySelector(`.${clsName}`).onclick = () => {
     prepareMainUI();
-    updateProjectTitle(project[0])
+    updateProjectTitle(title)
 
     const ul = document.querySelector('.td-list');
     ul.textContent = '';
-    callDisplayTODOs(project, ul);
+
+    Object.entries(projects[title]).forEach(todo => {
+
+      const projectName = title
+      const tid = todo[0];
+      const title = todo[1].title;
+      const desc = todo[1].desc;
+      const ddt = todo[1].ddt;
+      const priorityClass = todo[1].priority === 'high' ? 'pr-h' : todo[1].priority === 'low' ? 'pr-l' : 'pr-m';
+
+      displayTODOs(tid, projectName, title, desc, ddt, priorityClass, ul);
+
+      document.querySelector(`.title-${tid}`).onclick = () => {
+        document.querySelector(`.desc-${tid}`).classList.toggle('hide');
+      }
+
+    })
   }
 }
 
@@ -90,7 +106,8 @@ const refreshProjectList = () => {
     const markup = `<li class="sb-p-item sb-item sb-item-${pid}">${project[0]}</li>`;
     elements.projectUL.insertAdjacentHTML("beforeend", markup);
 
-    renderTODOs(`sb-item-${pid}`, project)
+    renderProjectTODOs(`sb-item-${pid}`, project[0])
+
   });
 }
 
