@@ -15,13 +15,13 @@ export const projects = {
     id1: {
       title: 'Project 1, Task 1',
       desc: 'Say hi to everyone',
-      ddt: '2021-05-14',
+      ddt: '2021-05-29T16:21',
       priority: 'high',
     },
     id2: {
       title: 'Project 1, Task 2',
       desc: 'Say hello to everyone',
-      ddt: '2021-05-14',
+      ddt: '2021-05-16T16:21',
       priority: 'medium',
     },
   },
@@ -29,13 +29,13 @@ export const projects = {
     id11: {
       title: 'Project 2, Task 1',
       desc: 'Say bye to everyone',
-      ddt: '2021-05-14',
+      ddt: '2021-05-16T16:21',
       priority: 'high',
     },
     id12: {
       title: 'Project 2, Task 2',
       desc: 'Say good bye to everyone',
-      ddt: '2021-05-14',
+      ddt: '2021-05-17T16:21',
       priority: 'low',
     },
   },

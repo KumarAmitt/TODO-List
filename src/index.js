@@ -3,6 +3,7 @@ import uniqid from 'uniqid';
 import { elements, projects } from './js/base';
 import Todo from "./js/Todo";
 import Project from './js/Project'
+import {format} from 'date-fns'
 
 
 elements.menu.addEventListener('click', () => {
@@ -183,13 +184,19 @@ refreshProjectList();
 
 //---------------------------
 
-//TODAY
+// TODAY
 document.querySelector('.sb-today').addEventListener('click', () => {
   prepareMainUI();
   updateProjectTitle('Today');
 
   const ul = document.querySelector('.td-list');
   ul.textContent = '';
+
+  Object.entries(projects).filter(p => {
+    Object.entries(p[1]).filter(pp => pp[1].ddt.slice(0, 10) === format(new Date(),'yyyy-MM-dd')).forEach(e => {
+      console.log(e)
+    })
+  })
 
 })
 
