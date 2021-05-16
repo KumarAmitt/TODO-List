@@ -14089,18 +14089,7 @@ var callDisplayTODOs = function callDisplayTODOs(project, ul) {
       document.querySelector(".desc-".concat(tid)).classList.toggle('hide');
     };
   });
-}; // document.querySelector('.sb-all').addEventListener('click', () => {
-//   prepareMainUI();
-//   updateProjectTitle('All TODOs');
-//
-//   const ul = document.querySelector('.td-list');
-//   ul.textContent = '';
-//
-//   Object.entries(projects).forEach((project) => {
-//     callDisplayTODOs(project, ul);
-//   });
-// });
-
+};
 
 document.querySelector('.sb-all').addEventListener('click', function () {
   prepareMainUI();
@@ -14131,11 +14120,21 @@ document.querySelector('.sb-today').addEventListener('click', function () {
   updateProjectTitle('Today');
   var ul = document.querySelector('.td-list');
   ul.textContent = '';
-  Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects).filter(function (p) {
-    Object.entries(p[1]).filter(function (pp) {
-      return pp[1].ddt.slice(0, 10) === (0,date_fns__WEBPACK_IMPORTED_MODULE_5__.default)(new Date(), 'yyyy-MM-dd');
-    }).forEach(function (e) {
-      console.log(e);
+  Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects).filter(function (project) {
+    Object.entries(project[1]).filter(function (p) {
+      return p[1].ddt.slice(0, 10) === (0,date_fns__WEBPACK_IMPORTED_MODULE_5__.default)(new Date(), 'yyyy-MM-dd');
+    }).forEach(function (todo) {
+      var projectName = project[0];
+      var tid = todo[0];
+      var title = todo[1].title;
+      var desc = todo[1].desc;
+      var ddt = todo[1].ddt;
+      var priorityClass = todo[1].priority === 'high' ? 'pr-h' : todo[1].priority === 'low' ? 'pr-l' : 'pr-m';
+      displayTODOs(tid, projectName, title, desc, ddt, priorityClass, ul);
+
+      document.querySelector(".title-".concat(tid)).onclick = function () {
+        document.querySelector(".desc-".concat(tid)).classList.toggle('hide');
+      };
     });
   });
 }); //---------------------------
