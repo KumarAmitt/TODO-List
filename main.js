@@ -100,7 +100,20 @@ var Todo = /*#__PURE__*/function () {
         ddt: this.ddt,
         priority: this.priority
       };
-    }
+    } // allTodos() {
+    //   Object.entries(projects).forEach(project => {
+    //     Object.entries(project[1]).forEach(todos => {
+    //       const tid = todos[0];
+    //       const projectName = project[0];
+    //       const title = todos[1].title;
+    //       const desc = todos[1].desc;
+    //       const ddt = todos[1].priority;
+    //       const priorityClass = todos[1].priority === 'high' ? 'pr-h' : todos[1].priority === 'low' ? 'pr-l' : 'pr-m';
+    //       console.log(tid, projectName, title, desc, ddt, priorityClass);
+    //     })
+    //   });
+    // }
+
   }]);
 
   return Todo;
@@ -11156,11 +11169,12 @@ var callDisplayTODOs = function callDisplayTODOs(project, ul) {
     var title = todo.title;
     var desc = todo.desc;
     var ddt = todo.ddt;
-    var priorityClass = todo.priority === 'high' ? 'pr-h' : todo.priority === 'low' ? 'pr-l' : 'pr-m';
+    var priorityClass = todo.priority === 'high' ? 'pr-h' : todo.priority === 'low' ? 'pr-l' : 'pr-m'; // console.log(tid, projectName, title, desc, ddt, priorityClass);
+
     displayTODOs(tid, projectName, title, desc, ddt, priorityClass, ul);
 
-    document.querySelector(".title-".concat(todos[0])).onclick = function () {
-      document.querySelector(".desc-".concat(todos[0])).classList.toggle('hide');
+    document.querySelector(".title-".concat(tid)).onclick = function (e) {
+      document.querySelector(".desc-".concat(tid)).classList.toggle('hide');
     };
   });
 };
@@ -11207,6 +11221,8 @@ document.getElementById('todoForm').addEventListener('submit', function (e) {
 
   var todo = new _js_Todo__WEBPACK_IMPORTED_MODULE_3__.default(project, title, desc, ddt, priority);
   todo.addTODO();
+  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.todoForm.classList.toggle('hide');
+  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.main.classList.remove('hide');
 });
 }();
 /******/ })()
