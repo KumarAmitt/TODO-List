@@ -160,28 +160,6 @@ const displayTODOs = (tid, projectName, title, desc, ddt, priorityClass, parent)
   parent.insertAdjacentHTML('beforeend', markup);
 }
 
-//Helper
-const callDisplayTODOs= (project, ul) => {
-
-  Object.entries(project[1]).forEach((todos) => {
-    const todo = todos[1];
-
-    const tid = todos[0];
-    const projectName = project[0];
-    const title = todo.title;
-    const desc = todo.desc;
-    const ddt = todo.ddt;
-    const priorityClass = todo.priority === 'high' ? 'pr-h' : todo.priority === 'low' ? 'pr-l' : 'pr-m';
-
-    // console.log(tid, projectName, title, desc, ddt, priorityClass);
-
-    displayTODOs(tid, projectName, title, desc, ddt, priorityClass, ul);
-
-    document.querySelector(`.title-${tid}`).onclick = (e) => {
-      document.querySelector(`.desc-${tid}`).classList.toggle('hide');
-    }
-  });
-}
 
 document.querySelector('.sb-all').addEventListener('click', () => {
   prepareMainUI();
