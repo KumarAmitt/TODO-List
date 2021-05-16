@@ -29,8 +29,13 @@ var Project = /*#__PURE__*/function () {
   }
 
   _createClass(Project, [{
-    key: "validate",
-    value: function validate() {
+    key: "addProject",
+    value: function addProject() {
+      _base__WEBPACK_IMPORTED_MODULE_0__.projects[this.name] = {};
+    }
+  }, {
+    key: "nameIsBlank",
+    value: function nameIsBlank() {
       return this.name.length === 0;
     }
   }, {
@@ -11047,7 +11052,7 @@ _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.menu.addEventListener('click', fu
 });
 _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.addProject.addEventListener('click', function () {
   var formStyle = _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.newProjectForm.style;
-  if (formStyle.display === 'none') formStyle.display = 'flex';else formStyle.display = 'none';
+  formStyle.display = formStyle.display === 'none' ? 'flex' : 'none';
 }); //Helper
 
 var updateProjectOptions = function updateProjectOptions() {
@@ -11067,37 +11072,20 @@ var refreshProjectList = function refreshProjectList() {
     _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.projectUL.insertAdjacentHTML("beforeend", markup);
     renderTODOs("sb-item-".concat(pid), project);
   });
-}; // elements.newPSubmit.addEventListener('click', () => {
-//   const inputField = document.querySelector('[name = projectName]');
-//   const projectName = inputField.value;
-//
-//   if (projectName.length === 0) {
-//     inputField.placeholder = 'Field can\'t be blank';
-//   } else if(checkUniqueness(projectName)) {
-//     inputField.placeholder = 'Project already exists';
-//   } else {
-//     elements.projectUL.textContent = '';
-//     projects[projectName] = {};
-//     refreshProjectList();
-//     updateProjectOptions();
-//   }
-//   elements.newProjectForm.reset();
-//   console.log(projects);
-// });
-
+};
 
 _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.newPSubmit.addEventListener('click', function () {
   var inputField = document.querySelector('[name = projectName]');
   var projectName = inputField.value;
   var project = new _js_Project__WEBPACK_IMPORTED_MODULE_4__.default(projectName);
 
-  if (project.validate()) {
+  if (project.nameIsBlank()) {
     inputField.placeholder = 'Field can\'t be blank';
   } else if (project.checkUniqueness()) {
     inputField.placeholder = 'Project already exists';
   } else {
     _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.projectUL.textContent = '';
-    _js_base__WEBPACK_IMPORTED_MODULE_2__.projects[projectName] = {};
+    project.addProject();
     refreshProjectList();
     updateProjectOptions();
   }

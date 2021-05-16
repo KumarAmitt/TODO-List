@@ -9,7 +9,7 @@ export default class Project {
     projects[this.name] = {};
   }
 
-  validate(){
+  nameIsBlank(){
     return this.name.length === 0
   }
 

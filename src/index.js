@@ -11,8 +11,7 @@ elements.menu.addEventListener('click', () => {
 
 elements.addProject.addEventListener('click', () => {
   const formStyle = elements.newProjectForm.style;
-  if (formStyle.display === 'none') formStyle.display = 'flex';
-  else formStyle.display = 'none';
+  formStyle.display = formStyle.display === 'none' ? 'flex' : 'none';
 });
 
 //Helper
@@ -42,31 +41,13 @@ const refreshProjectList = () => {
   });
 }
 
-// elements.newPSubmit.addEventListener('click', () => {
-//   const inputField = document.querySelector('[name = projectName]');
-//   const projectName = inputField.value;
-//
-//   if (projectName.length === 0) {
-//     inputField.placeholder = 'Field can\'t be blank';
-//   } else if(checkUniqueness(projectName)) {
-//     inputField.placeholder = 'Project already exists';
-//   } else {
-//     elements.projectUL.textContent = '';
-//     projects[projectName] = {};
-//     refreshProjectList();
-//     updateProjectOptions();
-//   }
-//   elements.newProjectForm.reset();
-//   console.log(projects);
-// });
-
 elements.newPSubmit.addEventListener('click', () => {
   const inputField = document.querySelector('[name = projectName]');
   const projectName = inputField.value;
 
   let project = new Project(projectName);
 
-  if (project.validate()) {
+  if (project.nameIsBlank()) {
     inputField.placeholder = 'Field can\'t be blank';
   } else if(project.checkUniqueness()) {
     inputField.placeholder = 'Project already exists';
