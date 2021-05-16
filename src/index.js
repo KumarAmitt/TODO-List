@@ -166,6 +166,18 @@ const callDisplayTODOs= (project, ul) => {
   });
 }
 
+// document.querySelector('.sb-all').addEventListener('click', () => {
+//   prepareMainUI();
+//   updateProjectTitle('All TODOs');
+//
+//   const ul = document.querySelector('.td-list');
+//   ul.textContent = '';
+//
+//   Object.entries(projects).forEach((project) => {
+//     callDisplayTODOs(project, ul);
+//   });
+// });
+
 document.querySelector('.sb-all').addEventListener('click', () => {
   prepareMainUI();
   updateProjectTitle('All TODOs');
@@ -173,10 +185,24 @@ document.querySelector('.sb-all').addEventListener('click', () => {
   const ul = document.querySelector('.td-list');
   ul.textContent = '';
 
-  Object.entries(projects).forEach((project) => {
-    callDisplayTODOs(project, ul);
+  Object.entries(projects).forEach(project => {
+    Object.entries(project[1]).forEach(todo => {
+      const projectName = project[0]
+      const tid = todo[0];
+      const title = todo[1].title;
+      const desc = todo[1].desc;
+      const ddt = todo[1].ddt;
+      const priorityClass = todo[1].priority === 'high' ? 'pr-h' : todo[1].priority === 'low' ? 'pr-l' : 'pr-m';
 
-  });
+      displayTODOs(tid, projectName, title, desc, ddt, priorityClass, ul);
+
+      document.querySelector(`.title-${tid}`).onclick = () => {
+        document.querySelector(`.desc-${tid}`).classList.toggle('hide');
+      }
+
+    })
+  })
+
 });
 
 
@@ -197,8 +223,7 @@ document.querySelector('.sb-today').addEventListener('click', () => {
       console.log(e)
     })
   })
-
-})
+});
 
 //---------------------------
 
