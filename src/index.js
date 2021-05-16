@@ -155,10 +155,12 @@ const callDisplayTODOs= (project, ul) => {
     const ddt = todo.ddt;
     const priorityClass = todo.priority === 'high' ? 'pr-h' : todo.priority === 'low' ? 'pr-l' : 'pr-m';
 
+    // console.log(tid, projectName, title, desc, ddt, priorityClass);
+
     displayTODOs(tid, projectName, title, desc, ddt, priorityClass, ul);
 
-    document.querySelector(`.title-${todos[0]}`).onclick = () => {
-      document.querySelector(`.desc-${todos[0]}`).classList.toggle('hide');
+    document.querySelector(`.title-${tid}`).onclick = (e) => {
+      document.querySelector(`.desc-${tid}`).classList.toggle('hide');
     }
   });
 }
@@ -172,6 +174,7 @@ document.querySelector('.sb-all').addEventListener('click', () => {
 
   Object.entries(projects).forEach((project) => {
     callDisplayTODOs(project, ul);
+
   });
 });
 
@@ -210,5 +213,8 @@ document.getElementById('todoForm').addEventListener('submit', (e) => {
 
   let todo = new Todo(project, title, desc, ddt, priority);
   todo.addTODO();
+
+  elements.todoForm.classList.toggle('hide');
+  elements.main.classList.remove('hide')
 
 });
