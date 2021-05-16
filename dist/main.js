@@ -11050,9 +11050,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.menu.addEventListener('click', function () {
   _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.sidebar.classList.toggle('hide');
 });
-_js_base__WEBPACK_IMPORTED_MODULE_2__.elements.addProject.addEventListener('click', function () {
+_js_base__WEBPACK_IMPORTED_MODULE_2__.elements.addProject.addEventListener('click', function (e) {
   var formStyle = _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.newProjectForm.style;
-  formStyle.display = formStyle.display === 'none' ? 'flex' : 'none';
+  formStyle.display = formStyle.display === 'flex' ? 'none' : 'flex';
 }); //Helper
 
 var updateProjectOptions = function updateProjectOptions() {

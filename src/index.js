@@ -9,9 +9,9 @@ elements.menu.addEventListener('click', () => {
   elements.sidebar.classList.toggle('hide');
 });
 
-elements.addProject.addEventListener('click', () => {
+elements.addProject.addEventListener('click', (e) => {
   const formStyle = elements.newProjectForm.style;
-  formStyle.display = formStyle.display === 'none' ? 'flex' : 'none';
+  formStyle.display = formStyle.display === 'flex' ? 'none' : 'flex';
 });
 
 //Helper
