@@ -8,7 +8,9 @@ export const elements = {
   select: document.getElementById('select'),
   main: document.querySelector('main'),
   todoForm: document.querySelector('.todo-form'),
-  todoListUL: document.querySelector('.td-list')
+  todoListUL: document.querySelector('.td-list'),
+  all: document.querySelector('.sb-all'),
+  today: document.querySelector('.sb-today'),
 };
 
 export const projects = {

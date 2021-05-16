@@ -100,26 +100,46 @@ var Todo = /*#__PURE__*/function () {
         ddt: this.ddt,
         priority: this.priority
       };
-    } // allTodos() {
-    //   Object.entries(projects).forEach(project => {
-    //     Object.entries(project[1]).forEach(todos => {
-    //       const tid = todos[0];
-    //       const projectName = project[0];
-    //       const title = todos[1].title;
-    //       const desc = todos[1].desc;
-    //       const ddt = todos[1].priority;
-    //       const priorityClass = todos[1].priority === 'high' ? 'pr-h' : todos[1].priority === 'low' ? 'pr-l' : 'pr-m';
-    //       console.log(tid, projectName, title, desc, ddt, priorityClass);
-    //     })
-    //   });
-    // }
-
+    }
   }]);
 
   return Todo;
 }();
 
 
+
+/***/ }),
+
+/***/ "./src/js/allTodos.js":
+/*!****************************!*\
+  !*** ./src/js/allTodos.js ***!
+  \****************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
+/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helper */ "./src/js/helper.js");
+
+
+
+var allTODOs = function allTODOs() {
+  (0,_helper__WEBPACK_IMPORTED_MODULE_1__.prepareMainUI)();
+  (0,_helper__WEBPACK_IMPORTED_MODULE_1__.updateProjectTitle)('All TODOs');
+  var ul = _base__WEBPACK_IMPORTED_MODULE_0__.elements.todoListUL;
+  ul.textContent = '';
+  Object.entries(_base__WEBPACK_IMPORTED_MODULE_0__.projects).forEach(function (project) {
+    Object.entries(project[1]).forEach(function (todo) {
+      (0,_helper__WEBPACK_IMPORTED_MODULE_1__.paintTodoItem)({
+        project: project[0],
+        todo: todo,
+        parent: ul
+      });
+    });
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (allTODOs);
 
 /***/ }),
 
@@ -145,7 +165,9 @@ var elements = {
   select: document.getElementById('select'),
   main: document.querySelector('main'),
   todoForm: document.querySelector('.todo-form'),
-  todoListUL: document.querySelector('.td-list')
+  todoListUL: document.querySelector('.td-list'),
+  all: document.querySelector('.sb-all'),
+  today: document.querySelector('.sb-today')
 };
 var projects = {
   'Project I': {
@@ -177,6 +199,255 @@ var projects = {
     }
   }
 };
+
+/***/ }),
+
+/***/ "./src/js/helper.js":
+/*!**************************!*\
+  !*** ./src/js/helper.js ***!
+  \**************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "toggleMenu": function() { return /* binding */ toggleMenu; },
+/* harmony export */   "toggleAddProjectsForm": function() { return /* binding */ toggleAddProjectsForm; },
+/* harmony export */   "updateSelectOptions": function() { return /* binding */ updateSelectOptions; },
+/* harmony export */   "prepareMainUI": function() { return /* binding */ prepareMainUI; },
+/* harmony export */   "refreshProjectList": function() { return /* binding */ refreshProjectList; },
+/* harmony export */   "updateProjectTitle": function() { return /* binding */ updateProjectTitle; },
+/* harmony export */   "paintTodoItem": function() { return /* binding */ paintTodoItem; }
+/* harmony export */ });
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
+/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! uniqid */ "./node_modules/uniqid/index.js");
+/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_1__);
+
+
+var toggleMenu = function toggleMenu() {
+  _base__WEBPACK_IMPORTED_MODULE_0__.elements.menu.addEventListener('click', function () {
+    _base__WEBPACK_IMPORTED_MODULE_0__.elements.sidebar.classList.toggle('hide');
+  });
+};
+var toggleAddProjectsForm = function toggleAddProjectsForm() {
+  _base__WEBPACK_IMPORTED_MODULE_0__.elements.addProjects.addEventListener('click', function (e) {
+    var formStyle = _base__WEBPACK_IMPORTED_MODULE_0__.elements.newProjectForm.style;
+    formStyle.display = formStyle.display === 'flex' ? 'none' : 'flex';
+  });
+};
+var updateSelectOptions = function updateSelectOptions() {
+  _base__WEBPACK_IMPORTED_MODULE_0__.elements.select.textContent = '';
+  Object.entries(_base__WEBPACK_IMPORTED_MODULE_0__.projects).forEach(function (project) {
+    var markup = "<option value=\"".concat(project[0], "\">").concat(project[0], "</option>");
+    _base__WEBPACK_IMPORTED_MODULE_0__.elements.select.insertAdjacentHTML("beforeend", markup);
+  });
+}; //--------------------------
+
+var prepareMainUI = function prepareMainUI() {
+  _base__WEBPACK_IMPORTED_MODULE_0__.elements.todoForm.classList.add('hide');
+  _base__WEBPACK_IMPORTED_MODULE_0__.elements.sidebar.classList.add('hide');
+  _base__WEBPACK_IMPORTED_MODULE_0__.elements.main.classList.remove('hide');
+};
+
+var prepareFormUI = function prepareFormUI() {
+  _base__WEBPACK_IMPORTED_MODULE_0__.elements.main.classList.add('hide');
+  _base__WEBPACK_IMPORTED_MODULE_0__.elements.todoForm.classList.remove('hide');
+};
+
+var selectDefaultOption = function selectDefaultOption(title) {
+  if (title !== 'All TODOs' && title !== 'Today') {
+    document.querySelector("select > option[value=\"".concat(title, "\"]")).selected = "true";
+  }
+};
+
+var refreshProjectList = function refreshProjectList() {
+  Object.entries(_base__WEBPACK_IMPORTED_MODULE_0__.projects).forEach(function (project) {
+    var pid = uniqid__WEBPACK_IMPORTED_MODULE_1___default()();
+    var markup = "<li class=\"sb-p-item sb-item sb-item-".concat(pid, "\">").concat(project[0], "</li>");
+    _base__WEBPACK_IMPORTED_MODULE_0__.elements.projectUL.insertAdjacentHTML("beforeend", markup);
+    renderProjectTODOs("sb-item-".concat(pid), project[0]);
+  });
+};
+
+var renderProjectTODOs = function renderProjectTODOs(clsName, title) {
+  document.querySelector(".".concat(clsName)).onclick = function () {
+    prepareMainUI();
+    updateProjectTitle(title);
+    var ul = _base__WEBPACK_IMPORTED_MODULE_0__.elements.todoListUL;
+    ul.textContent = '';
+    Object.entries(_base__WEBPACK_IMPORTED_MODULE_0__.projects[title]).forEach(function (todo) {
+      paintTodoItem({
+        project: title,
+        todo: todo,
+        parent: ul
+      });
+    });
+  };
+};
+
+var renderForm = function renderForm(title, id) {
+  document.querySelector(".new-todo-".concat(id)).addEventListener('click', function () {
+    prepareFormUI();
+    selectDefaultOption(title);
+  });
+};
+
+var updateProjectTitle = function updateProjectTitle(title) {
+  var id = uniqid__WEBPACK_IMPORTED_MODULE_1___default()();
+  var category = document.querySelector('.category');
+  category.textContent = '';
+  var markup = "<div class=\"category-title\">".concat(title, "</div>\n                  <div class=\"new-todo new-todo-").concat(id, "\"><i class=\"fas fa-plus\"></i></div>");
+  category.insertAdjacentHTML("beforeend", markup);
+  renderForm(title, id);
+};
+
+var displayTODOs = function displayTODOs(tid, projectName, title, desc, ddt, priorityClass, parent) {
+  var markup = "<li class=\"td-list-item\">\n                        <div class=\"check\">\n                          <span class=\"status ".concat(priorityClass, "\"><i class=\"fas fa-square\"></i></span>\n                        </div>\n                \n                        <div class=\"info\">\n                          <div class=\"title title-").concat(tid, "\">").concat(title, "</div>\n                          <div class=\"info-secondary\">\n                            <div class=\"due-dt\">").concat(ddt, "</div>\n                            <div class=\"btns\">\n                              <span class=\"edit\"><i class=\"fas fa-edit\"></i></span>\n                              <span class=\"delete\"><i class=\"fas fa-trash-alt\"></i></span>\n                            </div>\n                          </div>\n                           <div class=\"desc desc-").concat(tid, " hide\">").concat(desc, "\n                             <span>").concat(projectName, "</span>\n                           </div>\n                        </div>\n                      </li>");
+  parent.insertAdjacentHTML('beforeend', markup);
+};
+
+var paintTodoItem = function paintTodoItem(_ref) {
+  var project = _ref.project,
+      todo = _ref.todo,
+      parent = _ref.parent;
+  var projectName = project;
+  var tid = todo[0];
+  var title = todo[1].title;
+  var desc = todo[1].desc;
+  var ddt = todo[1].ddt;
+  var priorityClass = todo[1].priority === 'high' ? 'pr-h' : todo[1].priority === 'low' ? 'pr-l' : 'pr-m';
+  displayTODOs(tid, projectName, title, desc, ddt, priorityClass, parent);
+
+  document.querySelector(".title-".concat(tid)).onclick = function () {
+    document.querySelector(".desc-".concat(tid)).classList.toggle('hide');
+  };
+};
+
+/***/ }),
+
+/***/ "./src/js/runApp.js":
+/*!**************************!*\
+  !*** ./src/js/runApp.js ***!
+  \**************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
+/* harmony import */ var _Project__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Project */ "./src/js/Project.js");
+/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./helper */ "./src/js/helper.js");
+/* harmony import */ var _allTodos__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./allTodos */ "./src/js/allTodos.js");
+/* harmony import */ var _today__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./today */ "./src/js/today.js");
+/* harmony import */ var _Todo__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Todo */ "./src/js/Todo.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+var readFormInput = function readFormInput() {
+  var project = document.getElementById('select').value;
+  var title = document.getElementById('title').value;
+  var desc = document.getElementById('desc').value;
+  var ddt = document.getElementById('due-dt').value;
+  var priority = document.getElementById('todoForm').elements.priority.value;
+  return [project, title, desc, ddt, priority];
+};
+
+var runApp = function runApp() {
+  _base__WEBPACK_IMPORTED_MODULE_0__.elements.newPSubmit.addEventListener('click', function () {
+    var inputField = document.querySelector('[name="projectName"]');
+    var projectName = inputField.value;
+    var project = new _Project__WEBPACK_IMPORTED_MODULE_1__.default(projectName);
+
+    if (project.nameIsBlank()) {
+      inputField.placeholder = 'Field can\'t be blank';
+    } else if (project.checkUniqueness()) {
+      inputField.placeholder = 'Project already exists';
+    } else {
+      _base__WEBPACK_IMPORTED_MODULE_0__.elements.projectUL.textContent = '';
+      project.addProject();
+      (0,_helper__WEBPACK_IMPORTED_MODULE_2__.refreshProjectList)();
+      (0,_helper__WEBPACK_IMPORTED_MODULE_2__.updateSelectOptions)();
+    }
+
+    _base__WEBPACK_IMPORTED_MODULE_0__.elements.newProjectForm.reset();
+  });
+  _base__WEBPACK_IMPORTED_MODULE_0__.elements.all.addEventListener('click', function () {
+    (0,_allTodos__WEBPACK_IMPORTED_MODULE_3__.default)();
+  });
+  _base__WEBPACK_IMPORTED_MODULE_0__.elements.today.addEventListener('click', function () {
+    (0,_today__WEBPACK_IMPORTED_MODULE_4__.default)();
+  });
+  document.getElementById('todoForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var _readFormInput = readFormInput(),
+        _readFormInput2 = _slicedToArray(_readFormInput, 5),
+        project = _readFormInput2[0],
+        title = _readFormInput2[1],
+        desc = _readFormInput2[2],
+        ddt = _readFormInput2[3],
+        priority = _readFormInput2[4];
+
+    var todo = new _Todo__WEBPACK_IMPORTED_MODULE_5__.default(project, title, desc, ddt, priority);
+    todo.addTODO();
+    _base__WEBPACK_IMPORTED_MODULE_0__.elements.todoForm.classList.toggle('hide');
+    _base__WEBPACK_IMPORTED_MODULE_0__.elements.main.classList.remove('hide');
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (runApp);
+
+/***/ }),
+
+/***/ "./src/js/today.js":
+/*!*************************!*\
+  !*** ./src/js/today.js ***!
+  \*************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/format/index.js");
+/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helper */ "./src/js/helper.js");
+
+
+
+
+var todayTODOs = function todayTODOs() {
+  (0,_helper__WEBPACK_IMPORTED_MODULE_1__.prepareMainUI)();
+  (0,_helper__WEBPACK_IMPORTED_MODULE_1__.updateProjectTitle)('Today');
+  var ul = _base__WEBPACK_IMPORTED_MODULE_0__.elements.todoListUL;
+  ul.textContent = '';
+  Object.entries(_base__WEBPACK_IMPORTED_MODULE_0__.projects).filter(function (project) {
+    Object.entries(project[1]).filter(function (p) {
+      return p[1].ddt.slice(0, 10) === (0,date_fns__WEBPACK_IMPORTED_MODULE_2__.default)(new Date(), 'yyyy-MM-dd');
+    }).forEach(function (todo) {
+      (0,_helper__WEBPACK_IMPORTED_MODULE_1__.paintTodoItem)({
+        project: project[0],
+        todo: todo,
+        parent: ul
+      });
+    });
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (todayTODOs);
 
 /***/ }),
 
@@ -13949,215 +14220,26 @@ define(String.prototype, "padRight", "".padEnd);
   \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _stylesheets_style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./stylesheets/style.scss */ "./src/stylesheets/style.scss");
-/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! uniqid */ "./node_modules/uniqid/index.js");
-/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _js_base__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/base */ "./src/js/base.js");
-/* harmony import */ var _js_Todo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/Todo */ "./src/js/Todo.js");
-/* harmony import */ var _js_Project__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/Project */ "./src/js/Project.js");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/format/index.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+/* harmony import */ var _js_today__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/today */ "./src/js/today.js");
+/* harmony import */ var _js_runApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/runApp */ "./src/js/runApp.js");
+/* harmony import */ var _js_helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/helper */ "./src/js/helper.js");
 
 
 
 
 
+var init = function init() {
+  (0,_js_today__WEBPACK_IMPORTED_MODULE_1__.default)();
+  (0,_js_helper__WEBPACK_IMPORTED_MODULE_3__.toggleMenu)();
+  (0,_js_helper__WEBPACK_IMPORTED_MODULE_3__.toggleAddProjectsForm)();
+  (0,_js_helper__WEBPACK_IMPORTED_MODULE_3__.updateSelectOptions)(); //Remove
 
+  (0,_js_helper__WEBPACK_IMPORTED_MODULE_3__.refreshProjectList)(); //Remove
 
-_js_base__WEBPACK_IMPORTED_MODULE_2__.elements.menu.addEventListener('click', function () {
-  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.sidebar.classList.toggle('hide');
-});
-_js_base__WEBPACK_IMPORTED_MODULE_2__.elements.addProjects.addEventListener('click', function (e) {
-  var formStyle = _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.newProjectForm.style;
-  formStyle.display = formStyle.display === 'flex' ? 'none' : 'flex';
-}); //Helper
-
-var updateSelectOptions = function updateSelectOptions() {
-  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.select.textContent = '';
-  Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects).forEach(function (project) {
-    var markup = "<option value=\"".concat(project[0], "\">").concat(project[0], "</option>");
-    _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.select.insertAdjacentHTML("beforeend", markup);
-  });
+  (0,_js_runApp__WEBPACK_IMPORTED_MODULE_2__.default)();
 };
 
-updateSelectOptions(); //------------------------------
-//Helper
-
-var prepareMainUI = function prepareMainUI() {
-  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.todoForm.classList.add('hide');
-  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.sidebar.classList.add('hide');
-  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.main.classList.remove('hide');
-};
-
-var prepareFormUI = function prepareFormUI() {
-  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.main.classList.add('hide');
-  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.todoForm.classList.remove('hide');
-};
-
-var selectDefaultOption = function selectDefaultOption(title) {
-  if (title !== 'All TODOs' && title !== 'Today') {
-    document.querySelector("select > option[value=\"".concat(title, "\"]")).selected = "true";
-  }
-};
-
-var renderForm = function renderForm(title, id) {
-  document.querySelector(".new-todo-".concat(id)).addEventListener('click', function () {
-    prepareFormUI();
-    selectDefaultOption(title);
-  });
-}; //Helper
-
-
-var updateProjectTitle = function updateProjectTitle(title) {
-  var id = uniqid__WEBPACK_IMPORTED_MODULE_1___default()();
-  var category = document.querySelector('.category');
-  category.textContent = '';
-  var markup = "<div class=\"category-title\">".concat(title, "</div>\n                  <div class=\"new-todo new-todo-").concat(id, "\"><i class=\"fas fa-plus\"></i></div>");
-  category.insertAdjacentHTML("beforeend", markup);
-  renderForm(title, id);
-};
-
-var paintTodoItem = function paintTodoItem(_ref) {
-  var project = _ref.project,
-      todo = _ref.todo,
-      parent = _ref.parent;
-  var projectName = project;
-  var tid = todo[0];
-  var title = todo[1].title;
-  var desc = todo[1].desc;
-  var ddt = todo[1].ddt;
-  var priorityClass = todo[1].priority === 'high' ? 'pr-h' : todo[1].priority === 'low' ? 'pr-l' : 'pr-m';
-  displayTODOs(tid, projectName, title, desc, ddt, priorityClass, parent);
-
-  document.querySelector(".title-".concat(tid)).onclick = function () {
-    document.querySelector(".desc-".concat(tid)).classList.toggle('hide');
-  };
-}; //Helper
-
-
-var renderProjectTODOs = function renderProjectTODOs(clsName, title) {
-  document.querySelector(".".concat(clsName)).onclick = function () {
-    prepareMainUI();
-    updateProjectTitle(title);
-    var ul = _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.todoListUL;
-    ul.textContent = '';
-    Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects[title]).forEach(function (todo) {
-      paintTodoItem({
-        project: title,
-        todo: todo,
-        parent: ul
-      });
-    });
-  };
-}; //Helper
-
-
-var refreshProjectList = function refreshProjectList() {
-  Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects).forEach(function (project) {
-    var pid = uniqid__WEBPACK_IMPORTED_MODULE_1___default()();
-    var markup = "<li class=\"sb-p-item sb-item sb-item-".concat(pid, "\">").concat(project[0], "</li>");
-    _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.projectUL.insertAdjacentHTML("beforeend", markup);
-    renderProjectTODOs("sb-item-".concat(pid), project[0]);
-  });
-};
-
-_js_base__WEBPACK_IMPORTED_MODULE_2__.elements.newPSubmit.addEventListener('click', function () {
-  var inputField = document.querySelector('[name="projectName"]');
-  var projectName = inputField.value;
-  var project = new _js_Project__WEBPACK_IMPORTED_MODULE_4__.default(projectName);
-
-  if (project.nameIsBlank()) {
-    inputField.placeholder = 'Field can\'t be blank';
-  } else if (project.checkUniqueness()) {
-    inputField.placeholder = 'Project already exists';
-  } else {
-    _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.projectUL.textContent = '';
-    project.addProject();
-    refreshProjectList();
-    updateSelectOptions();
-  }
-
-  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.newProjectForm.reset();
-  console.log(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects);
-}); //-------------------------
-//Helper
-
-var displayTODOs = function displayTODOs(tid, projectName, title, desc, ddt, priorityClass, parent) {
-  var markup = "<li class=\"td-list-item\">\n                        <div class=\"check\">\n                          <span class=\"status ".concat(priorityClass, "\"><i class=\"fas fa-square\"></i></span>\n                        </div>\n                \n                        <div class=\"info\">\n                          <div class=\"title title-").concat(tid, "\">").concat(title, "</div>\n                          <div class=\"info-secondary\">\n                            <div class=\"due-dt\">").concat(ddt, "</div>\n                            <div class=\"btns\">\n                              <span class=\"edit\"><i class=\"fas fa-edit\"></i></span>\n                              <span class=\"delete\"><i class=\"fas fa-trash-alt\"></i></span>\n                            </div>\n                          </div>\n                           <div class=\"desc desc-").concat(tid, " hide\">").concat(desc, "\n                             <span>").concat(projectName, "</span>\n                           </div>\n                        </div>\n                      </li>");
-  parent.insertAdjacentHTML('beforeend', markup);
-};
-
-document.querySelector('.sb-all').addEventListener('click', function () {
-  prepareMainUI();
-  updateProjectTitle('All TODOs');
-  var ul = document.querySelector('.td-list');
-  ul.textContent = '';
-  Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects).forEach(function (project) {
-    Object.entries(project[1]).forEach(function (todo) {
-      paintTodoItem({
-        project: project[0],
-        todo: todo,
-        parent: ul
-      });
-    });
-  });
-});
-refreshProjectList(); //---------------------------
-// TODAY
-
-document.querySelector('.sb-today').addEventListener('click', function () {
-  prepareMainUI();
-  updateProjectTitle('Today');
-  var ul = document.querySelector('.td-list');
-  ul.textContent = '';
-  Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects).filter(function (project) {
-    Object.entries(project[1]).filter(function (p) {
-      return p[1].ddt.slice(0, 10) === (0,date_fns__WEBPACK_IMPORTED_MODULE_5__.default)(new Date(), 'yyyy-MM-dd');
-    }).forEach(function (todo) {
-      paintTodoItem({
-        project: project[0],
-        todo: todo,
-        parent: ul
-      });
-    });
-  });
-}); //---------------------------
-//Helper
-
-var readFormInput = function readFormInput() {
-  var project = document.getElementById('select').value;
-  var title = document.getElementById('title').value;
-  var desc = document.getElementById('desc').value;
-  var ddt = document.getElementById('due-dt').value;
-  var priority = document.getElementById('todoForm').elements.priority.value;
-  return [project, title, desc, ddt, priority];
-};
-
-document.getElementById('todoForm').addEventListener('submit', function (e) {
-  e.preventDefault();
-
-  var _readFormInput = readFormInput(),
-      _readFormInput2 = _slicedToArray(_readFormInput, 5),
-      project = _readFormInput2[0],
-      title = _readFormInput2[1],
-      desc = _readFormInput2[2],
-      ddt = _readFormInput2[3],
-      priority = _readFormInput2[4];
-
-  var todo = new _js_Todo__WEBPACK_IMPORTED_MODULE_3__.default(project, title, desc, ddt, priority);
-  todo.addTODO();
-  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.todoForm.classList.toggle('hide');
-  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.main.classList.remove('hide');
-});
+init();
 }();
 /******/ })()
 ;
