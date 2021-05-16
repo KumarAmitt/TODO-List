@@ -14103,17 +14103,11 @@ document.querySelector('.sb-all').addEventListener('click', function () {
   ul.textContent = '';
   Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects).forEach(function (project) {
     Object.entries(project[1]).forEach(function (todo) {
-      var projectName = project[0];
-      var tid = todo[0];
-      var title = todo[1].title;
-      var desc = todo[1].desc;
-      var ddt = todo[1].ddt;
-      var priorityClass = todo[1].priority === 'high' ? 'pr-h' : todo[1].priority === 'low' ? 'pr-l' : 'pr-m';
-      displayTODOs(tid, projectName, title, desc, ddt, priorityClass, ul);
-
-      document.querySelector(".title-".concat(tid)).onclick = function () {
-        document.querySelector(".desc-".concat(tid)).classList.toggle('hide');
-      };
+      paintTodoItem({
+        project: project[0],
+        todo: todo,
+        parent: ul
+      });
     });
   });
 });
@@ -14129,17 +14123,11 @@ document.querySelector('.sb-today').addEventListener('click', function () {
     Object.entries(project[1]).filter(function (p) {
       return p[1].ddt.slice(0, 10) === (0,date_fns__WEBPACK_IMPORTED_MODULE_5__.default)(new Date(), 'yyyy-MM-dd');
     }).forEach(function (todo) {
-      var projectName = project[0];
-      var tid = todo[0];
-      var title = todo[1].title;
-      var desc = todo[1].desc;
-      var ddt = todo[1].ddt;
-      var priorityClass = todo[1].priority === 'high' ? 'pr-h' : todo[1].priority === 'low' ? 'pr-l' : 'pr-m';
-      displayTODOs(tid, projectName, title, desc, ddt, priorityClass, ul);
-
-      document.querySelector(".title-".concat(tid)).onclick = function () {
-        document.querySelector(".desc-".concat(tid)).classList.toggle('hide');
-      };
+      paintTodoItem({
+        project: project[0],
+        todo: todo,
+        parent: ul
+      });
     });
   });
 }); //---------------------------
