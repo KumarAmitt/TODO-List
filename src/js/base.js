@@ -7,7 +7,8 @@ export const elements = {
   projectUL: document.querySelector('.sb-p-items'),
   select: document.getElementById('select'),
   main: document.querySelector('main'),
-  todoForm: document.querySelector('.todo-form')
+  todoForm: document.querySelector('.todo-form'),
+  todoListUL: document.querySelector('.td-list')
 };
 
 export const projects = {
