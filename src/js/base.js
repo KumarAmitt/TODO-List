@@ -5,7 +5,7 @@ export const elements = {
   newProjectForm: document.querySelector('.new-project'),
   newPSubmit: document.querySelector('.new-p-submit'),
   projectUL: document.querySelector('.sb-p-items'),
-  category: document.getElementById('category'),
+  select: document.getElementById('select'),
   main: document.querySelector('main'),
   todoForm: document.querySelector('.todo-form')
 };

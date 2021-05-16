@@ -129,7 +129,7 @@ var elements = {
   newProjectForm: document.querySelector('.new-project'),
   newPSubmit: document.querySelector('.new-p-submit'),
   projectUL: document.querySelector('.sb-p-items'),
-  category: document.getElementById('category'),
+  select: document.getElementById('select'),
   main: document.querySelector('main'),
   todoForm: document.querySelector('.todo-form')
 };
@@ -11055,15 +11055,62 @@ _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.addProject.addEventListener('clic
   formStyle.display = formStyle.display === 'flex' ? 'none' : 'flex';
 }); //Helper
 
-var updateProjectOptions = function updateProjectOptions() {
-  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.category.textContent = '';
+var updateSelectOptions = function updateSelectOptions() {
+  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.select.textContent = '';
   Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects).forEach(function (project) {
     var markup = "<option value=\"".concat(project[0], "\">").concat(project[0], "</option>");
-    _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.category.insertAdjacentHTML("beforeend", markup);
+    _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.select.insertAdjacentHTML("beforeend", markup);
   });
 };
 
-updateProjectOptions(); //Helper
+updateSelectOptions(); //------------------------------
+//Helper
+
+var prepareMainUI = function prepareMainUI() {
+  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.todoForm.classList.add('hide');
+  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.sidebar.classList.add('hide');
+  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.main.classList.remove('hide');
+};
+
+var prepareFormUI = function prepareFormUI() {
+  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.main.classList.add('hide');
+  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.todoForm.classList.remove('hide');
+};
+
+var selectDefaultOption = function selectDefaultOption(title) {
+  if (title !== 'All TODOs' && title !== 'Today') {
+    document.querySelector("select > option[value=\"".concat(title, "\"]")).selected = "true";
+  }
+};
+
+var renderForm = function renderForm(title, id) {
+  document.querySelector(".new-todo-".concat(id)).addEventListener('click', function () {
+    prepareFormUI();
+    selectDefaultOption(title);
+  });
+}; //Helper
+
+
+var updateProjectTitle = function updateProjectTitle(title) {
+  var id = uniqid__WEBPACK_IMPORTED_MODULE_1___default()();
+  var category = document.querySelector('.category');
+  category.textContent = '';
+  var markup = "<div class=\"category-title\">".concat(title, "</div>\n                  <div class=\"new-todo new-todo-").concat(id, "\"><i class=\"fas fa-plus\"></i></div>");
+  category.insertAdjacentHTML("beforeend", markup);
+  renderForm(title, id);
+}; //Helper
+
+
+var renderTODOs = function renderTODOs(clsName, project) {
+  document.querySelector(".".concat(clsName)).onclick = function () {
+    prepareMainUI();
+    updateProjectTitle(project[0]);
+    var ul = document.querySelector('.td-list');
+    ul.textContent = '';
+    callDisplayTODOs(project, ul);
+  };
+}; //Helper
+
 
 var refreshProjectList = function refreshProjectList() {
   Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects).forEach(function (project) {
@@ -11075,7 +11122,7 @@ var refreshProjectList = function refreshProjectList() {
 };
 
 _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.newPSubmit.addEventListener('click', function () {
-  var inputField = document.querySelector('[name = projectName]');
+  var inputField = document.querySelector('[name="projectName"]');
   var projectName = inputField.value;
   var project = new _js_Project__WEBPACK_IMPORTED_MODULE_4__.default(projectName);
 
@@ -11087,38 +11134,13 @@ _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.newPSubmit.addEventListener('clic
     _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.projectUL.textContent = '';
     project.addProject();
     refreshProjectList();
-    updateProjectOptions();
+    updateSelectOptions();
   }
 
   _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.newProjectForm.reset();
   console.log(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects);
 }); //-------------------------
 //Helper
-
-var cleanMainUI = function cleanMainUI() {
-  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.main.style.display = 'block';
-  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.todoForm.classList.add('hide');
-  _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.sidebar.classList.add('hide');
-}; //Helper
-
-
-var updateProjectTitle = function updateProjectTitle(title) {
-  var id = uniqid__WEBPACK_IMPORTED_MODULE_1___default()();
-  var category = document.querySelector('.category');
-  category.textContent = '';
-  var markup = "<div class=\"category-title\">".concat(title, "</div>\n                  <div class=\"new-todo new-todo-").concat(id, "\"><i class=\"fas fa-plus\"></i></div>");
-  category.insertAdjacentHTML("beforeend", markup);
-  document.querySelector(".new-todo-".concat(id)).addEventListener('click', function () {
-    console.log("new-todo-".concat(id));
-    _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.main.style.display = 'none';
-    _js_base__WEBPACK_IMPORTED_MODULE_2__.elements.todoForm.classList.remove('hide');
-
-    if (title !== 'All TODOs' && title !== 'Today') {
-      document.querySelector("select > option[value=\"".concat(title, "\"]")).selected = "true";
-    }
-  });
-}; //Helper
-
 
 var displayTODOs = function displayTODOs(tid, projectName, title, desc, ddt, priorityClass, parent) {
   var markup = "<li class=\"td-list-item\">\n                        <div class=\"check\">\n                          <span class=\"status ".concat(priorityClass, "\"><i class=\"fas fa-square\"></i></span>\n                        </div>\n                \n                        <div class=\"info\">\n                          <div class=\"title title-").concat(tid, "\">").concat(title, "</div>\n                          <div class=\"info-secondary\">\n                            <div class=\"due-dt\">").concat(ddt, "</div>\n                            <div class=\"btns\">\n                              <span class=\"edit\"><i class=\"fas fa-edit\"></i></span>\n                              <span class=\"delete\"><i class=\"fas fa-trash-alt\"></i></span>\n                            </div>\n                          </div>\n                           <div class=\"desc desc-").concat(tid, " hide\">").concat(desc, "\n                             <span>").concat(projectName, "</span>\n                           </div>\n                        </div>\n                      </li>");
@@ -11144,30 +11166,19 @@ var callDisplayTODOs = function callDisplayTODOs(project, ul) {
 };
 
 document.querySelector('.sb-all').addEventListener('click', function () {
-  cleanMainUI();
+  prepareMainUI();
   updateProjectTitle('All TODOs');
   var ul = document.querySelector('.td-list');
   ul.textContent = '';
   Object.entries(_js_base__WEBPACK_IMPORTED_MODULE_2__.projects).forEach(function (project) {
     callDisplayTODOs(project, ul);
   });
-}); //Helper
-
-var renderTODOs = function renderTODOs(clsName, project) {
-  document.querySelector(".".concat(clsName)).onclick = function () {
-    cleanMainUI();
-    updateProjectTitle(project[0]);
-    var ul = document.querySelector('.td-list');
-    ul.textContent = '';
-    callDisplayTODOs(project, ul);
-  };
-};
-
+});
 refreshProjectList(); //---------------------------
 //TODAY
 
 document.querySelector('.sb-today').addEventListener('click', function () {
-  cleanMainUI();
+  prepareMainUI();
   updateProjectTitle('Today');
   var ul = document.querySelector('.td-list');
   ul.textContent = '';
@@ -11175,7 +11186,7 @@ document.querySelector('.sb-today').addEventListener('click', function () {
 //Helper
 
 var readFormInput = function readFormInput() {
-  var project = document.getElementById('category').value;
+  var project = document.getElementById('select').value;
   var title = document.getElementById('title').value;
   var desc = document.getElementById('desc').value;
   var ddt = document.getElementById('due-dt').value;

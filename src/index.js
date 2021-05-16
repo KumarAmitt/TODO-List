@@ -15,59 +15,44 @@ elements.addProject.addEventListener('click', (e) => {
 });
 
 //Helper
-const updateProjectOptions = () => {
-  elements.category.textContent = '';
+const updateSelectOptions = () => {
+  elements.select.textContent = '';
 
   Object.entries(projects).forEach( project => {
     const markup = `<option value="${project[0]}">${project[0]}</option>`;
 
-    elements.category.insertAdjacentHTML("beforeend", markup);
+    elements.select.insertAdjacentHTML("beforeend", markup);
   });
 
 };
 
-updateProjectOptions();
+updateSelectOptions();
 
-
-//Helper
-const refreshProjectList = () => {
-  Object.entries(projects).forEach( project => {
-    let pid = uniqid();
-    const markup = `<li class="sb-p-item sb-item sb-item-${pid}">${project[0]}</li>`;
-
-    elements.projectUL.insertAdjacentHTML("beforeend", markup);
-
-    renderTODOs(`sb-item-${pid}`, project)
-  });
-}
-
-elements.newPSubmit.addEventListener('click', () => {
-  const inputField = document.querySelector('[name = projectName]');
-  const projectName = inputField.value;
-
-  let project = new Project(projectName);
-
-  if (project.nameIsBlank()) {
-    inputField.placeholder = 'Field can\'t be blank';
-  } else if(project.checkUniqueness()) {
-    inputField.placeholder = 'Project already exists';
-  } else {
-    elements.projectUL.textContent = '';
-    project.addProject();
-    refreshProjectList();
-    updateProjectOptions();
-  }
-  elements.newProjectForm.reset();
-  console.log(projects);
-});
-
-//-------------------------
+//------------------------------
 
 //Helper
-const cleanMainUI = () => {
-  elements.main.style.display = 'block';
+const prepareMainUI = () => {
   elements.todoForm.classList.add('hide');
   elements.sidebar.classList.add('hide');
+  elements.main.classList.remove('hide');
+}
+
+const prepareFormUI = () => {
+  elements.main.classList.add('hide');
+  elements.todoForm.classList.remove('hide');
+}
+
+const selectDefaultOption = (title) => {
+  if (title !== 'All TODOs' && title !== 'Today'){
+    document.querySelector(`select > option[value="${title}"]`).selected = "true";
+  }
+}
+
+const renderForm = (title, id) => {
+  document.querySelector(`.new-todo-${id}`).addEventListener('click', () => {
+    prepareFormUI()
+    selectDefaultOption(title);
+  })
 }
 
 //Helper
@@ -81,16 +66,56 @@ const updateProjectTitle = (title) => {
 
   category.insertAdjacentHTML("beforeend", markup);
 
-  document.querySelector(`.new-todo-${id}`).addEventListener('click', () => {
-    console.log(`new-todo-${id}`);
-    elements.main.style.display = 'none';
-    elements.todoForm.classList.remove('hide');
-
-    if (title !== 'All TODOs' && title !== 'Today'){
-      document.querySelector(`select > option[value="${title}"]`).selected = "true";
-    }
-  })
+  renderForm(title, id);
 }
+
+//Helper
+const renderTODOs = (clsName, project) => {
+  document.querySelector(`.${clsName}`).onclick = () => {
+    prepareMainUI();
+    updateProjectTitle(project[0])
+
+    const ul = document.querySelector('.td-list');
+    ul.textContent = '';
+    callDisplayTODOs(project, ul);
+  }
+}
+
+
+//Helper
+const refreshProjectList = () => {
+  Object.entries(projects).forEach( project => {
+    let pid = uniqid();
+    const markup = `<li class="sb-p-item sb-item sb-item-${pid}">${project[0]}</li>`;
+    elements.projectUL.insertAdjacentHTML("beforeend", markup);
+
+    renderTODOs(`sb-item-${pid}`, project)
+  });
+}
+
+elements.newPSubmit.addEventListener('click', () => {
+  const inputField = document.querySelector('[name="projectName"]');
+  const projectName = inputField.value;
+
+  let project = new Project(projectName);
+
+  if (project.nameIsBlank()) {
+    inputField.placeholder = 'Field can\'t be blank';
+  } else if(project.checkUniqueness()) {
+    inputField.placeholder = 'Project already exists';
+  } else {
+    elements.projectUL.textContent = '';
+    project.addProject();
+    refreshProjectList();
+    updateSelectOptions();
+  }
+  elements.newProjectForm.reset();
+  console.log(projects);
+});
+
+//-------------------------
+
+
 
 //Helper
 const displayTODOs = (tid, projectName, title, desc, ddt, priorityClass, parent) => {
@@ -139,7 +164,7 @@ const callDisplayTODOs= (project, ul) => {
 }
 
 document.querySelector('.sb-all').addEventListener('click', () => {
-  cleanMainUI();
+  prepareMainUI();
   updateProjectTitle('All TODOs');
 
   const ul = document.querySelector('.td-list');
@@ -151,25 +176,13 @@ document.querySelector('.sb-all').addEventListener('click', () => {
 });
 
 
-//Helper
-const renderTODOs = (clsName, project) => {
-  document.querySelector(`.${clsName}`).onclick = () => {
-    cleanMainUI();
-    updateProjectTitle(project[0])
-
-    const ul = document.querySelector('.td-list');
-    ul.textContent = '';
-    callDisplayTODOs(project, ul);
-  }
-}
-
 refreshProjectList();
 
 //---------------------------
 
 //TODAY
 document.querySelector('.sb-today').addEventListener('click', () => {
-  cleanMainUI();
+  prepareMainUI();
   updateProjectTitle('Today');
 
   const ul = document.querySelector('.td-list');
@@ -182,7 +195,7 @@ document.querySelector('.sb-today').addEventListener('click', () => {
 //Helper
 
 const readFormInput = () => {
-  const project = document.getElementById('category').value;
+  const project = document.getElementById('select').value;
   const title = document.getElementById('title').value;
   const desc = document.getElementById('desc').value;
   const ddt = document.getElementById('due-dt').value;
