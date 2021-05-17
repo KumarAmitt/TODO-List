@@ -138,11 +138,13 @@ var Todo = /*#__PURE__*/function () {
   }, {
     key: "_update",
     value: function _update(project, tid, title, desc, ddt, priority) {
+      var st = _base__WEBPACK_IMPORTED_MODULE_1__.projects[project][tid].status;
       _base__WEBPACK_IMPORTED_MODULE_1__.projects[project][tid] = {
         title: title,
         desc: desc,
         ddt: ddt,
-        priority: priority
+        priority: priority,
+        status: st
       };
     }
   }, {
@@ -226,40 +228,40 @@ var elements = {
   today: document.querySelector('.sb-today')
 };
 var prevProject = [];
-var projects = {
-  'Project I': {
-    id1: {
-      title: 'Project 1, Task 1',
-      desc: 'Say hi to everyone',
-      ddt: '2021-05-29T16:21',
-      priority: 'high',
-      status: 'pending'
-    },
-    id2: {
-      title: 'Project 1, Task 2',
-      desc: 'Say hello to everyone',
-      ddt: '2021-05-16T16:21',
-      priority: 'medium',
-      status: 'pending'
-    }
-  },
-  'Project II': {
-    id11: {
-      title: 'Project 2, Task 1',
-      desc: 'Say bye to everyone',
-      ddt: '2021-05-16T16:21',
-      priority: 'high',
-      status: 'pending'
-    },
-    id12: {
-      title: 'Project 2, Task 2',
-      desc: 'Say good bye to everyone',
-      ddt: '2021-05-17T16:21',
-      priority: 'low',
-      status: 'finish'
-    }
-  }
-};
+var projects = {}; // export const projects = {
+//   'Project I': {
+//     id1: {
+//       title: 'Project 1, Task 1',
+//       desc: 'Say hi to everyone',
+//       ddt: '2021-05-29T16:21',
+//       priority: 'high',
+//       status: 'pending'
+//     },
+//     id2: {
+//       title: 'Project 1, Task 2',
+//       desc: 'Say hello to everyone',
+//       ddt: '2021-05-16T16:21',
+//       priority: 'medium',
+//       status: 'pending'
+//     },
+//   },
+//   'Project II': {
+//     id11: {
+//       title: 'Project 2, Task 1',
+//       desc: 'Say bye to everyone',
+//       ddt: '2021-05-16T16:21',
+//       priority: 'high',
+//       status: 'pending'
+//     },
+//     id12: {
+//       title: 'Project 2, Task 2',
+//       desc: 'Say good bye to everyone',
+//       ddt: '2021-05-17T16:21',
+//       priority: 'low',
+//       status: 'finish'
+//     },
+//   },
+// };
 
 /***/ }),
 
@@ -14394,10 +14396,8 @@ __webpack_require__.r(__webpack_exports__);
 var init = function init() {
   (0,_js_today__WEBPACK_IMPORTED_MODULE_1__.default)();
   (0,_js_shared__WEBPACK_IMPORTED_MODULE_3__.toggleMenu)();
-  (0,_js_shared__WEBPACK_IMPORTED_MODULE_3__.toggleAddProjectsForm)();
-  (0,_js_shared__WEBPACK_IMPORTED_MODULE_3__.updateSelectOptions)(); //Remove
-
-  (0,_js_shared__WEBPACK_IMPORTED_MODULE_3__.refreshProjectList)(); //Remove
+  (0,_js_shared__WEBPACK_IMPORTED_MODULE_3__.toggleAddProjectsForm)(); // updateSelectOptions();  //Remove
+  // refreshProjectList();   //Remove
 
   (0,_js_runApp__WEBPACK_IMPORTED_MODULE_2__.runApp)();
 };
