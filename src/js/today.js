@@ -3,6 +3,7 @@ import {format} from "date-fns";
 import {prepareMainUI} from "./shared";
 import updateProjectTitle from "./updateTitle";
 import paintTodoItem from "./todoItem";
+import {readStorage} from "./runApp";
 
 const todayTODOs = () => {
   prepareMainUI();
@@ -11,7 +12,7 @@ const todayTODOs = () => {
   const ul = elements.todoListUL;
   ul.textContent = '';
 
-  Object.entries(projects).filter(project => {
+  Object.entries(readStorage()).filter(project => {
     Object.entries(project[1]).filter(p => p[1].ddt.slice(0, 10) === format(new Date(),'yyyy-MM-dd')).forEach(todo => {
       paintTodoItem({project: project[0], todo: todo, parent: ul})
     })

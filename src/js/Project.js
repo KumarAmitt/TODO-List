@@ -22,9 +22,4 @@ export default class Project {
     localStorage.setItem('projects', JSON.stringify(projects));
   }
 
-  readStorage(){
-    const storage = JSON.parse(localStorage.getItem('projects'));
-    return storage;
-  }
-
 }

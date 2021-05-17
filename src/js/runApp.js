@@ -18,6 +18,14 @@ export const readFormInput = () => {
   return [project, title, desc, ddt, priority];
 }
 
+export const readStorage = () => {
+  const storage = JSON.parse(localStorage.getItem('projects'));
+  if (storage)
+    return storage
+  else
+    return {};
+}
+
 export const runApp = () => {
 
   elements.newPSubmit.addEventListener('click', () => {
@@ -65,7 +73,7 @@ export const runApp = () => {
     const ul = elements.todoListUL;
     ul.textContent = '';
 
-    Object.entries(projects[project]).forEach(todo => {
+    Object.entries(readStorage()[project]).forEach(todo => {
       paintTodoItem({project: project, todo: todo, parent: ul})
     })
 

@@ -20,7 +20,7 @@ export const toggleAddProjectsForm = () => {
 export const updateSelectOptions = () => {
   elements.select.textContent = '';
 
-  Object.entries(projects).forEach( project => {
+  Object.entries(readStorage()).forEach( project => {
     const markup = `<option value="${project[0]}">${project[0]}</option>`;
 
     elements.select.insertAdjacentHTML("beforeend", markup);
@@ -42,14 +42,14 @@ export const renderProjectTODOs = (clsName, title) => {
     const ul = elements.todoListUL;
     ul.textContent = '';
 
-    Object.entries(projects[title]).forEach(todo => {
+    Object.entries(readStorage()[title]).forEach(todo => {
       paintTodoItem({project: title, todo: todo, parent: ul})
     })
   }
 }
 
 export const refreshProjectList = () => {
-  Object.entries(projects).forEach( project => {
+  Object.entries(readStorage()).forEach( project => {
     let pid = uniqid();
     const markup = `<li class="sb-p-item sb-item sb-item-${pid}">${project[0]}</li>`;
     elements.projectUL.insertAdjacentHTML("beforeend", markup);
