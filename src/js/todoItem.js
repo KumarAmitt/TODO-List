@@ -1,6 +1,9 @@
+import Todo from './Todo';
+import {projects} from "./base";
+
 const displayTODOs = (tid, projectName, title, desc, ddt, priorityClass, parent) => {
 
-  const markup = `<li class="td-list-item">
+  const markup = `<li class="td-list-item td-list-item-${tid}">
                         <div class="check">
                           <span class="status status-${tid} ${priorityClass}"><i class="fas fa-square"></i></span>
                         </div>
@@ -32,10 +35,12 @@ const paintTodoItem = ({project, todo, parent}) => {
 
   displayTODOs(tid, projectName, title, desc, ddt, priorityClass, parent);
 
+  // description
   document.querySelector(`.title-${tid}`).onclick = () => {
     document.querySelector(`.desc-${tid}`).classList.toggle('hide');
   }
 
+  // change status
   document.querySelector(`.status-${tid}`).onclick = () => {
     document.querySelector(`.title-${tid}`).classList.toggle('st-f');
 
@@ -43,6 +48,15 @@ const paintTodoItem = ({project, todo, parent}) => {
     check.className = check.className === 'fas fa-square' ? 'fas fa-check-square' : 'fas fa-square';
   }
 
+  // delete
+  document.querySelector(`.delete-${tid}`).addEventListener('click', () => {
+    new Todo().deleteTODO(project, tid);
+
+    document.querySelector(`.td-list-item-${tid}`).textContent = '';
+    document.querySelector(`.td-list-item-${tid}`).style.borderBottom = 'none';
+    document.querySelector(`.td-list-item-${tid}`).style.padding = '0';
+
+  })
 
 
 }

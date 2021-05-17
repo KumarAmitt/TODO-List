@@ -3,7 +3,7 @@ import { projects } from './base'
 
 export default class Todo {
   constructor(project, title, desc, ddt, priority) {
-    this.pid = uniqid();
+    this.tid = uniqid();
     this.project = project;
     this.title = title;
     this.desc = desc;
@@ -12,7 +12,7 @@ export default class Todo {
   }
 
   addTODO() {
-    projects[this.project][this.pid] = {
+    projects[this.project][this.tid] = {
       title: this.title,
       desc: this.desc,
       ddt: this.ddt,
@@ -20,4 +20,7 @@ export default class Todo {
     }
   }
 
+  deleteTODO(project, tid){
+    delete projects[project][tid];
+  }
 }

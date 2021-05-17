@@ -83,7 +83,7 @@ var Todo = /*#__PURE__*/function () {
   function Todo(project, title, desc, ddt, priority) {
     _classCallCheck(this, Todo);
 
-    this.pid = uniqid__WEBPACK_IMPORTED_MODULE_0___default()();
+    this.tid = uniqid__WEBPACK_IMPORTED_MODULE_0___default()();
     this.project = project;
     this.title = title;
     this.desc = desc;
@@ -94,12 +94,17 @@ var Todo = /*#__PURE__*/function () {
   _createClass(Todo, [{
     key: "addTODO",
     value: function addTODO() {
-      _base__WEBPACK_IMPORTED_MODULE_1__.projects[this.project][this.pid] = {
+      _base__WEBPACK_IMPORTED_MODULE_1__.projects[this.project][this.tid] = {
         title: this.title,
         desc: this.desc,
         ddt: this.ddt,
         priority: this.priority
       };
+    }
+  }, {
+    key: "deleteTODO",
+    value: function deleteTODO(project, tid) {
+      delete _base__WEBPACK_IMPORTED_MODULE_1__.projects[project][tid];
     }
   }]);
 
@@ -432,8 +437,13 @@ var todayTODOs = function todayTODOs() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Todo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Todo */ "./src/js/Todo.js");
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
+
+
+
 var displayTODOs = function displayTODOs(tid, projectName, title, desc, ddt, priorityClass, parent) {
-  var markup = "<li class=\"td-list-item\">\n                        <div class=\"check\">\n                          <span class=\"status status-".concat(tid, " ").concat(priorityClass, "\"><i class=\"fas fa-square\"></i></span>\n                        </div>\n                \n                        <div class=\"info\">\n                          <div class=\"title title-").concat(tid, "\">").concat(title, "</div>\n                          <div class=\"info-secondary\">\n                            <div class=\"due-dt\">").concat(ddt, "</div>\n                            <div class=\"btns\">\n                              <span class=\"edit edit-").concat(tid, "\"><i class=\"fas fa-edit\"></i></span>\n                              <span class=\"delete delete-").concat(tid, "\"><i class=\"fas fa-trash-alt\"></i></span>\n                            </div>\n                          </div>\n                           <div class=\"desc desc-").concat(tid, " hide\">").concat(desc, "\n                             <span>").concat(projectName, "</span>\n                           </div>\n                        </div>\n                      </li>");
+  var markup = "<li class=\"td-list-item td-list-item-".concat(tid, "\">\n                        <div class=\"check\">\n                          <span class=\"status status-").concat(tid, " ").concat(priorityClass, "\"><i class=\"fas fa-square\"></i></span>\n                        </div>\n                \n                        <div class=\"info\">\n                          <div class=\"title title-").concat(tid, "\">").concat(title, "</div>\n                          <div class=\"info-secondary\">\n                            <div class=\"due-dt\">").concat(ddt, "</div>\n                            <div class=\"btns\">\n                              <span class=\"edit edit-").concat(tid, "\"><i class=\"fas fa-edit\"></i></span>\n                              <span class=\"delete delete-").concat(tid, "\"><i class=\"fas fa-trash-alt\"></i></span>\n                            </div>\n                          </div>\n                           <div class=\"desc desc-").concat(tid, " hide\">").concat(desc, "\n                             <span>").concat(projectName, "</span>\n                           </div>\n                        </div>\n                      </li>");
   parent.insertAdjacentHTML('beforeend', markup);
 };
 
@@ -447,17 +457,26 @@ var paintTodoItem = function paintTodoItem(_ref) {
   var desc = todo[1].desc;
   var ddt = todo[1].ddt;
   var priorityClass = todo[1].priority === 'high' ? 'pr-h' : todo[1].priority === 'low' ? 'pr-l' : 'pr-m';
-  displayTODOs(tid, projectName, title, desc, ddt, priorityClass, parent);
+  displayTODOs(tid, projectName, title, desc, ddt, priorityClass, parent); // description
 
   document.querySelector(".title-".concat(tid)).onclick = function () {
     document.querySelector(".desc-".concat(tid)).classList.toggle('hide');
-  };
+  }; // change status
+
 
   document.querySelector(".status-".concat(tid)).onclick = function () {
     document.querySelector(".title-".concat(tid)).classList.toggle('st-f');
     var check = document.querySelector(".status-".concat(tid, " i"));
     check.className = check.className === 'fas fa-square' ? 'fas fa-check-square' : 'fas fa-square';
-  };
+  }; // delete
+
+
+  document.querySelector(".delete-".concat(tid)).addEventListener('click', function () {
+    new _Todo__WEBPACK_IMPORTED_MODULE_0__.default().deleteTODO(project, tid);
+    document.querySelector(".td-list-item-".concat(tid)).textContent = '';
+    document.querySelector(".td-list-item-".concat(tid)).style.borderBottom = 'none';
+    document.querySelector(".td-list-item-".concat(tid)).style.padding = '0';
+  });
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (paintTodoItem);
