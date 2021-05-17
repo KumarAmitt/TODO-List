@@ -8,8 +8,8 @@ const init = () => {
   todayTODOs();
   toggleMenu();
   toggleAddProjectsForm();
-  updateSelectOptions();  //Remove
-  refreshProjectList();   //Remove
+  // updateSelectOptions();  //Remove
+  // refreshProjectList();   //Remove
   runApp();
 }
 

@@ -44,11 +44,13 @@ export default class Todo {
   }
 
   _update(project, tid, title, desc, ddt, priority){
+    let st = projects[project][tid].status;
     projects[project][tid] = {
       title,
       desc,
       ddt,
-      priority
+      priority,
+      status: st
     }
   }
 
