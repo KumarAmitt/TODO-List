@@ -457,6 +457,7 @@ var paintTodoItem = function paintTodoItem(_ref) {
   var desc = todo[1].desc;
   var ddt = todo[1].ddt;
   var priorityClass = todo[1].priority === 'high' ? 'pr-h' : todo[1].priority === 'low' ? 'pr-l' : 'pr-m';
+  var priority = todo[1].priority;
   displayTODOs(tid, projectName, title, desc, ddt, priorityClass, parent); // description
 
   document.querySelector(".title-".concat(tid)).onclick = function () {
@@ -476,6 +477,17 @@ var paintTodoItem = function paintTodoItem(_ref) {
     document.querySelector(".td-list-item-".concat(tid)).textContent = '';
     document.querySelector(".td-list-item-".concat(tid)).style.borderBottom = 'none';
     document.querySelector(".td-list-item-".concat(tid)).style.padding = '0';
+  });
+  document.querySelector(".edit-".concat(tid)).addEventListener('click', function () {
+    _base__WEBPACK_IMPORTED_MODULE_1__.elements.main.classList.add('hide');
+    _base__WEBPACK_IMPORTED_MODULE_1__.elements.todoForm.classList.remove('hide');
+    document.getElementById('select').value = project;
+    document.getElementById('title').value = title;
+    document.getElementById('desc').value = desc;
+    document.getElementById('due-dt').value = ddt;
+    document.getElementById('todoForm').elements.priority.value = priority;
+    document.querySelector("select > option[value=\"".concat(project, "\"]")).selected = "true";
+    document.querySelector('.submit').value = 'Update TODO';
   });
 };
 

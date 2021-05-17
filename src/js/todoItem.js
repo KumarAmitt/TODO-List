@@ -1,5 +1,5 @@
 import Todo from './Todo';
-import {projects} from "./base";
+import {elements, projects} from "./base";
 
 const displayTODOs = (tid, projectName, title, desc, ddt, priorityClass, parent) => {
 
@@ -32,6 +32,7 @@ const paintTodoItem = ({project, todo, parent}) => {
   const desc = todo[1].desc;
   const ddt = todo[1].ddt;
   const priorityClass = todo[1].priority === 'high' ? 'pr-h' : todo[1].priority === 'low' ? 'pr-l' : 'pr-m';
+  const priority = todo[1].priority;
 
   displayTODOs(tid, projectName, title, desc, ddt, priorityClass, parent);
 
@@ -57,6 +58,21 @@ const paintTodoItem = ({project, todo, parent}) => {
     document.querySelector(`.td-list-item-${tid}`).style.padding = '0';
 
   })
+
+  document.querySelector(`.edit-${tid}`).addEventListener('click', () => {
+    elements.main.classList.add('hide');
+    elements.todoForm.classList.remove('hide');
+
+    document.getElementById('select').value = project;
+    document.getElementById('title').value = title;
+    document.getElementById('desc').value = desc;
+    document.getElementById('due-dt').value = ddt;
+    document.getElementById('todoForm').elements.priority.value = priority;
+    document.querySelector(`select > option[value="${project}"]`).selected = "true";
+    document.querySelector('.submit').value = 'Update TODO'
+
+  })
+
 
 
 }
