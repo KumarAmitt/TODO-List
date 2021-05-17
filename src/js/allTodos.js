@@ -1,5 +1,7 @@
 import {elements, projects} from "./base";
-import {prepareMainUI, updateProjectTitle, paintTodoItem} from "./helper";
+import {prepareMainUI} from "./shared";
+import updateProjectTitle from "./updateTitle";
+import paintTodoItem from "./todoItem";
 
 const allTODOs = () => {
   prepareMainUI();

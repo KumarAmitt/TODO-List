@@ -14,6 +14,6 @@ export default class Project {
   }
 
   checkUniqueness(){
-   return Object.entries(projects).some( project => project[0] === this.name);
+   return Object.entries(projects).every( project => project[0] !== this.name);
   }
 }

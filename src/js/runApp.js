@@ -1,9 +1,12 @@
 import {elements, projects} from "./base";
 import Project from "./Project";
-import {refreshProjectList, updateSelectOptions} from "./helper";
+import Todo from "./Todo";
+import {prepareMainUI, refreshProjectList, updateSelectOptions} from "./shared";
 import allTODOs from "./allTodos";
 import todayTODOs from "./today";
-import Todo from "./Todo";
+import paintTodoItem from "./todoItem";
+import updateProjectTitle from "./updateTitle";
+
 
 const readFormInput = () => {
   const project = document.getElementById('select').value;
@@ -25,7 +28,7 @@ const runApp = () => {
 
     if (project.nameIsBlank()) {
       inputField.placeholder = 'Field can\'t be blank';
-    } else if(project.checkUniqueness()) {
+    } else if(!project.checkUniqueness()) {
       inputField.placeholder = 'Project already exists';
     } else {
       elements.projectUL.textContent = '';
@@ -51,8 +54,17 @@ const runApp = () => {
     let todo = new Todo(project, title, desc, ddt, priority);
     todo.addTODO();
 
-    elements.todoForm.classList.toggle('hide');
-    elements.main.classList.remove('hide')
+    prepareMainUI();
+    updateProjectTitle(project)
+    const ul = elements.todoListUL;
+    ul.textContent = '';
+
+    Object.entries(projects[project]).forEach(todo => {
+      paintTodoItem({project: project, todo: todo, parent: ul})
+    })
+
+    document.getElementById('todoForm').reset();
+
   });
 
 }

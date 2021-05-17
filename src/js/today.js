@@ -1,6 +1,8 @@
 import {elements, projects} from "./base";
 import {format} from "date-fns";
-import {prepareMainUI, updateProjectTitle, paintTodoItem} from "./helper";
+import {prepareMainUI} from "./shared";
+import updateProjectTitle from "./updateTitle";
+import paintTodoItem from "./todoItem";
 
 const todayTODOs = () => {
   prepareMainUI();
