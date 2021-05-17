@@ -1,4 +1,4 @@
-import {elements, projects} from "./base";
+import {elements, prevProject, projects} from "./base";
 import Project from "./Project";
 import Todo from "./Todo";
 import {prepareMainUI, refreshProjectList, updateSelectOptions} from "./shared";
@@ -8,7 +8,7 @@ import paintTodoItem from "./todoItem";
 import updateProjectTitle from "./updateTitle";
 
 
-const readFormInput = () => {
+export const readFormInput = () => {
   const project = document.getElementById('select').value;
   const title = document.getElementById('title').value;
   const desc = document.getElementById('desc').value;
@@ -49,21 +49,38 @@ const runApp = () => {
 
   document.getElementById('todoForm').addEventListener('submit', (e) => {
     e.preventDefault();
+    // const [project, title, desc, ddt, priority] = readFormInput();
+    //
+    // let todo = new Todo(project, title, desc, ddt, priority);
+    // todo.addTODO();
+    //
+    // prepareMainUI();
+    // updateProjectTitle(project)
+    // const ul = elements.todoListUL;
+    // ul.textContent = '';
+    //
+    // Object.entries(projects[project]).forEach(todo => {
+    //   paintTodoItem({project: project, todo: todo, parent: ul})
+    // })
+    //
+    // document.getElementById('todoForm').reset();
+
+
+    //-------------------------
+
+
     const [project, title, desc, ddt, priority] = readFormInput();
 
     let todo = new Todo(project, title, desc, ddt, priority);
-    todo.addTODO();
 
-    prepareMainUI();
-    updateProjectTitle(project)
-    const ul = elements.todoListUL;
-    ul.textContent = '';
 
-    Object.entries(projects[project]).forEach(todo => {
-      paintTodoItem({project: project, todo: todo, parent: ul})
-    })
-
-    document.getElementById('todoForm').reset();
+    if (document.querySelector('.submit').value === 'Create TODO'){
+      todo.addTODO();
+      console.log(projects)
+    }else{
+      todo.updateTODO(prevProject[0], project, prevProject[1], title, desc, ddt, priority)
+      console.log(projects);
+    }
 
   });
 

@@ -1,5 +1,6 @@
 import Todo from './Todo';
-import {elements, projects} from "./base";
+import {elements, prevProject, projects} from "./base";
+import {readFormInput} from "./runApp";
 
 const displayTODOs = (tid, projectName, title, desc, ddt, priorityClass, parent) => {
 
@@ -60,16 +61,24 @@ const paintTodoItem = ({project, todo, parent}) => {
   })
 
   document.querySelector(`.edit-${tid}`).addEventListener('click', () => {
+
     elements.main.classList.add('hide');
     elements.todoForm.classList.remove('hide');
 
-    document.getElementById('select').value = project;
     document.getElementById('title').value = title;
     document.getElementById('desc').value = desc;
     document.getElementById('due-dt').value = ddt;
     document.getElementById('todoForm').elements.priority.value = priority;
     document.querySelector(`select > option[value="${project}"]`).selected = "true";
     document.querySelector('.submit').value = 'Update TODO'
+
+    prevProject[0] = projectName;
+    prevProject[1] = tid
+
+    // document.querySelector('.submit').onclick = () => {
+    //   const [newProject, title, desc, ddt, priority] = readFormInput();
+    //     new Todo().updateTODO(projectName, newProject, title, desc, ddt, priority);
+    // }
 
   })
 

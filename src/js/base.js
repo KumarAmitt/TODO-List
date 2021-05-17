@@ -13,6 +13,8 @@ export const elements = {
   today: document.querySelector('.sb-today'),
 };
 
+export let prevProject = [];
+
 export const projects = {
   'Project I': {
     id1: {

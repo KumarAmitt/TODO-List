@@ -20,6 +20,18 @@ export default class Todo {
     }
   }
 
+  updateTODO(prevProject, newProject, tid, title, desc, ddt, priority){
+    if(prevProject === newProject){
+      projects[prevProject][tid] = {
+        title: title,
+        desc: desc,
+        ddt: ddt,
+        priority: priority
+      }
+    }
+
+  }
+
   deleteTODO(project, tid){
     delete projects[project][tid];
   }
