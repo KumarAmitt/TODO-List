@@ -220,7 +220,7 @@ main .category .new-todo:hover {
 
 @media (min-width: 768px) {
   main {
-    margin-left: 18em;
+    margin: 0.5em 1.5em 0.5em 18em;
   }
 }
 .todo-form {
