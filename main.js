@@ -53,12 +53,6 @@ var Project = /*#__PURE__*/function () {
     value: function persistData() {
       localStorage.setItem('projects', JSON.stringify(_base__WEBPACK_IMPORTED_MODULE_0__.projects));
     }
-  }, {
-    key: "readStorage",
-    value: function readStorage() {
-      var storage = JSON.parse(localStorage.getItem('projects'));
-      return storage;
-    }
   }]);
 
   return Project;
@@ -177,6 +171,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./shared */ "./src/js/shared.js");
 /* harmony import */ var _updateTitle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./updateTitle */ "./src/js/updateTitle.js");
 /* harmony import */ var _todoItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./todoItem */ "./src/js/todoItem.js");
+/* harmony import */ var _runApp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./runApp */ "./src/js/runApp.js");
+
 
 
 
@@ -187,7 +183,7 @@ var allTODOs = function allTODOs() {
   (0,_updateTitle__WEBPACK_IMPORTED_MODULE_2__.default)('All TODOs');
   var ul = _base__WEBPACK_IMPORTED_MODULE_0__.elements.todoListUL;
   ul.textContent = '';
-  Object.entries(_base__WEBPACK_IMPORTED_MODULE_0__.projects).forEach(function (project) {
+  Object.entries((0,_runApp__WEBPACK_IMPORTED_MODULE_4__.readStorage)()).forEach(function (project) {
     Object.entries(project[1]).forEach(function (todo) {
       (0,_todoItem__WEBPACK_IMPORTED_MODULE_3__.default)({
         project: project[0],
@@ -277,6 +273,7 @@ var projects = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "readFormInput": function() { return /* binding */ readFormInput; },
+/* harmony export */   "readStorage": function() { return /* binding */ readStorage; },
 /* harmony export */   "runApp": function() { return /* binding */ runApp; }
 /* harmony export */ });
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
@@ -314,6 +311,10 @@ var readFormInput = function readFormInput() {
   var ddt = document.getElementById('due-dt').value;
   var priority = document.getElementById('todoForm').elements.priority.value;
   return [project, title, desc, ddt, priority];
+};
+var readStorage = function readStorage() {
+  var storage = JSON.parse(localStorage.getItem('projects'));
+  if (storage) return storage;else return {};
 };
 var runApp = function runApp() {
   _base__WEBPACK_IMPORTED_MODULE_0__.elements.newPSubmit.addEventListener('click', function () {
@@ -363,7 +364,7 @@ var runApp = function runApp() {
     (0,_updateTitle__WEBPACK_IMPORTED_MODULE_7__.default)(project);
     var ul = _base__WEBPACK_IMPORTED_MODULE_0__.elements.todoListUL;
     ul.textContent = '';
-    Object.entries(_base__WEBPACK_IMPORTED_MODULE_0__.projects[project]).forEach(function (todo) {
+    Object.entries(readStorage()[project]).forEach(function (todo) {
       (0,_todoItem__WEBPACK_IMPORTED_MODULE_6__.default)({
         project: project,
         todo: todo,
@@ -416,7 +417,7 @@ var toggleAddProjectsForm = function toggleAddProjectsForm() {
 };
 var updateSelectOptions = function updateSelectOptions() {
   _base__WEBPACK_IMPORTED_MODULE_0__.elements.select.textContent = '';
-  Object.entries(_base__WEBPACK_IMPORTED_MODULE_0__.projects).forEach(function (project) {
+  Object.entries((0,_runApp__WEBPACK_IMPORTED_MODULE_4__.readStorage)()).forEach(function (project) {
     var markup = "<option value=\"".concat(project[0], "\">").concat(project[0], "</option>");
     _base__WEBPACK_IMPORTED_MODULE_0__.elements.select.insertAdjacentHTML("beforeend", markup);
   });
@@ -432,7 +433,7 @@ var renderProjectTODOs = function renderProjectTODOs(clsName, title) {
     (0,_updateTitle__WEBPACK_IMPORTED_MODULE_3__.default)(title);
     var ul = _base__WEBPACK_IMPORTED_MODULE_0__.elements.todoListUL;
     ul.textContent = '';
-    Object.entries(_base__WEBPACK_IMPORTED_MODULE_0__.projects[title]).forEach(function (todo) {
+    Object.entries((0,_runApp__WEBPACK_IMPORTED_MODULE_4__.readStorage)()[title]).forEach(function (todo) {
       (0,_todoItem__WEBPACK_IMPORTED_MODULE_2__.default)({
         project: title,
         todo: todo,
@@ -442,7 +443,7 @@ var renderProjectTODOs = function renderProjectTODOs(clsName, title) {
   };
 };
 var refreshProjectList = function refreshProjectList() {
-  Object.entries(_base__WEBPACK_IMPORTED_MODULE_0__.projects).forEach(function (project) {
+  Object.entries((0,_runApp__WEBPACK_IMPORTED_MODULE_4__.readStorage)()).forEach(function (project) {
     var pid = uniqid__WEBPACK_IMPORTED_MODULE_1___default()();
     var markup = "<li class=\"sb-p-item sb-item sb-item-".concat(pid, "\">").concat(project[0], "</li>");
     _base__WEBPACK_IMPORTED_MODULE_0__.elements.projectUL.insertAdjacentHTML("beforeend", markup);
@@ -461,10 +462,12 @@ var refreshProjectList = function refreshProjectList() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/format/index.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/format/index.js");
 /* harmony import */ var _shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./shared */ "./src/js/shared.js");
 /* harmony import */ var _updateTitle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./updateTitle */ "./src/js/updateTitle.js");
 /* harmony import */ var _todoItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./todoItem */ "./src/js/todoItem.js");
+/* harmony import */ var _runApp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./runApp */ "./src/js/runApp.js");
+
 
 
 
@@ -476,9 +479,9 @@ var todayTODOs = function todayTODOs() {
   (0,_updateTitle__WEBPACK_IMPORTED_MODULE_2__.default)('Today');
   var ul = _base__WEBPACK_IMPORTED_MODULE_0__.elements.todoListUL;
   ul.textContent = '';
-  Object.entries(_base__WEBPACK_IMPORTED_MODULE_0__.projects).filter(function (project) {
+  Object.entries((0,_runApp__WEBPACK_IMPORTED_MODULE_4__.readStorage)()).filter(function (project) {
     Object.entries(project[1]).filter(function (p) {
-      return p[1].ddt.slice(0, 10) === (0,date_fns__WEBPACK_IMPORTED_MODULE_4__.default)(new Date(), 'yyyy-MM-dd');
+      return p[1].ddt.slice(0, 10) === (0,date_fns__WEBPACK_IMPORTED_MODULE_5__.default)(new Date(), 'yyyy-MM-dd');
     }).forEach(function (todo) {
       (0,_todoItem__WEBPACK_IMPORTED_MODULE_3__.default)({
         project: project[0],
