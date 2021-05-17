@@ -105,18 +105,27 @@ var Todo = /*#__PURE__*/function () {
     key: "updateTODO",
     value: function updateTODO(prevProject, newProject, tid, title, desc, ddt, priority) {
       if (prevProject === newProject) {
-        _base__WEBPACK_IMPORTED_MODULE_1__.projects[prevProject][tid] = {
-          title: title,
-          desc: desc,
-          ddt: ddt,
-          priority: priority
-        };
+        this._update(prevProject, tid, title, desc, ddt, priority);
+      } else {
+        delete _base__WEBPACK_IMPORTED_MODULE_1__.projects[prevProject][tid];
+
+        this._update(newProject, tid, title, desc, ddt, priority);
       }
     }
   }, {
     key: "deleteTODO",
     value: function deleteTODO(project, tid) {
       delete _base__WEBPACK_IMPORTED_MODULE_1__.projects[project][tid];
+    }
+  }, {
+    key: "_update",
+    value: function _update(project, tid, title, desc, ddt, priority) {
+      _base__WEBPACK_IMPORTED_MODULE_1__.projects[project][tid] = {
+        title: title,
+        desc: desc,
+        ddt: ddt,
+        priority: priority
+      };
     }
   }]);
 
@@ -333,6 +342,19 @@ var runApp = function runApp() {
       todo.updateTODO(_base__WEBPACK_IMPORTED_MODULE_0__.prevProject[0], project, _base__WEBPACK_IMPORTED_MODULE_0__.prevProject[1], title, desc, ddt, priority);
       console.log(_base__WEBPACK_IMPORTED_MODULE_0__.projects);
     }
+
+    (0,_shared__WEBPACK_IMPORTED_MODULE_3__.prepareMainUI)();
+    (0,_updateTitle__WEBPACK_IMPORTED_MODULE_7__.default)(project);
+    var ul = _base__WEBPACK_IMPORTED_MODULE_0__.elements.todoListUL;
+    ul.textContent = '';
+    Object.entries(_base__WEBPACK_IMPORTED_MODULE_0__.projects[project]).forEach(function (todo) {
+      (0,_todoItem__WEBPACK_IMPORTED_MODULE_6__.default)({
+        project: project,
+        todo: todo,
+        parent: ul
+      });
+    });
+    document.getElementById('todoForm').reset();
   });
 };
 
