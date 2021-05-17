@@ -21,18 +21,24 @@ export default class Todo {
   }
 
   updateTODO(prevProject, newProject, tid, title, desc, ddt, priority){
-    if(prevProject === newProject){
-      projects[prevProject][tid] = {
-        title: title,
-        desc: desc,
-        ddt: ddt,
-        priority: priority
-      }
+    if (prevProject === newProject){
+      this._update(prevProject,tid, title, desc, ddt, priority)
+    } else {
+      delete projects[prevProject][tid];
+      this._update(newProject,tid, title, desc, ddt, priority)
     }
-
   }
 
   deleteTODO(project, tid){
     delete projects[project][tid];
+  }
+
+  _update(project, tid, title, desc, ddt, priority){
+    projects[project][tid] = {
+      title: title,
+      desc: desc,
+      ddt: ddt,
+      priority: priority
+    }
   }
 }

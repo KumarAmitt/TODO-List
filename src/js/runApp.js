@@ -73,7 +73,6 @@ const runApp = () => {
 
     let todo = new Todo(project, title, desc, ddt, priority);
 
-
     if (document.querySelector('.submit').value === 'Create TODO'){
       todo.addTODO();
       console.log(projects)
@@ -81,6 +80,17 @@ const runApp = () => {
       todo.updateTODO(prevProject[0], project, prevProject[1], title, desc, ddt, priority)
       console.log(projects);
     }
+
+    prepareMainUI();
+    updateProjectTitle(project)
+    const ul = elements.todoListUL;
+    ul.textContent = '';
+
+    Object.entries(projects[project]).forEach(todo => {
+      paintTodoItem({project: project, todo: todo, parent: ul})
+    })
+
+    document.getElementById('todoForm').reset();
 
   });
 
