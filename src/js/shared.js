@@ -2,6 +2,7 @@ import {elements, projects} from "./base";
 import uniqid from "uniqid";
 import paintTodoItem from "./todoItem";
 import updateProjectTitle from "./updateTitle";
+import {readStorage} from "./runApp";
 
 export const toggleMenu = () => {
   elements.menu.addEventListener('click', () => {

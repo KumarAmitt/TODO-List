@@ -20,6 +20,7 @@ export default class Todo {
       priority: this.priority,
       status: this.status
     }
+    this.persistData();
   }
 
   updateTODO(prevProject, newProject, tid, title, desc, ddt, priority){
@@ -29,14 +30,17 @@ export default class Todo {
       delete projects[prevProject][tid];
       this._update(newProject,tid, title, desc, ddt, priority)
     }
+    this.persistData();
   }
 
   updateStatus(project, tid){
     projects[project][tid].status = projects[project][tid].status === 'finish' ? 'pending' : 'finish';
+    this.persistData();
   }
 
   deleteTODO(project, tid){
     delete projects[project][tid];
+    this.persistData();
   }
 
   _update(project, tid, title, desc, ddt, priority){
@@ -47,4 +51,9 @@ export default class Todo {
       priority
     }
   }
+
+  persistData(){
+    localStorage.setItem('projects', JSON.stringify(projects));
+  }
+
 }

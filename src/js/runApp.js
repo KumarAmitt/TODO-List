@@ -18,7 +18,7 @@ export const readFormInput = () => {
   return [project, title, desc, ddt, priority];
 }
 
-const runApp = () => {
+export const runApp = () => {
 
   elements.newPSubmit.addEventListener('click', () => {
     const inputField = document.querySelector('[name="projectName"]');
@@ -75,4 +75,4 @@ const runApp = () => {
 
 }
 
-export default runApp;
+// export default runApp;
