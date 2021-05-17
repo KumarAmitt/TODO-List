@@ -1,7 +1,6 @@
 .todo-form {
   margin: 2.8em 0.5em;
   border: 1px solid transparent;
-  //display: none;
 }
 
 form > * {
@@ -56,12 +55,13 @@ select {
 
 @media (min-width: 768px) {
   .todo-form {
-    margin-left: 18em;
+    margin: 0.5em 1.5em 0.5em 18em;
   }
 
   .todo-submit .submit {
     width: 20em;
-    right: 0;
+    right: 1.5em;
     left: auto;
+    bottom: 0.5em;
   }
 }
