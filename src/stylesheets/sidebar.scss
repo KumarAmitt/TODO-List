@@ -87,3 +87,13 @@
     font-size: 0.9rem;
   }
 }
+
+@media (min-width: 768px) {
+  .sidebar {
+    display: block;
+    bottom: 0;
+    left: 0;
+    right: auto;
+    width: 16em;
+  }
+}

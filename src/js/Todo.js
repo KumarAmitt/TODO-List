@@ -41,10 +41,10 @@ export default class Todo {
 
   _update(project, tid, title, desc, ddt, priority){
     projects[project][tid] = {
-      title: title,
-      desc: desc,
-      ddt: ddt,
-      priority: priority
+      title,
+      desc,
+      ddt,
+      priority
     }
   }
 }

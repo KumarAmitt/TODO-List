@@ -45,6 +45,11 @@ nav .menu i {
   color: #bdf2e3;
 }
 
+@media (min-width: 768px) {
+  nav .menu i {
+    color: transparent;
+  }
+}
 .sidebar {
   border: 1px solid #63a693;
   width: 60%;
@@ -121,6 +126,15 @@ nav .menu i {
   font-size: 0.9rem;
 }
 
+@media (min-width: 768px) {
+  .sidebar {
+    display: block;
+    bottom: 0;
+    left: 0;
+    right: auto;
+    width: 16em;
+  }
+}
 main {
   margin: 3.5em 0.5em 0.5em 0.5em;
 }
@@ -200,6 +214,11 @@ main .category .new-todo:hover {
   text-align: right;
 }
 
+@media (min-width: 768px) {
+  main {
+    margin-left: 18em;
+  }
+}
 .todo-form {
   margin: 2.8em 0.5em;
   border: 1px solid transparent;
