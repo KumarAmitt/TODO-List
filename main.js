@@ -89,6 +89,7 @@ var Todo = /*#__PURE__*/function () {
     this.desc = desc;
     this.ddt = ddt;
     this.priority = priority;
+    this.status = 'pending';
   }
 
   _createClass(Todo, [{
@@ -98,7 +99,8 @@ var Todo = /*#__PURE__*/function () {
         title: this.title,
         desc: this.desc,
         ddt: this.ddt,
-        priority: this.priority
+        priority: this.priority,
+        status: this.status
       };
     }
   }, {
@@ -111,6 +113,11 @@ var Todo = /*#__PURE__*/function () {
 
         this._update(newProject, tid, title, desc, ddt, priority);
       }
+    }
+  }, {
+    key: "updateStatus",
+    value: function updateStatus(project, tid) {
+      _base__WEBPACK_IMPORTED_MODULE_1__.projects[project][tid].status = _base__WEBPACK_IMPORTED_MODULE_1__.projects[project][tid].status === 'finish' ? 'pending' : 'finish';
     }
   }, {
     key: "deleteTODO",
@@ -207,13 +214,15 @@ var projects = {
       title: 'Project 1, Task 1',
       desc: 'Say hi to everyone',
       ddt: '2021-05-29T16:21',
-      priority: 'high'
+      priority: 'high',
+      status: 'pending'
     },
     id2: {
       title: 'Project 1, Task 2',
       desc: 'Say hello to everyone',
       ddt: '2021-05-16T16:21',
-      priority: 'medium'
+      priority: 'medium',
+      status: 'pending'
     }
   },
   'Project II': {
@@ -221,13 +230,15 @@ var projects = {
       title: 'Project 2, Task 1',
       desc: 'Say bye to everyone',
       ddt: '2021-05-16T16:21',
-      priority: 'high'
+      priority: 'high',
+      status: 'pending'
     },
     id12: {
       title: 'Project 2, Task 2',
       desc: 'Say good bye to everyone',
       ddt: '2021-05-17T16:21',
-      priority: 'low'
+      priority: 'low',
+      status: 'finish'
     }
   }
 };
@@ -308,22 +319,7 @@ var runApp = function runApp() {
     (0,_today__WEBPACK_IMPORTED_MODULE_5__.default)();
   });
   document.getElementById('todoForm').addEventListener('submit', function (e) {
-    e.preventDefault(); // const [project, title, desc, ddt, priority] = readFormInput();
-    //
-    // let todo = new Todo(project, title, desc, ddt, priority);
-    // todo.addTODO();
-    //
-    // prepareMainUI();
-    // updateProjectTitle(project)
-    // const ul = elements.todoListUL;
-    // ul.textContent = '';
-    //
-    // Object.entries(projects[project]).forEach(todo => {
-    //   paintTodoItem({project: project, todo: todo, parent: ul})
-    // })
-    //
-    // document.getElementById('todoForm').reset();
-    //-------------------------
+    e.preventDefault();
 
     var _readFormInput = readFormInput(),
         _readFormInput2 = _slicedToArray(_readFormInput, 5),
@@ -337,10 +333,8 @@ var runApp = function runApp() {
 
     if (document.querySelector('.submit').value === 'Create TODO') {
       todo.addTODO();
-      console.log(_base__WEBPACK_IMPORTED_MODULE_0__.projects);
     } else {
       todo.updateTODO(_base__WEBPACK_IMPORTED_MODULE_0__.prevProject[0], project, _base__WEBPACK_IMPORTED_MODULE_0__.prevProject[1], title, desc, ddt, priority);
-      console.log(_base__WEBPACK_IMPORTED_MODULE_0__.projects);
     }
 
     (0,_shared__WEBPACK_IMPORTED_MODULE_3__.prepareMainUI)();
@@ -492,8 +486,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var displayTODOs = function displayTODOs(tid, projectName, title, desc, ddt, priorityClass, parent) {
-  var markup = "<li class=\"td-list-item td-list-item-".concat(tid, "\">\n                        <div class=\"check\">\n                          <span class=\"status status-").concat(tid, " ").concat(priorityClass, "\"><i class=\"fas fa-square\"></i></span>\n                        </div>\n                \n                        <div class=\"info\">\n                          <div class=\"title title-").concat(tid, "\">").concat(title, "</div>\n                          <div class=\"info-secondary\">\n                            <div class=\"due-dt\">").concat(ddt, "</div>\n                            <div class=\"btns\">\n                              <span class=\"edit edit-").concat(tid, "\"><i class=\"fas fa-edit\"></i></span>\n                              <span class=\"delete delete-").concat(tid, "\"><i class=\"fas fa-trash-alt\"></i></span>\n                            </div>\n                          </div>\n                           <div class=\"desc desc-").concat(tid, " hide\">").concat(desc, "\n                             <span>").concat(projectName, "</span>\n                           </div>\n                        </div>\n                      </li>");
+var displayTODOs = function displayTODOs(tid, projectName, title, desc, ddt, priorityClass, statusClass, iconClass, parent) {
+  var markup = "<li class=\"td-list-item td-list-item-".concat(tid, "\">\n                        <div class=\"check\">\n                          <span class=\"status status-").concat(tid, " ").concat(priorityClass, "\"><i class=\"fas ").concat(iconClass, "\"></i></span>\n                        </div>\n                \n                        <div class=\"info\">\n                          <div class=\"title title-").concat(tid, " ").concat(statusClass, "\">").concat(title, "</div>\n                          <div class=\"info-secondary\">\n                            <div class=\"due-dt\">").concat(ddt, "</div>\n                            <div class=\"btns\">\n                              <span class=\"edit edit-").concat(tid, "\"><i class=\"fas fa-edit\"></i></span>\n                              <span class=\"delete delete-").concat(tid, "\"><i class=\"fas fa-trash-alt\"></i></span>\n                            </div>\n                          </div>\n                           <div class=\"desc desc-").concat(tid, " hide\">").concat(desc, "\n                             <span>").concat(projectName, "</span>\n                           </div>\n                        </div>\n                      </li>");
   parent.insertAdjacentHTML('beforeend', markup);
 };
 
@@ -508,7 +502,10 @@ var paintTodoItem = function paintTodoItem(_ref) {
   var ddt = todo[1].ddt;
   var priorityClass = todo[1].priority === 'high' ? 'pr-h' : todo[1].priority === 'low' ? 'pr-l' : 'pr-m';
   var priority = todo[1].priority;
-  displayTODOs(tid, projectName, title, desc, ddt, priorityClass, parent); // description
+  var status = todo[1].status;
+  var statusClass = status === 'pending' ? '' : 'st-f';
+  var iconClass = status === 'pending' ? 'fa-square' : 'fa-check-square';
+  displayTODOs(tid, projectName, title, desc, ddt, priorityClass, statusClass, iconClass, parent); // description
 
   document.querySelector(".title-".concat(tid)).onclick = function () {
     document.querySelector(".desc-".concat(tid)).classList.toggle('hide');
@@ -516,6 +513,7 @@ var paintTodoItem = function paintTodoItem(_ref) {
 
 
   document.querySelector(".status-".concat(tid)).onclick = function () {
+    new _Todo__WEBPACK_IMPORTED_MODULE_0__.default().updateStatus(project, tid);
     document.querySelector(".title-".concat(tid)).classList.toggle('st-f');
     var check = document.querySelector(".status-".concat(tid, " i"));
     check.className = check.className === 'fas fa-square' ? 'fas fa-check-square' : 'fas fa-square';
@@ -538,10 +536,7 @@ var paintTodoItem = function paintTodoItem(_ref) {
     document.querySelector("select > option[value=\"".concat(project, "\"]")).selected = "true";
     document.querySelector('.submit').value = 'Update TODO';
     _base__WEBPACK_IMPORTED_MODULE_1__.prevProject[0] = projectName;
-    _base__WEBPACK_IMPORTED_MODULE_1__.prevProject[1] = tid; // document.querySelector('.submit').onclick = () => {
-    //   const [newProject, title, desc, ddt, priority] = readFormInput();
-    //     new Todo().updateTODO(projectName, newProject, title, desc, ddt, priority);
-    // }
+    _base__WEBPACK_IMPORTED_MODULE_1__.prevProject[1] = tid;
   });
 };
 
