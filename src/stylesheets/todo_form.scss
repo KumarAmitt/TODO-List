@@ -53,3 +53,15 @@ select {
     background-color: #316c5b;
   }
 }
+
+@media (min-width: 768px) {
+  .todo-form {
+    margin-left: 18em;
+  }
+
+  .todo-submit .submit {
+    width: 20em;
+    right: 0;
+    left: auto;
+  }
+}

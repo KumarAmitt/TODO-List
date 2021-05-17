@@ -46,8 +46,11 @@ nav .menu i {
 }
 
 @media (min-width: 768px) {
+  nav {
+    width: 15.1em;
+  }
   nav .menu i {
-    color: transparent;
+    display: none;
   }
 }
 .sidebar {
@@ -129,6 +132,7 @@ nav .menu i {
 @media (min-width: 768px) {
   .sidebar {
     display: block;
+    top: 2.4em;
     bottom: 0;
     left: 0;
     right: auto;
@@ -274,6 +278,17 @@ select:focus {
   background-color: #316c5b;
 }
 
+@media (min-width: 768px) {
+  .todo-form {
+    margin-left: 18em;
+  }
+
+  .todo-submit .submit {
+    width: 20em;
+    right: 0;
+    left: auto;
+  }
+}
 body {
   margin: 0;
   padding: 0;
