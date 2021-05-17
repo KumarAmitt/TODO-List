@@ -102,6 +102,18 @@ var Todo = /*#__PURE__*/function () {
       };
     }
   }, {
+    key: "updateTODO",
+    value: function updateTODO(prevProject, newProject, tid, title, desc, ddt, priority) {
+      if (prevProject === newProject) {
+        _base__WEBPACK_IMPORTED_MODULE_1__.projects[prevProject][tid] = {
+          title: title,
+          desc: desc,
+          ddt: ddt,
+          priority: priority
+        };
+      }
+    }
+  }, {
     key: "deleteTODO",
     value: function deleteTODO(project, tid) {
       delete _base__WEBPACK_IMPORTED_MODULE_1__.projects[project][tid];
@@ -162,6 +174,7 @@ var allTODOs = function allTODOs() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "elements": function() { return /* binding */ elements; },
+/* harmony export */   "prevProject": function() { return /* binding */ prevProject; },
 /* harmony export */   "projects": function() { return /* binding */ projects; }
 /* harmony export */ });
 var elements = {
@@ -178,6 +191,7 @@ var elements = {
   all: document.querySelector('.sb-all'),
   today: document.querySelector('.sb-today')
 };
+var prevProject = [];
 var projects = {
   'Project I': {
     id1: {
@@ -219,6 +233,9 @@ var projects = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "readFormInput": function() { return /* binding */ readFormInput; }
+/* harmony export */ });
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
 /* harmony import */ var _Project__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Project */ "./src/js/Project.js");
 /* harmony import */ var _Todo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Todo */ "./src/js/Todo.js");
@@ -238,7 +255,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -283,7 +299,22 @@ var runApp = function runApp() {
     (0,_today__WEBPACK_IMPORTED_MODULE_5__.default)();
   });
   document.getElementById('todoForm').addEventListener('submit', function (e) {
-    e.preventDefault();
+    e.preventDefault(); // const [project, title, desc, ddt, priority] = readFormInput();
+    //
+    // let todo = new Todo(project, title, desc, ddt, priority);
+    // todo.addTODO();
+    //
+    // prepareMainUI();
+    // updateProjectTitle(project)
+    // const ul = elements.todoListUL;
+    // ul.textContent = '';
+    //
+    // Object.entries(projects[project]).forEach(todo => {
+    //   paintTodoItem({project: project, todo: todo, parent: ul})
+    // })
+    //
+    // document.getElementById('todoForm').reset();
+    //-------------------------
 
     var _readFormInput = readFormInput(),
         _readFormInput2 = _slicedToArray(_readFormInput, 5),
@@ -294,19 +325,14 @@ var runApp = function runApp() {
         priority = _readFormInput2[4];
 
     var todo = new _Todo__WEBPACK_IMPORTED_MODULE_2__.default(project, title, desc, ddt, priority);
-    todo.addTODO();
-    (0,_shared__WEBPACK_IMPORTED_MODULE_3__.prepareMainUI)();
-    (0,_updateTitle__WEBPACK_IMPORTED_MODULE_7__.default)(project);
-    var ul = _base__WEBPACK_IMPORTED_MODULE_0__.elements.todoListUL;
-    ul.textContent = '';
-    Object.entries(_base__WEBPACK_IMPORTED_MODULE_0__.projects[project]).forEach(function (todo) {
-      (0,_todoItem__WEBPACK_IMPORTED_MODULE_6__.default)({
-        project: project,
-        todo: todo,
-        parent: ul
-      });
-    });
-    document.getElementById('todoForm').reset();
+
+    if (document.querySelector('.submit').value === 'Create TODO') {
+      todo.addTODO();
+      console.log(_base__WEBPACK_IMPORTED_MODULE_0__.projects);
+    } else {
+      todo.updateTODO(_base__WEBPACK_IMPORTED_MODULE_0__.prevProject[0], project, _base__WEBPACK_IMPORTED_MODULE_0__.prevProject[1], title, desc, ddt, priority);
+      console.log(_base__WEBPACK_IMPORTED_MODULE_0__.projects);
+    }
   });
 };
 
@@ -439,6 +465,8 @@ var todayTODOs = function todayTODOs() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Todo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Todo */ "./src/js/Todo.js");
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
+/* harmony import */ var _runApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./runApp */ "./src/js/runApp.js");
+
 
 
 
@@ -481,13 +509,17 @@ var paintTodoItem = function paintTodoItem(_ref) {
   document.querySelector(".edit-".concat(tid)).addEventListener('click', function () {
     _base__WEBPACK_IMPORTED_MODULE_1__.elements.main.classList.add('hide');
     _base__WEBPACK_IMPORTED_MODULE_1__.elements.todoForm.classList.remove('hide');
-    document.getElementById('select').value = project;
     document.getElementById('title').value = title;
     document.getElementById('desc').value = desc;
     document.getElementById('due-dt').value = ddt;
     document.getElementById('todoForm').elements.priority.value = priority;
     document.querySelector("select > option[value=\"".concat(project, "\"]")).selected = "true";
     document.querySelector('.submit').value = 'Update TODO';
+    _base__WEBPACK_IMPORTED_MODULE_1__.prevProject[0] = projectName;
+    _base__WEBPACK_IMPORTED_MODULE_1__.prevProject[1] = tid; // document.querySelector('.submit').onclick = () => {
+    //   const [newProject, title, desc, ddt, priority] = readFormInput();
+    //     new Todo().updateTODO(projectName, newProject, title, desc, ddt, priority);
+    // }
   });
 };
 
