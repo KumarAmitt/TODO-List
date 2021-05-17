@@ -9,6 +9,7 @@ export default class Todo {
     this.desc = desc;
     this.ddt = ddt;
     this.priority = priority;
+    this.status = 'pending';
   }
 
   addTODO() {
@@ -16,7 +17,8 @@ export default class Todo {
       title: this.title,
       desc: this.desc,
       ddt: this.ddt,
-      priority: this.priority
+      priority: this.priority,
+      status: this.status
     }
   }
 
@@ -27,6 +29,10 @@ export default class Todo {
       delete projects[prevProject][tid];
       this._update(newProject,tid, title, desc, ddt, priority)
     }
+  }
+
+  updateStatus(project, tid){
+    projects[project][tid].status = projects[project][tid].status === 'finish' ? 'pending' : 'finish';
   }
 
   deleteTODO(project, tid){

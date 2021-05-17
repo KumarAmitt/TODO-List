@@ -22,12 +22,14 @@ export const projects = {
       desc: 'Say hi to everyone',
       ddt: '2021-05-29T16:21',
       priority: 'high',
+      status: 'pending'
     },
     id2: {
       title: 'Project 1, Task 2',
       desc: 'Say hello to everyone',
       ddt: '2021-05-16T16:21',
       priority: 'medium',
+      status: 'pending'
     },
   },
   'Project II': {
@@ -36,12 +38,14 @@ export const projects = {
       desc: 'Say bye to everyone',
       ddt: '2021-05-16T16:21',
       priority: 'high',
+      status: 'pending'
     },
     id12: {
       title: 'Project 2, Task 2',
       desc: 'Say good bye to everyone',
       ddt: '2021-05-17T16:21',
       priority: 'low',
+      status: 'finish'
     },
   },
 };

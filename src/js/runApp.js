@@ -49,25 +49,6 @@ const runApp = () => {
 
   document.getElementById('todoForm').addEventListener('submit', (e) => {
     e.preventDefault();
-    // const [project, title, desc, ddt, priority] = readFormInput();
-    //
-    // let todo = new Todo(project, title, desc, ddt, priority);
-    // todo.addTODO();
-    //
-    // prepareMainUI();
-    // updateProjectTitle(project)
-    // const ul = elements.todoListUL;
-    // ul.textContent = '';
-    //
-    // Object.entries(projects[project]).forEach(todo => {
-    //   paintTodoItem({project: project, todo: todo, parent: ul})
-    // })
-    //
-    // document.getElementById('todoForm').reset();
-
-
-    //-------------------------
-
 
     const [project, title, desc, ddt, priority] = readFormInput();
 
@@ -75,10 +56,8 @@ const runApp = () => {
 
     if (document.querySelector('.submit').value === 'Create TODO'){
       todo.addTODO();
-      console.log(projects)
     }else{
       todo.updateTODO(prevProject[0], project, prevProject[1], title, desc, ddt, priority)
-      console.log(projects);
     }
 
     prepareMainUI();

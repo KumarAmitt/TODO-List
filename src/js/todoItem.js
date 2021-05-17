@@ -2,15 +2,15 @@ import Todo from './Todo';
 import {elements, prevProject, projects} from "./base";
 import {readFormInput} from "./runApp";
 
-const displayTODOs = (tid, projectName, title, desc, ddt, priorityClass, parent) => {
+const displayTODOs = (tid, projectName, title, desc, ddt, priorityClass, statusClass, iconClass, parent) => {
 
   const markup = `<li class="td-list-item td-list-item-${tid}">
                         <div class="check">
-                          <span class="status status-${tid} ${priorityClass}"><i class="fas fa-square"></i></span>
+                          <span class="status status-${tid} ${priorityClass}"><i class="fas ${iconClass}"></i></span>
                         </div>
                 
                         <div class="info">
-                          <div class="title title-${tid}">${title}</div>
+                          <div class="title title-${tid} ${statusClass}">${title}</div>
                           <div class="info-secondary">
                             <div class="due-dt">${ddt}</div>
                             <div class="btns">
@@ -34,8 +34,11 @@ const paintTodoItem = ({project, todo, parent}) => {
   const ddt = todo[1].ddt;
   const priorityClass = todo[1].priority === 'high' ? 'pr-h' : todo[1].priority === 'low' ? 'pr-l' : 'pr-m';
   const priority = todo[1].priority;
+  const status = todo[1].status;
+  const statusClass = status === 'pending' ? '' : 'st-f';
+  const iconClass = status === 'pending' ? 'fa-square' : 'fa-check-square'
 
-  displayTODOs(tid, projectName, title, desc, ddt, priorityClass, parent);
+  displayTODOs(tid, projectName, title, desc, ddt, priorityClass, statusClass, iconClass, parent);
 
   // description
   document.querySelector(`.title-${tid}`).onclick = () => {
@@ -44,6 +47,9 @@ const paintTodoItem = ({project, todo, parent}) => {
 
   // change status
   document.querySelector(`.status-${tid}`).onclick = () => {
+
+    new Todo().updateStatus(project, tid);
+
     document.querySelector(`.title-${tid}`).classList.toggle('st-f');
 
     let check = document.querySelector(`.status-${tid} i`);
@@ -74,11 +80,6 @@ const paintTodoItem = ({project, todo, parent}) => {
 
     prevProject[0] = projectName;
     prevProject[1] = tid
-
-    // document.querySelector('.submit').onclick = () => {
-    //   const [newProject, title, desc, ddt, priority] = readFormInput();
-    //     new Todo().updateTODO(projectName, newProject, title, desc, ddt, priority);
-    // }
 
   })
 
