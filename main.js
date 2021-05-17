@@ -32,6 +32,7 @@ var Project = /*#__PURE__*/function () {
     key: "addProject",
     value: function addProject() {
       _base__WEBPACK_IMPORTED_MODULE_0__.projects[this.name] = {};
+      this.persistData();
     }
   }, {
     key: "nameIsBlank",
@@ -46,6 +47,17 @@ var Project = /*#__PURE__*/function () {
       return Object.entries(_base__WEBPACK_IMPORTED_MODULE_0__.projects).every(function (project) {
         return project[0] !== _this.name;
       });
+    }
+  }, {
+    key: "persistData",
+    value: function persistData() {
+      localStorage.setItem('projects', JSON.stringify(_base__WEBPACK_IMPORTED_MODULE_0__.projects));
+    }
+  }, {
+    key: "readStorage",
+    value: function readStorage() {
+      var storage = JSON.parse(localStorage.getItem('projects'));
+      return storage;
     }
   }]);
 
@@ -102,6 +114,7 @@ var Todo = /*#__PURE__*/function () {
         priority: this.priority,
         status: this.status
       };
+      this.persistData();
     }
   }, {
     key: "updateTODO",
@@ -113,16 +126,20 @@ var Todo = /*#__PURE__*/function () {
 
         this._update(newProject, tid, title, desc, ddt, priority);
       }
+
+      this.persistData();
     }
   }, {
     key: "updateStatus",
     value: function updateStatus(project, tid) {
       _base__WEBPACK_IMPORTED_MODULE_1__.projects[project][tid].status = _base__WEBPACK_IMPORTED_MODULE_1__.projects[project][tid].status === 'finish' ? 'pending' : 'finish';
+      this.persistData();
     }
   }, {
     key: "deleteTODO",
     value: function deleteTODO(project, tid) {
       delete _base__WEBPACK_IMPORTED_MODULE_1__.projects[project][tid];
+      this.persistData();
     }
   }, {
     key: "_update",
@@ -133,6 +150,11 @@ var Todo = /*#__PURE__*/function () {
         ddt: ddt,
         priority: priority
       };
+    }
+  }, {
+    key: "persistData",
+    value: function persistData() {
+      localStorage.setItem('projects', JSON.stringify(_base__WEBPACK_IMPORTED_MODULE_1__.projects));
     }
   }]);
 
@@ -254,7 +276,8 @@ var projects = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "readFormInput": function() { return /* binding */ readFormInput; }
+/* harmony export */   "readFormInput": function() { return /* binding */ readFormInput; },
+/* harmony export */   "runApp": function() { return /* binding */ runApp; }
 /* harmony export */ });
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
 /* harmony import */ var _Project__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Project */ "./src/js/Project.js");
@@ -292,7 +315,6 @@ var readFormInput = function readFormInput() {
   var priority = document.getElementById('todoForm').elements.priority.value;
   return [project, title, desc, ddt, priority];
 };
-
 var runApp = function runApp() {
   _base__WEBPACK_IMPORTED_MODULE_0__.elements.newPSubmit.addEventListener('click', function () {
     var inputField = document.querySelector('[name="projectName"]');
@@ -350,9 +372,7 @@ var runApp = function runApp() {
     });
     document.getElementById('todoForm').reset();
   });
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (runApp);
+}; // export default runApp;
 
 /***/ }),
 
@@ -377,6 +397,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _todoItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./todoItem */ "./src/js/todoItem.js");
 /* harmony import */ var _updateTitle__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./updateTitle */ "./src/js/updateTitle.js");
+/* harmony import */ var _runApp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./runApp */ "./src/js/runApp.js");
+
 
 
 
@@ -14374,7 +14396,7 @@ var init = function init() {
 
   (0,_js_shared__WEBPACK_IMPORTED_MODULE_3__.refreshProjectList)(); //Remove
 
-  (0,_js_runApp__WEBPACK_IMPORTED_MODULE_2__.default)();
+  (0,_js_runApp__WEBPACK_IMPORTED_MODULE_2__.runApp)();
 };
 
 init();
