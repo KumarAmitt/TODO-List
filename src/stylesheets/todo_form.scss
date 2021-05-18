@@ -1,0 +1,67 @@
+.todo-form {
+  margin: 2.8em 0.5em;
+  border: 1px solid transparent;
+}
+
+form > * {
+  margin-top: 1em;
+}
+
+form label {
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+select {
+  background-color: #fff;
+}
+
+textarea {
+  height: 30vh;
+  resize: none;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+form input:not([type='radio']),
+textarea,
+select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.4em;
+  border: none;
+  border-bottom: 1px solid #3b8c75;
+  font-size: 1rem;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.todo-submit .submit {
+  border-bottom: none;
+  background-color: #3b8c75;
+  color: #bdf2e3;
+  font-weight: 700;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 0.8em;
+
+  &:hover {
+    background-color: #316c5b;
+  }
+}
+
+@media (min-width: 768px) {
+  .todo-form {
+    margin: 0.5em 1.5em 0.5em 18em;
+  }
+
+  .todo-submit .submit {
+    width: 20em;
+    right: 1.5em;
+    left: auto;
+    bottom: 0.5em;
+  }
+}

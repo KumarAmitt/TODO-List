@@ -1,0 +1,12 @@
+@import "components";
+@import "nav";
+@import "sidebar";
+@import "main";
+@import "todo_form";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+}
