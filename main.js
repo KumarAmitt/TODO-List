@@ -12,14 +12,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ Project; }
 /* harmony export */ });
-/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
 
 var Project = /*#__PURE__*/function () {
   function Project(name) {
@@ -31,8 +28,10 @@ var Project = /*#__PURE__*/function () {
   _createClass(Project, [{
     key: "addProject",
     value: function addProject() {
-      _base__WEBPACK_IMPORTED_MODULE_0__.projects[this.name] = {};
-      this.persistData();
+      var data = JSON.parse(localStorage.getItem('projects'));
+      if (data === null) data = {};
+      data[this.name] = {};
+      localStorage.setItem('projects', JSON.stringify(data));
     }
   }, {
     key: "nameIsBlank",
@@ -44,15 +43,14 @@ var Project = /*#__PURE__*/function () {
     value: function checkUniqueness() {
       var _this = this;
 
-      return Object.entries(_base__WEBPACK_IMPORTED_MODULE_0__.projects).every(function (project) {
+      var data = JSON.parse(localStorage.getItem('projects'));
+      return Object.entries(data).every(function (project) {
         return project[0] !== _this.name;
       });
-    }
-  }, {
-    key: "persistData",
-    value: function persistData() {
-      localStorage.setItem('projects', JSON.stringify(_base__WEBPACK_IMPORTED_MODULE_0__.projects));
-    }
+    } // persistData(){
+    //   localStorage.setItem('projects', JSON.stringify(projects));
+    // }
+
   }]);
 
   return Project;
@@ -75,13 +73,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! uniqid */ "./node_modules/uniqid/index.js");
 /* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
 
 
 
@@ -101,56 +97,55 @@ var Todo = /*#__PURE__*/function () {
   _createClass(Todo, [{
     key: "addTODO",
     value: function addTODO() {
-      _base__WEBPACK_IMPORTED_MODULE_1__.projects[this.project][this.tid] = {
+      var data = JSON.parse(localStorage.getItem('projects'));
+      data[this.project][this.tid] = {
         title: this.title,
         desc: this.desc,
         ddt: this.ddt,
         priority: this.priority,
         status: this.status
       };
-      this.persistData();
+      localStorage.setItem('projects', JSON.stringify(data));
     }
   }, {
     key: "updateTODO",
-    value: function updateTODO(prevProject, newProject, tid, title, desc, ddt, priority) {
-      if (prevProject === newProject) {
-        this._update(prevProject, tid, title, desc, ddt, priority);
-      } else {
-        delete _base__WEBPACK_IMPORTED_MODULE_1__.projects[prevProject][tid];
+    value: function updateTODO(prevProject, newProject, tid, title, desc, ddt, priority, status) {
+      var data = JSON.parse(localStorage.getItem('projects'));
 
-        this._update(newProject, tid, title, desc, ddt, priority);
+      if (prevProject === newProject) {
+        this._update(data, prevProject, tid, title, desc, ddt, priority, status);
+      } else {
+        delete data[prevProject][tid];
+
+        this._update(data, newProject, tid, title, desc, ddt, priority, status);
       }
 
-      this.persistData();
+      localStorage.setItem('projects', JSON.stringify(data));
     }
   }, {
     key: "updateStatus",
     value: function updateStatus(project, tid) {
-      _base__WEBPACK_IMPORTED_MODULE_1__.projects[project][tid].status = _base__WEBPACK_IMPORTED_MODULE_1__.projects[project][tid].status === 'finish' ? 'pending' : 'finish';
-      this.persistData();
+      var data = JSON.parse(localStorage.getItem('projects'));
+      data[project][tid].status = data[project][tid].status === 'finish' ? 'pending' : 'finish';
+      localStorage.setItem('projects', JSON.stringify(data));
     }
   }, {
     key: "deleteTODO",
     value: function deleteTODO(project, tid) {
-      delete _base__WEBPACK_IMPORTED_MODULE_1__.projects[project][tid];
-      this.persistData();
+      var data = JSON.parse(localStorage.getItem('projects'));
+      delete data[project][tid];
+      localStorage.setItem('projects', JSON.stringify(data));
     }
   }, {
     key: "_update",
-    value: function _update(project, tid, title, desc, ddt, priority) {
-      var st = _base__WEBPACK_IMPORTED_MODULE_1__.projects[project][tid].status;
-      _base__WEBPACK_IMPORTED_MODULE_1__.projects[project][tid] = {
+    value: function _update(data, project, tid, title, desc, ddt, priority, status) {
+      data[project][tid] = {
         title: title,
         desc: desc,
         ddt: ddt,
         priority: priority,
-        status: st
+        status: status
       };
-    }
-  }, {
-    key: "persistData",
-    value: function persistData() {
-      localStorage.setItem('projects', JSON.stringify(_base__WEBPACK_IMPORTED_MODULE_1__.projects));
     }
   }]);
 
@@ -359,7 +354,7 @@ var runApp = function runApp() {
     if (document.querySelector('.submit').value === 'Create TODO') {
       todo.addTODO();
     } else {
-      todo.updateTODO(_base__WEBPACK_IMPORTED_MODULE_0__.prevProject[0], project, _base__WEBPACK_IMPORTED_MODULE_0__.prevProject[1], title, desc, ddt, priority);
+      todo.updateTODO(_base__WEBPACK_IMPORTED_MODULE_0__.prevProject[0], project, _base__WEBPACK_IMPORTED_MODULE_0__.prevProject[1], title, desc, ddt, priority, _base__WEBPACK_IMPORTED_MODULE_0__.prevProject[2]);
     }
 
     (0,_shared__WEBPACK_IMPORTED_MODULE_3__.prepareMainUI)();
@@ -564,6 +559,7 @@ var paintTodoItem = function paintTodoItem(_ref) {
     document.querySelector('.submit').value = 'Update TODO';
     _base__WEBPACK_IMPORTED_MODULE_1__.prevProject[0] = projectName;
     _base__WEBPACK_IMPORTED_MODULE_1__.prevProject[1] = tid;
+    _base__WEBPACK_IMPORTED_MODULE_1__.prevProject[2] = status;
   });
 };
 
@@ -600,6 +596,7 @@ var renderForm = function renderForm(title, id) {
   document.querySelector(".new-todo-".concat(id)).addEventListener('click', function () {
     prepareFormUI();
     selectDefaultOption(title);
+    document.querySelector('.submit').value = 'Create TODO';
   });
 };
 
@@ -607,7 +604,8 @@ var updateProjectTitle = function updateProjectTitle(title) {
   var id = uniqid__WEBPACK_IMPORTED_MODULE_0___default()();
   var category = document.querySelector('.category');
   category.textContent = '';
-  var markup = "<div class=\"category-title\">".concat(title, "</div>\n                  <div class=\"new-todo new-todo-").concat(id, "\"><i class=\"fas fa-plus\"></i></div>");
+  var addIcon = title === 'All TODOs' || title === 'Today' ? 'hide' : '';
+  var markup = "<div class=\"category-title\">".concat(title, "</div>\n                  <div class=\"new-todo new-todo-").concat(id, " ").concat(addIcon, "\"><i class=\"fas fa-plus\"></i></div>");
   category.insertAdjacentHTML("beforeend", markup);
   renderForm(title, id);
 };
@@ -14396,8 +14394,10 @@ __webpack_require__.r(__webpack_exports__);
 var init = function init() {
   (0,_js_today__WEBPACK_IMPORTED_MODULE_1__.default)();
   (0,_js_shared__WEBPACK_IMPORTED_MODULE_3__.toggleMenu)();
-  (0,_js_shared__WEBPACK_IMPORTED_MODULE_3__.toggleAddProjectsForm)(); // updateSelectOptions();  //Remove
-  // refreshProjectList();   //Remove
+  (0,_js_shared__WEBPACK_IMPORTED_MODULE_3__.toggleAddProjectsForm)();
+  (0,_js_shared__WEBPACK_IMPORTED_MODULE_3__.updateSelectOptions)(); //Remove
+
+  (0,_js_shared__WEBPACK_IMPORTED_MODULE_3__.refreshProjectList)(); //Remove
 
   (0,_js_runApp__WEBPACK_IMPORTED_MODULE_2__.runApp)();
 };
