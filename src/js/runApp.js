@@ -1,27 +1,25 @@
-import {elements, prevProject, projects} from "./base";
-import Project from "./Project";
-import Todo from "./Todo";
-import prepareMainUI from "./prepareMainUI";
-import allTODOs from "./allTodos";
-import todayTODOs from "./today";
-import paintTodoItem from "./todoItem";
-import updateProjectTitle from "./updateTitle";
-import refreshProjectList from "./refreshProjectList";
-import updateSelectOptions from "./updateSelectOptions";
-import readFormInput from "./readFormInput";
-
+import { elements, prevProject } from './base.js';
+import Project from './Project.js';
+import Todo from './Todo.js';
+import prepareMainUI from './prepareMainUI.js';
+import allTODOs from './allTodos.js';
+import todayTODOs from './today.js';
+import paintTodoItem from './todoItem.js';
+import updateProjectTitle from './updateTitle.js';
+import refreshProjectList from './refreshProjectList.js';
+import updateSelectOptions from './updateSelectOptions.js';
+import readFormInput from './readFormInput.js';
 
 const runApp = () => {
-
   elements.newPSubmit.addEventListener('click', () => {
     const inputField = document.querySelector('[name="projectName"]');
     const projectName = inputField.value;
 
-    let project = new Project(projectName);
+    const project = new Project(projectName);
 
     if (project.nameIsBlank()) {
       inputField.placeholder = 'Field can\'t be blank';
-    } else if(!project.checkUniqueness()) {
+    } else if (!project.checkUniqueness()) {
       inputField.placeholder = 'Project already exists';
     } else {
       elements.projectUL.textContent = '';
@@ -45,27 +43,28 @@ const runApp = () => {
 
     const [project, title, desc, ddt, priority] = readFormInput();
 
-    let todo = new Todo(project, title, desc, ddt, priority);
+    const todo = new Todo(project, title, desc, ddt, priority);
 
-    if (elements.submit.value === 'Create TODO'){
+    if (elements.submit.value === 'Create TODO') {
       todo.addTODO();
-    }else{
-      todo.updateTODO(prevProject[0], project, prevProject[1], title, desc, ddt, priority, prevProject[2])
+    } else {
+      const prevPjt = prevProject[0];
+      const tid = prevProject[1];
+      const status = prevProject[2];
+      Todo.updateTODO(prevPjt, project, tid, title, desc, ddt, priority, status);
     }
 
     prepareMainUI();
-    updateProjectTitle(project)
+    updateProjectTitle(project);
     const ul = elements.todoListUL;
     ul.textContent = '';
 
-    Object.entries(Project.read()[project]).forEach(todo => {
-      paintTodoItem({project: project, todo: todo, parent: ul})
-    })
+    Object.entries(Project.read()[project]).forEach((todo) => {
+      paintTodoItem({ project, todo, parent: ul });
+    });
 
-   elements.todoForm.reset();
-
+    elements.todoForm.reset();
   });
-
-}
+};
 
 export default runApp;

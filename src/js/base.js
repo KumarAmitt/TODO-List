@@ -12,44 +12,7 @@ export const elements = {
   todoListUL: document.querySelector('.td-list'),
   all: document.querySelector('.sb-all'),
   today: document.querySelector('.sb-today'),
-  submit: document.querySelector('.submit')
+  submit: document.querySelector('.submit'),
 };
 
-export let prevProject = [];
-
-// export const projects = {};
-
-// export const projects = {
-//   'Project I': {
-//     id1: {
-//       title: 'Project 1, Task 1',
-//       desc: 'Say hi to everyone',
-//       ddt: '2021-05-29T16:21',
-//       priority: 'high',
-//       status: 'pending'
-//     },
-//     id2: {
-//       title: 'Project 1, Task 2',
-//       desc: 'Say hello to everyone',
-//       ddt: '2021-05-16T16:21',
-//       priority: 'medium',
-//       status: 'pending'
-//     },
-//   },
-//   'Project II': {
-//     id11: {
-//       title: 'Project 2, Task 1',
-//       desc: 'Say bye to everyone',
-//       ddt: '2021-05-16T16:21',
-//       priority: 'high',
-//       status: 'pending'
-//     },
-//     id12: {
-//       title: 'Project 2, Task 2',
-//       desc: 'Say good bye to everyone',
-//       ddt: '2021-05-17T16:21',
-//       priority: 'low',
-//       status: 'finish'
-//     },
-//   },
-// };
+export const prevProject = [];

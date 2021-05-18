@@ -6,6 +6,6 @@ const readFormInput = () => {
   const priority = document.getElementById('todoForm').elements.priority.value;
 
   return [project, title, desc, ddt, priority];
-}
+};
 
 export default readFormInput;

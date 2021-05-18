@@ -1,5 +1,5 @@
 import uniqid from 'uniqid';
-import Project from "./Project";
+import Project from './Project.js';
 
 export default class Todo {
   constructor(project, title, desc, ddt, priority) {
@@ -13,48 +13,47 @@ export default class Todo {
   }
 
   addTODO() {
-    let data = Project.read()
+    const data = Project.read();
     data[this.project][this.tid] = {
       title: this.title,
       desc: this.desc,
       ddt: this.ddt,
       priority: this.priority,
-      status: this.status
-    }
+      status: this.status,
+    };
     Project.write(data);
   }
 
-  updateTODO(prevProject, newProject, tid, title, desc, ddt, priority, status){
-    let data = Project.read()
-    if (prevProject === newProject){
-      this._update(data, prevProject,tid, title, desc, ddt, priority, status)
+  static updateTODO(prevProject, newProject, tid, title, desc, ddt, priority, status) {
+    const data = Project.read();
+    if (prevProject === newProject) {
+      this.update(data, prevProject, tid, title, desc, ddt, priority, status);
     } else {
       delete data[prevProject][tid];
-      this._update(data, newProject,tid, title, desc, ddt, priority, status)
+      this.update(data, newProject, tid, title, desc, ddt, priority, status);
     }
     Project.write(data);
   }
 
-  updateStatus(project, tid){
-    let data = Project.read()
+  static updateStatus(project, tid) {
+    const data = Project.read();
     data[project][tid].status = data[project][tid].status === 'finish' ? 'pending' : 'finish';
     Project.write(data);
   }
 
-  deleteTODO(project, tid){
-    let data = Project.read()
+  static deleteTODO(project, tid) {
+    const data = Project.read();
     delete data[project][tid];
     Project.write(data);
   }
 
-  _update(data, project, tid, title, desc, ddt, priority, status){
+  static update(data, project, tid, title, desc, ddt, priority, status) {
     data[project][tid] = {
       title,
       desc,
       ddt,
       priority,
-      status
-    }
+      status,
+    };
   }
-
 }
