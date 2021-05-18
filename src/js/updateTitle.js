@@ -1,13 +1,12 @@
 import uniqid from "uniqid";
 import {elements} from "./base";
 
-
 const prepareFormUI = () => {
   elements.main.classList.add('hide');
-  elements.todoForm.classList.remove('hide');
+  elements.todoFormDiv.classList.remove('hide');
 }
 
-const selectDefaultOption = (title) => {
+const setDefaultOption = (title) => {
   if (title !== 'All TODOs' && title !== 'Today'){
     document.querySelector(`select > option[value="${title}"]`).selected = "true";
   }
@@ -16,8 +15,8 @@ const selectDefaultOption = (title) => {
 const renderForm = (title, id) => {
   document.querySelector(`.new-todo-${id}`).addEventListener('click', () => {
     prepareFormUI()
-    selectDefaultOption(title);
-    document.querySelector('.submit').value = 'Create TODO'
+    setDefaultOption(title);
+    elements.submit.value = 'Create TODO'
   })
 }
 

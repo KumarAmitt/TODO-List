@@ -1,5 +1,5 @@
 import uniqid from 'uniqid';
-import Storage from "./Storage";
+import Project from "./Project";
 
 export default class Todo {
   constructor(project, title, desc, ddt, priority) {
@@ -13,7 +13,7 @@ export default class Todo {
   }
 
   addTODO() {
-    let data = Storage.read()
+    let data = Project.read()
     data[this.project][this.tid] = {
       title: this.title,
       desc: this.desc,
@@ -21,30 +21,30 @@ export default class Todo {
       priority: this.priority,
       status: this.status
     }
-    Storage.write(data);
+    Project.write(data);
   }
 
   updateTODO(prevProject, newProject, tid, title, desc, ddt, priority, status){
-    let data = Storage.read()
+    let data = Project.read()
     if (prevProject === newProject){
       this._update(data, prevProject,tid, title, desc, ddt, priority, status)
     } else {
       delete data[prevProject][tid];
       this._update(data, newProject,tid, title, desc, ddt, priority, status)
     }
-    Storage.write(data);
+    Project.write(data);
   }
 
   updateStatus(project, tid){
-    let data = Storage.read()
+    let data = Project.read()
     data[project][tid].status = data[project][tid].status === 'finish' ? 'pending' : 'finish';
-    Storage.write(data);
+    Project.write(data);
   }
 
   deleteTODO(project, tid){
-    let data = Storage.read()
+    let data = Project.read()
     delete data[project][tid];
-    Storage.write(data);
+    Project.write(data);
   }
 
   _update(data, project, tid, title, desc, ddt, priority, status){

@@ -1,32 +1,17 @@
 import {elements, prevProject, projects} from "./base";
 import Project from "./Project";
 import Todo from "./Todo";
-import {prepareMainUI, refreshProjectList, updateSelectOptions} from "./shared";
+import prepareMainUI from "./prepareMainUI";
 import allTODOs from "./allTodos";
 import todayTODOs from "./today";
 import paintTodoItem from "./todoItem";
 import updateProjectTitle from "./updateTitle";
+import refreshProjectList from "./refreshProjectList";
+import updateSelectOptions from "./updateSelectOptions";
+import readFormInput from "./readFormInput";
 
 
-export const readFormInput = () => {
-  const project = document.getElementById('select').value;
-  const title = document.getElementById('title').value;
-  const desc = document.getElementById('desc').value;
-  const ddt = document.getElementById('due-dt').value;
-  const priority = document.getElementById('todoForm').elements.priority.value;
-
-  return [project, title, desc, ddt, priority];
-}
-
-export const readStorage = () => {
-  const storage = JSON.parse(localStorage.getItem('projects'));
-  if (storage)
-    return storage
-  else
-    return {};
-}
-
-export const runApp = () => {
+const runApp = () => {
 
   elements.newPSubmit.addEventListener('click', () => {
     const inputField = document.querySelector('[name="projectName"]');
@@ -55,14 +40,14 @@ export const runApp = () => {
     todayTODOs();
   });
 
-  document.getElementById('todoForm').addEventListener('submit', (e) => {
+  elements.todoForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const [project, title, desc, ddt, priority] = readFormInput();
 
     let todo = new Todo(project, title, desc, ddt, priority);
 
-    if (document.querySelector('.submit').value === 'Create TODO'){
+    if (elements.submit.value === 'Create TODO'){
       todo.addTODO();
     }else{
       todo.updateTODO(prevProject[0], project, prevProject[1], title, desc, ddt, priority, prevProject[2])
@@ -73,14 +58,14 @@ export const runApp = () => {
     const ul = elements.todoListUL;
     ul.textContent = '';
 
-    Object.entries(readStorage()[project]).forEach(todo => {
+    Object.entries(Project.read()[project]).forEach(todo => {
       paintTodoItem({project: project, todo: todo, parent: ul})
     })
 
-    document.getElementById('todoForm').reset();
+   elements.todoForm.reset();
 
   });
 
 }
 
-// export default runApp;
+export default runApp;

@@ -7,15 +7,17 @@ export const elements = {
   projectUL: document.querySelector('.sb-p-items'),
   select: document.getElementById('select'),
   main: document.querySelector('main'),
-  todoForm: document.querySelector('.todo-form'),
+  todoFormDiv: document.querySelector('.todo-form'),
+  todoForm: document.getElementById('todoForm'),
   todoListUL: document.querySelector('.td-list'),
   all: document.querySelector('.sb-all'),
   today: document.querySelector('.sb-today'),
+  submit: document.querySelector('.submit')
 };
 
 export let prevProject = [];
 
-export const projects = {};
+// export const projects = {};
 
 // export const projects = {
 //   'Project I': {

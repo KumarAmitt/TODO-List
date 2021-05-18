@@ -1,6 +1,6 @@
 import Todo from './Todo';
-import {elements, prevProject, projects} from "./base";
-import {readFormInput} from "./runApp";
+import {elements, prevProject} from "./base";
+
 
 const displayTODOs = (tid, projectName, title, desc, ddt, priorityClass, statusClass, iconClass, parent) => {
 
@@ -69,7 +69,7 @@ const paintTodoItem = ({project, todo, parent}) => {
   document.querySelector(`.edit-${tid}`).addEventListener('click', () => {
 
     elements.main.classList.add('hide');
-    elements.todoForm.classList.remove('hide');
+    elements.todoFormDiv.classList.remove('hide');
 
     document.getElementById('title').value = title;
     document.getElementById('desc').value = desc;
@@ -83,8 +83,6 @@ const paintTodoItem = ({project, todo, parent}) => {
     prevProject[2] = status
 
   })
-
-
 
 }
 export default paintTodoItem;
