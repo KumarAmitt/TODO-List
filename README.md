@@ -10,7 +10,9 @@ This project is a part of
 JavaScript Assignment.
 
 
-![screenshot](./src/img/scr.png)
+![screenshot](./src/img/mk1.png)
+
+![screenshot](./src/img/mk2.png)
 
 ## Live Demo
 
