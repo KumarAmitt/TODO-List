@@ -1,4 +1,5 @@
 import uniqid from 'uniqid';
+import Storage from "./Storage";
 
 export default class Todo {
   constructor(project, title, desc, ddt, priority) {
@@ -12,7 +13,7 @@ export default class Todo {
   }
 
   addTODO() {
-    let data = JSON.parse(localStorage.getItem('projects'));
+    let data = Storage.read()
     data[this.project][this.tid] = {
       title: this.title,
       desc: this.desc,
@@ -20,31 +21,30 @@ export default class Todo {
       priority: this.priority,
       status: this.status
     }
-    localStorage.setItem('projects', JSON.stringify(data));
+    Storage.write(data);
   }
 
   updateTODO(prevProject, newProject, tid, title, desc, ddt, priority, status){
-    let data = JSON.parse(localStorage.getItem('projects'));
-
+    let data = Storage.read()
     if (prevProject === newProject){
       this._update(data, prevProject,tid, title, desc, ddt, priority, status)
     } else {
       delete data[prevProject][tid];
       this._update(data, newProject,tid, title, desc, ddt, priority, status)
     }
-    localStorage.setItem('projects', JSON.stringify(data));
+    Storage.write(data);
   }
 
   updateStatus(project, tid){
-    let data = JSON.parse(localStorage.getItem('projects'));
+    let data = Storage.read()
     data[project][tid].status = data[project][tid].status === 'finish' ? 'pending' : 'finish';
-    localStorage.setItem('projects', JSON.stringify(data));
+    Storage.write(data);
   }
 
   deleteTODO(project, tid){
-    let data = JSON.parse(localStorage.getItem('projects'));
+    let data = Storage.read()
     delete data[project][tid];
-    localStorage.setItem('projects', JSON.stringify(data));
+    Storage.write(data);
   }
 
   _update(data, project, tid, title, desc, ddt, priority, status){

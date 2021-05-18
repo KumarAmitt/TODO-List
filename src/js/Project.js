@@ -1,15 +1,14 @@
+import Storage from './Storage'
+
 export default class Project {
   constructor(name){
     this.name = name;
   }
 
   addProject(){
-    let data = JSON.parse(localStorage.getItem('projects'));
-    if(data === null)
-      data = {}
-
+    let data = Storage.read()
     data[this.name] = {};
-    localStorage.setItem('projects', JSON.stringify(data));
+    Storage.write(data)
   }
 
   nameIsBlank(){
@@ -17,11 +16,8 @@ export default class Project {
   }
 
   checkUniqueness(){
-    let data = JSON.parse(localStorage.getItem('projects'));
+    let data = Storage.read()
     return Object.entries(data).every( project => project[0] !== this.name);
   }
 
-  // persistData(){
-  //   localStorage.setItem('projects', JSON.stringify(projects));
-  // }
 }
