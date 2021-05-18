@@ -31,21 +31,22 @@
         <div class="new-p-submit"><i class="fas fa-plus"></i></div>
       </form>
       <ul class="sb-p-items">
+<!--        *** Placeholder Tag-->
 <!--        <li class="sb-p-item sb-item">Project ONE</li>-->
-<!--        <li class="sb-p-item sb-item">Project TWO</li>-->
-<!--        <li class="sb-p-item sb-item">Project THREE</li>-->
-<!--        <li class="sb-p-item sb-item">Project FOUR</li>-->
       </ul>
     </div>
   </div>
 
   <main class="hide">
     <div class="category">
+<!--      *** Placeholder Tag-->
 <!--      <div class="category-title">Project ONE</div>-->
 <!--      <div class="new-todo"><i class="fas fa-plus"></i></div>-->
     </div>
 
     <ul class="td-list">
+<!--      *** Placeholder Tag-->
+
 <!--      <li class="td-list-item">-->
 <!--        <div class="check">-->
 <!--          <span class="status pr-h"><i class="fas fa-square"></i></span>-->
@@ -67,40 +68,6 @@
 <!--        </div>-->
 <!--      </li>-->
 
-<!--      <li class="td-list-item">-->
-<!--        <div class="check">-->
-<!--          <span class="status pr-m"><i class="fas fa-square"></i></span>-->
-<!--        </div>-->
-
-<!--        <div class="info">-->
-<!--          <div class="title">This is my first TODO...</div>-->
-<!--          <div class="info-secondary">-->
-<!--            <div class="due-dt">15 May</div>-->
-<!--            <div class="btns">-->
-<!--              <span class="edit"><i class="fas fa-edit"></i></span>-->
-<!--              <span class="delete"><i class="fas fa-trash-alt"></i></span>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </li>-->
-
-<!--      <li class="td-list-item">-->
-<!--        <div class="check">-->
-<!--          <span class="status pr-l"><i class="fas fa-square"></i></span>-->
-<!--        </div>-->
-
-<!--        <div class="info">-->
-<!--          <div class="title st-f">This is my first TODO...</div>-->
-<!--          <div class="info-secondary">-->
-<!--            <div class="due-dt">15 May</div>-->
-<!--            <div class="btns">-->
-<!--              <span class="edit"><i class="fas fa-edit"></i></span>-->
-<!--              <span class="delete"><i class="fas fa-trash-alt"></i></span>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </li>-->
-
     </ul>
 
   </main>
@@ -110,28 +77,29 @@
     <form id="todoForm">
       <div class="todo-project">
         <select id="select" name="category">
+<!--          *** Placeholder Tag-->
 <!--          <option value="Project ONE" selected>Project ONE</option>-->
 <!--          <option value="Project TWO">Project TWO</option>-->
         </select>
       </div>
 
       <div class="todo-title">
-        <input type="text" name="title" id="title" placeholder="Title">
+        <input type="text" name="title" id="title" placeholder="Title" maxlength="24" required>
       </div>
 
       <div class="todo-desc">
-        <textarea name="desc" id="desc" placeholder="Write more about your TODO..." maxlength="300"></textarea>
+        <textarea name="desc" id="desc" placeholder="Write more about your TODO..." maxlength="300" required></textarea>
       </div>
 
       <div class="todo-ddt">
         <label for="due-dt">Due Date</label>
-        <input type="datetime-local" id="due-dt">
+        <input type="datetime-local" id="due-dt" required>
       </div>
 
       <div class="todo-priority">
         <p>Select Priority of the Task</p>
         <label class="pr-h">
-          <input type="radio" name="priority" value="high">
+          <input type="radio" name="priority" value="high" required>
           High
         </label>
         <label class="pr-m">
