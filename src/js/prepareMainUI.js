@@ -1,4 +1,4 @@
-import { elements } from './base';
+import { elements } from './base.js';
 
 const prepareMainUI = () => {
   elements.todoFormDiv.classList.add('hide');
