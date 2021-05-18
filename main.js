@@ -51,7 +51,7 @@ var Project = /*#__PURE__*/function () {
     key: "read",
     value: function read() {
       var data = JSON.parse(localStorage.getItem('projects'));
-      return data ? data : {};
+      return data || {};
     }
   }, {
     key: "write",
@@ -80,7 +80,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! uniqid */ "./node_modules/uniqid/index.js");
 /* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Project__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Project */ "./src/js/Project.js");
+/* harmony import */ var _Project_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Project.js */ "./src/js/Project.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -106,7 +106,7 @@ var Todo = /*#__PURE__*/function () {
   _createClass(Todo, [{
     key: "addTODO",
     value: function addTODO() {
-      var data = _Project__WEBPACK_IMPORTED_MODULE_1__.default.read();
+      var data = _Project_js__WEBPACK_IMPORTED_MODULE_1__.default.read();
       data[this.project][this.tid] = {
         title: this.title,
         desc: this.desc,
@@ -114,40 +114,39 @@ var Todo = /*#__PURE__*/function () {
         priority: this.priority,
         status: this.status
       };
-      _Project__WEBPACK_IMPORTED_MODULE_1__.default.write(data);
+      _Project_js__WEBPACK_IMPORTED_MODULE_1__.default.write(data);
     }
-  }, {
+  }], [{
     key: "updateTODO",
     value: function updateTODO(prevProject, newProject, tid, title, desc, ddt, priority, status) {
-      var data = _Project__WEBPACK_IMPORTED_MODULE_1__.default.read();
+      var data = _Project_js__WEBPACK_IMPORTED_MODULE_1__.default.read();
 
       if (prevProject === newProject) {
-        this._update(data, prevProject, tid, title, desc, ddt, priority, status);
+        this.update(data, prevProject, tid, title, desc, ddt, priority, status);
       } else {
         delete data[prevProject][tid];
-
-        this._update(data, newProject, tid, title, desc, ddt, priority, status);
+        this.update(data, newProject, tid, title, desc, ddt, priority, status);
       }
 
-      _Project__WEBPACK_IMPORTED_MODULE_1__.default.write(data);
+      _Project_js__WEBPACK_IMPORTED_MODULE_1__.default.write(data);
     }
   }, {
     key: "updateStatus",
     value: function updateStatus(project, tid) {
-      var data = _Project__WEBPACK_IMPORTED_MODULE_1__.default.read();
+      var data = _Project_js__WEBPACK_IMPORTED_MODULE_1__.default.read();
       data[project][tid].status = data[project][tid].status === 'finish' ? 'pending' : 'finish';
-      _Project__WEBPACK_IMPORTED_MODULE_1__.default.write(data);
+      _Project_js__WEBPACK_IMPORTED_MODULE_1__.default.write(data);
     }
   }, {
     key: "deleteTODO",
     value: function deleteTODO(project, tid) {
-      var data = _Project__WEBPACK_IMPORTED_MODULE_1__.default.read();
+      var data = _Project_js__WEBPACK_IMPORTED_MODULE_1__.default.read();
       delete data[project][tid];
-      _Project__WEBPACK_IMPORTED_MODULE_1__.default.write(data);
+      _Project_js__WEBPACK_IMPORTED_MODULE_1__.default.write(data);
     }
   }, {
-    key: "_update",
-    value: function _update(data, project, tid, title, desc, ddt, priority, status) {
+    key: "update",
+    value: function update(data, project, tid, title, desc, ddt, priority, status) {
       data[project][tid] = {
         title: title,
         desc: desc,
@@ -173,11 +172,11 @@ var Todo = /*#__PURE__*/function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
-/* harmony import */ var _prepareMainUI__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./prepareMainUI */ "./src/js/prepareMainUI.js");
-/* harmony import */ var _updateTitle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./updateTitle */ "./src/js/updateTitle.js");
-/* harmony import */ var _todoItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./todoItem */ "./src/js/todoItem.js");
-/* harmony import */ var _Project__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Project */ "./src/js/Project.js");
+/* harmony import */ var _base_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base.js */ "./src/js/base.js");
+/* harmony import */ var _prepareMainUI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./prepareMainUI.js */ "./src/js/prepareMainUI.js");
+/* harmony import */ var _updateTitle_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./updateTitle.js */ "./src/js/updateTitle.js");
+/* harmony import */ var _todoItem_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./todoItem.js */ "./src/js/todoItem.js");
+/* harmony import */ var _Project_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Project.js */ "./src/js/Project.js");
 
 
 
@@ -185,13 +184,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var allTODOs = function allTODOs() {
-  (0,_prepareMainUI__WEBPACK_IMPORTED_MODULE_1__.default)();
-  (0,_updateTitle__WEBPACK_IMPORTED_MODULE_2__.default)('All TODOs');
-  var ul = _base__WEBPACK_IMPORTED_MODULE_0__.elements.todoListUL;
+  (0,_prepareMainUI_js__WEBPACK_IMPORTED_MODULE_1__.default)();
+  (0,_updateTitle_js__WEBPACK_IMPORTED_MODULE_2__.default)('All TODOs');
+  var ul = _base_js__WEBPACK_IMPORTED_MODULE_0__.elements.todoListUL;
   ul.textContent = '';
-  Object.entries(_Project__WEBPACK_IMPORTED_MODULE_4__.default.read()).forEach(function (project) {
+  Object.entries(_Project_js__WEBPACK_IMPORTED_MODULE_4__.default.read()).forEach(function (project) {
     Object.entries(project[1]).forEach(function (todo) {
-      (0,_todoItem__WEBPACK_IMPORTED_MODULE_3__.default)({
+      (0,_todoItem_js__WEBPACK_IMPORTED_MODULE_3__.default)({
         project: project[0],
         todo: todo,
         parent: ul
@@ -232,41 +231,7 @@ var elements = {
   today: document.querySelector('.sb-today'),
   submit: document.querySelector('.submit')
 };
-var prevProject = []; // export const projects = {};
-// export const projects = {
-//   'Project I': {
-//     id1: {
-//       title: 'Project 1, Task 1',
-//       desc: 'Say hi to everyone',
-//       ddt: '2021-05-29T16:21',
-//       priority: 'high',
-//       status: 'pending'
-//     },
-//     id2: {
-//       title: 'Project 1, Task 2',
-//       desc: 'Say hello to everyone',
-//       ddt: '2021-05-16T16:21',
-//       priority: 'medium',
-//       status: 'pending'
-//     },
-//   },
-//   'Project II': {
-//     id11: {
-//       title: 'Project 2, Task 1',
-//       desc: 'Say bye to everyone',
-//       ddt: '2021-05-16T16:21',
-//       priority: 'high',
-//       status: 'pending'
-//     },
-//     id12: {
-//       title: 'Project 2, Task 2',
-//       desc: 'Say good bye to everyone',
-//       ddt: '2021-05-17T16:21',
-//       priority: 'low',
-//       status: 'finish'
-//     },
-//   },
-// };
+var prevProject = [];
 
 /***/ }),
 
@@ -320,22 +285,22 @@ var readFormInput = function readFormInput() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Project__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Project */ "./src/js/Project.js");
-/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! uniqid */ "./node_modules/uniqid/index.js");
-/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
-/* harmony import */ var _renderProjectTODOs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./renderProjectTODOs */ "./src/js/renderProjectTODOs.js");
+/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! uniqid */ "./node_modules/uniqid/index.js");
+/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Project_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Project.js */ "./src/js/Project.js");
+/* harmony import */ var _base_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./base.js */ "./src/js/base.js");
+/* harmony import */ var _renderProjectTODOs_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./renderProjectTODOs.js */ "./src/js/renderProjectTODOs.js");
 
 
 
 
 
 var refreshProjectList = function refreshProjectList() {
-  Object.entries(_Project__WEBPACK_IMPORTED_MODULE_0__.default.read()).forEach(function (project) {
-    var pid = uniqid__WEBPACK_IMPORTED_MODULE_1___default()();
+  Object.entries(_Project_js__WEBPACK_IMPORTED_MODULE_1__.default.read()).forEach(function (project) {
+    var pid = uniqid__WEBPACK_IMPORTED_MODULE_0___default()();
     var markup = "<li class=\"sb-p-item sb-item sb-item-".concat(pid, "\">").concat(project[0], "</li>");
-    _base__WEBPACK_IMPORTED_MODULE_2__.elements.projectUL.insertAdjacentHTML("beforeend", markup);
-    (0,_renderProjectTODOs__WEBPACK_IMPORTED_MODULE_3__.default)("sb-item-".concat(pid), project[0]);
+    _base_js__WEBPACK_IMPORTED_MODULE_2__.elements.projectUL.insertAdjacentHTML('beforeend', markup);
+    (0,_renderProjectTODOs_js__WEBPACK_IMPORTED_MODULE_3__.default)("sb-item-".concat(pid), project[0]);
   });
 };
 
@@ -351,11 +316,11 @@ var refreshProjectList = function refreshProjectList() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _updateTitle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./updateTitle */ "./src/js/updateTitle.js");
-/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
-/* harmony import */ var _Project__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Project */ "./src/js/Project.js");
-/* harmony import */ var _todoItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./todoItem */ "./src/js/todoItem.js");
-/* harmony import */ var _prepareMainUI__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./prepareMainUI */ "./src/js/prepareMainUI.js");
+/* harmony import */ var _updateTitle_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./updateTitle.js */ "./src/js/updateTitle.js");
+/* harmony import */ var _base_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base.js */ "./src/js/base.js");
+/* harmony import */ var _Project_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Project.js */ "./src/js/Project.js");
+/* harmony import */ var _todoItem_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./todoItem.js */ "./src/js/todoItem.js");
+/* harmony import */ var _prepareMainUI_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./prepareMainUI.js */ "./src/js/prepareMainUI.js");
 
 
 
@@ -364,12 +329,12 @@ __webpack_require__.r(__webpack_exports__);
 
 var renderProjectTODOs = function renderProjectTODOs(clsName, title) {
   document.querySelector(".".concat(clsName)).onclick = function () {
-    (0,_prepareMainUI__WEBPACK_IMPORTED_MODULE_4__.default)();
-    (0,_updateTitle__WEBPACK_IMPORTED_MODULE_0__.default)(title);
-    var ul = _base__WEBPACK_IMPORTED_MODULE_1__.elements.todoListUL;
+    (0,_prepareMainUI_js__WEBPACK_IMPORTED_MODULE_4__.default)();
+    (0,_updateTitle_js__WEBPACK_IMPORTED_MODULE_0__.default)(title);
+    var ul = _base_js__WEBPACK_IMPORTED_MODULE_1__.elements.todoListUL;
     ul.textContent = '';
-    Object.entries(_Project__WEBPACK_IMPORTED_MODULE_2__.default.read()[title]).forEach(function (todo) {
-      (0,_todoItem__WEBPACK_IMPORTED_MODULE_3__.default)({
+    Object.entries(_Project_js__WEBPACK_IMPORTED_MODULE_2__.default.read()[title]).forEach(function (todo) {
+      (0,_todoItem_js__WEBPACK_IMPORTED_MODULE_3__.default)({
         project: title,
         todo: todo,
         parent: ul
@@ -390,17 +355,17 @@ var renderProjectTODOs = function renderProjectTODOs(clsName, title) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
-/* harmony import */ var _Project__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Project */ "./src/js/Project.js");
-/* harmony import */ var _Todo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Todo */ "./src/js/Todo.js");
-/* harmony import */ var _prepareMainUI__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./prepareMainUI */ "./src/js/prepareMainUI.js");
-/* harmony import */ var _allTodos__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./allTodos */ "./src/js/allTodos.js");
-/* harmony import */ var _today__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./today */ "./src/js/today.js");
-/* harmony import */ var _todoItem__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./todoItem */ "./src/js/todoItem.js");
-/* harmony import */ var _updateTitle__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./updateTitle */ "./src/js/updateTitle.js");
-/* harmony import */ var _refreshProjectList__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./refreshProjectList */ "./src/js/refreshProjectList.js");
-/* harmony import */ var _updateSelectOptions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./updateSelectOptions */ "./src/js/updateSelectOptions.js");
-/* harmony import */ var _readFormInput__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./readFormInput */ "./src/js/readFormInput.js");
+/* harmony import */ var _base_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base.js */ "./src/js/base.js");
+/* harmony import */ var _Project_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Project.js */ "./src/js/Project.js");
+/* harmony import */ var _Todo_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Todo.js */ "./src/js/Todo.js");
+/* harmony import */ var _prepareMainUI_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./prepareMainUI.js */ "./src/js/prepareMainUI.js");
+/* harmony import */ var _allTodos_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./allTodos.js */ "./src/js/allTodos.js");
+/* harmony import */ var _today_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./today.js */ "./src/js/today.js");
+/* harmony import */ var _todoItem_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./todoItem.js */ "./src/js/todoItem.js");
+/* harmony import */ var _updateTitle_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./updateTitle.js */ "./src/js/updateTitle.js");
+/* harmony import */ var _refreshProjectList_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./refreshProjectList.js */ "./src/js/refreshProjectList.js");
+/* harmony import */ var _updateSelectOptions_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./updateSelectOptions.js */ "./src/js/updateSelectOptions.js");
+/* harmony import */ var _readFormInput_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./readFormInput.js */ "./src/js/readFormInput.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -426,34 +391,34 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var runApp = function runApp() {
-  _base__WEBPACK_IMPORTED_MODULE_0__.elements.newPSubmit.addEventListener('click', function () {
+  _base_js__WEBPACK_IMPORTED_MODULE_0__.elements.newPSubmit.addEventListener('click', function () {
     var inputField = document.querySelector('[name="projectName"]');
     var projectName = inputField.value;
-    var project = new _Project__WEBPACK_IMPORTED_MODULE_1__.default(projectName);
+    var project = new _Project_js__WEBPACK_IMPORTED_MODULE_1__.default(projectName);
 
     if (project.nameIsBlank()) {
       inputField.placeholder = 'Field can\'t be blank';
     } else if (!project.checkUniqueness()) {
       inputField.placeholder = 'Project already exists';
     } else {
-      _base__WEBPACK_IMPORTED_MODULE_0__.elements.projectUL.textContent = '';
+      _base_js__WEBPACK_IMPORTED_MODULE_0__.elements.projectUL.textContent = '';
       project.addProject();
-      (0,_refreshProjectList__WEBPACK_IMPORTED_MODULE_8__.default)();
-      (0,_updateSelectOptions__WEBPACK_IMPORTED_MODULE_9__.default)();
+      (0,_refreshProjectList_js__WEBPACK_IMPORTED_MODULE_8__.default)();
+      (0,_updateSelectOptions_js__WEBPACK_IMPORTED_MODULE_9__.default)();
     }
 
-    _base__WEBPACK_IMPORTED_MODULE_0__.elements.newProjectForm.reset();
+    _base_js__WEBPACK_IMPORTED_MODULE_0__.elements.newProjectForm.reset();
   });
-  _base__WEBPACK_IMPORTED_MODULE_0__.elements.all.addEventListener('click', function () {
-    (0,_allTodos__WEBPACK_IMPORTED_MODULE_4__.default)();
+  _base_js__WEBPACK_IMPORTED_MODULE_0__.elements.all.addEventListener('click', function () {
+    (0,_allTodos_js__WEBPACK_IMPORTED_MODULE_4__.default)();
   });
-  _base__WEBPACK_IMPORTED_MODULE_0__.elements.today.addEventListener('click', function () {
-    (0,_today__WEBPACK_IMPORTED_MODULE_5__.default)();
+  _base_js__WEBPACK_IMPORTED_MODULE_0__.elements.today.addEventListener('click', function () {
+    (0,_today_js__WEBPACK_IMPORTED_MODULE_5__.default)();
   });
-  _base__WEBPACK_IMPORTED_MODULE_0__.elements.todoForm.addEventListener('submit', function (e) {
+  _base_js__WEBPACK_IMPORTED_MODULE_0__.elements.todoForm.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    var _readFormInput = (0,_readFormInput__WEBPACK_IMPORTED_MODULE_10__.default)(),
+    var _readFormInput = (0,_readFormInput_js__WEBPACK_IMPORTED_MODULE_10__.default)(),
         _readFormInput2 = _slicedToArray(_readFormInput, 5),
         project = _readFormInput2[0],
         title = _readFormInput2[1],
@@ -461,26 +426,29 @@ var runApp = function runApp() {
         ddt = _readFormInput2[3],
         priority = _readFormInput2[4];
 
-    var todo = new _Todo__WEBPACK_IMPORTED_MODULE_2__.default(project, title, desc, ddt, priority);
+    var todo = new _Todo_js__WEBPACK_IMPORTED_MODULE_2__.default(project, title, desc, ddt, priority);
 
-    if (_base__WEBPACK_IMPORTED_MODULE_0__.elements.submit.value === 'Create TODO') {
+    if (_base_js__WEBPACK_IMPORTED_MODULE_0__.elements.submit.value === 'Create TODO') {
       todo.addTODO();
     } else {
-      todo.updateTODO(_base__WEBPACK_IMPORTED_MODULE_0__.prevProject[0], project, _base__WEBPACK_IMPORTED_MODULE_0__.prevProject[1], title, desc, ddt, priority, _base__WEBPACK_IMPORTED_MODULE_0__.prevProject[2]);
+      var prevPjt = _base_js__WEBPACK_IMPORTED_MODULE_0__.prevProject[0];
+      var tid = _base_js__WEBPACK_IMPORTED_MODULE_0__.prevProject[1];
+      var status = _base_js__WEBPACK_IMPORTED_MODULE_0__.prevProject[2];
+      _Todo_js__WEBPACK_IMPORTED_MODULE_2__.default.updateTODO(prevPjt, project, tid, title, desc, ddt, priority, status);
     }
 
-    (0,_prepareMainUI__WEBPACK_IMPORTED_MODULE_3__.default)();
-    (0,_updateTitle__WEBPACK_IMPORTED_MODULE_7__.default)(project);
-    var ul = _base__WEBPACK_IMPORTED_MODULE_0__.elements.todoListUL;
+    (0,_prepareMainUI_js__WEBPACK_IMPORTED_MODULE_3__.default)();
+    (0,_updateTitle_js__WEBPACK_IMPORTED_MODULE_7__.default)(project);
+    var ul = _base_js__WEBPACK_IMPORTED_MODULE_0__.elements.todoListUL;
     ul.textContent = '';
-    Object.entries(_Project__WEBPACK_IMPORTED_MODULE_1__.default.read()[project]).forEach(function (todo) {
-      (0,_todoItem__WEBPACK_IMPORTED_MODULE_6__.default)({
+    Object.entries(_Project_js__WEBPACK_IMPORTED_MODULE_1__.default.read()[project]).forEach(function (todo) {
+      (0,_todoItem_js__WEBPACK_IMPORTED_MODULE_6__.default)({
         project: project,
         todo: todo,
         parent: ul
       });
     });
-    _base__WEBPACK_IMPORTED_MODULE_0__.elements.todoForm.reset();
+    _base_js__WEBPACK_IMPORTED_MODULE_0__.elements.todoForm.reset();
   });
 };
 
@@ -496,12 +464,12 @@ var runApp = function runApp() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/format/index.js");
-/* harmony import */ var _prepareMainUI__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./prepareMainUI */ "./src/js/prepareMainUI.js");
-/* harmony import */ var _updateTitle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./updateTitle */ "./src/js/updateTitle.js");
-/* harmony import */ var _todoItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./todoItem */ "./src/js/todoItem.js");
-/* harmony import */ var _Project__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Project */ "./src/js/Project.js");
+/* harmony import */ var _base_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base.js */ "./src/js/base.js");
+/* harmony import */ var _prepareMainUI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./prepareMainUI.js */ "./src/js/prepareMainUI.js");
+/* harmony import */ var _updateTitle_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./updateTitle.js */ "./src/js/updateTitle.js");
+/* harmony import */ var _todoItem_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./todoItem.js */ "./src/js/todoItem.js");
+/* harmony import */ var _Project_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Project.js */ "./src/js/Project.js");
 
 
 
@@ -510,16 +478,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var todayTODOs = function todayTODOs() {
-  (0,_prepareMainUI__WEBPACK_IMPORTED_MODULE_1__.default)();
-  (0,_updateTitle__WEBPACK_IMPORTED_MODULE_2__.default)('Today');
-  var ul = _base__WEBPACK_IMPORTED_MODULE_0__.elements.todoListUL;
+  (0,_prepareMainUI_js__WEBPACK_IMPORTED_MODULE_1__.default)();
+  (0,_updateTitle_js__WEBPACK_IMPORTED_MODULE_2__.default)('Today');
+  var ul = _base_js__WEBPACK_IMPORTED_MODULE_0__.elements.todoListUL;
   ul.textContent = '';
-  var data = _Project__WEBPACK_IMPORTED_MODULE_4__.default.read();
-  Object.entries(data).filter(function (project) {
+  var data = _Project_js__WEBPACK_IMPORTED_MODULE_4__.default.read();
+  Object.entries(data).forEach(function (project) {
     Object.entries(project[1]).filter(function (p) {
       return p[1].ddt.slice(0, 10) === (0,date_fns__WEBPACK_IMPORTED_MODULE_5__.default)(new Date(), 'yyyy-MM-dd');
     }).forEach(function (todo) {
-      (0,_todoItem__WEBPACK_IMPORTED_MODULE_3__.default)({
+      (0,_todoItem_js__WEBPACK_IMPORTED_MODULE_3__.default)({
         project: project[0],
         todo: todo,
         parent: ul
@@ -540,13 +508,13 @@ var todayTODOs = function todayTODOs() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Todo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Todo */ "./src/js/Todo.js");
-/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
+/* harmony import */ var _Todo_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Todo.js */ "./src/js/Todo.js");
+/* harmony import */ var _base_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base.js */ "./src/js/base.js");
 
 
 
-var displayTODOs = function displayTODOs(tid, projectName, title, desc, ddt, priorityClass, statusClass, iconClass, parent) {
-  var markup = "<li class=\"td-list-item td-list-item-".concat(tid, "\">\n                        <div class=\"check\">\n                          <span class=\"status status-").concat(tid, " ").concat(priorityClass, "\"><i class=\"fas ").concat(iconClass, "\"></i></span>\n                        </div>\n                \n                        <div class=\"info\">\n                          <div class=\"title title-").concat(tid, " ").concat(statusClass, "\">").concat(title, "</div>\n                          <div class=\"info-secondary\">\n                            <div class=\"due-dt\">").concat(ddt, "</div>\n                            <div class=\"btns\">\n                              <span class=\"edit edit-").concat(tid, "\"><i class=\"fas fa-edit\"></i></span>\n                              <span class=\"delete delete-").concat(tid, "\"><i class=\"fas fa-trash-alt\"></i></span>\n                            </div>\n                          </div>\n                           <div class=\"desc desc-").concat(tid, " hide\">").concat(desc, "\n                             <span>").concat(projectName, "</span>\n                           </div>\n                        </div>\n                      </li>");
+var displayTODOs = function displayTODOs(tid, projectName, title, desc, ddt, prCls, statusCls, iconClass, parent) {
+  var markup = "<li class=\"td-list-item td-list-item-".concat(tid, "\">\n                        <div class=\"check\">\n                          <span class=\"status status-").concat(tid, " ").concat(prCls, "\"><i class=\"fas ").concat(iconClass, "\"></i></span>\n                        </div>\n                \n                        <div class=\"info\">\n                          <div class=\"title title-").concat(tid, " ").concat(statusCls, "\">").concat(title, "</div>\n                          <div class=\"info-secondary\">\n                            <div class=\"due-dt\">").concat(ddt, "</div>\n                            <div class=\"btns\">\n                              <span class=\"edit edit-").concat(tid, "\"><i class=\"fas fa-edit\"></i></span>\n                              <span class=\"delete delete-").concat(tid, "\"><i class=\"fas fa-trash-alt\"></i></span>\n                            </div>\n                          </div>\n                           <div class=\"desc desc-").concat(tid, " hide\">").concat(desc, "\n                             <span>").concat(projectName, "</span>\n                           </div>\n                        </div>\n                      </li>");
   parent.insertAdjacentHTML('beforeend', markup);
 };
 
@@ -559,11 +527,20 @@ var paintTodoItem = function paintTodoItem(_ref) {
   var title = todo[1].title;
   var desc = todo[1].desc;
   var ddt = todo[1].ddt;
-  var priorityClass = todo[1].priority === 'high' ? 'pr-h' : todo[1].priority === 'low' ? 'pr-l' : 'pr-m';
   var priority = todo[1].priority;
   var status = todo[1].status;
   var statusClass = status === 'pending' ? '' : 'st-f';
   var iconClass = status === 'pending' ? 'fa-square' : 'fa-check-square';
+  var priorityClass;
+
+  if (todo[1].priority === 'high') {
+    priorityClass = 'pr-h';
+  } else if (todo[1].priority === 'low') {
+    priorityClass = 'pr-l';
+  } else {
+    priorityClass = 'pr-m';
+  }
+
   displayTODOs(tid, projectName, title, desc, ddt, priorityClass, statusClass, iconClass, parent); // description
 
   document.querySelector(".title-".concat(tid)).onclick = function () {
@@ -572,7 +549,7 @@ var paintTodoItem = function paintTodoItem(_ref) {
 
 
   document.querySelector(".status-".concat(tid)).onclick = function () {
-    new _Todo__WEBPACK_IMPORTED_MODULE_0__.default().updateStatus(project, tid);
+    _Todo_js__WEBPACK_IMPORTED_MODULE_0__.default.updateStatus(project, tid);
     document.querySelector(".title-".concat(tid)).classList.toggle('st-f');
     var check = document.querySelector(".status-".concat(tid, " i"));
     check.className = check.className === 'fas fa-square' ? 'fas fa-check-square' : 'fas fa-square';
@@ -580,23 +557,23 @@ var paintTodoItem = function paintTodoItem(_ref) {
 
 
   document.querySelector(".delete-".concat(tid)).addEventListener('click', function () {
-    new _Todo__WEBPACK_IMPORTED_MODULE_0__.default().deleteTODO(project, tid);
+    _Todo_js__WEBPACK_IMPORTED_MODULE_0__.default.deleteTODO(project, tid);
     document.querySelector(".td-list-item-".concat(tid)).textContent = '';
     document.querySelector(".td-list-item-".concat(tid)).style.borderBottom = 'none';
     document.querySelector(".td-list-item-".concat(tid)).style.padding = '0';
   });
   document.querySelector(".edit-".concat(tid)).addEventListener('click', function () {
-    _base__WEBPACK_IMPORTED_MODULE_1__.elements.main.classList.add('hide');
-    _base__WEBPACK_IMPORTED_MODULE_1__.elements.todoFormDiv.classList.remove('hide');
+    _base_js__WEBPACK_IMPORTED_MODULE_1__.elements.main.classList.add('hide');
+    _base_js__WEBPACK_IMPORTED_MODULE_1__.elements.todoFormDiv.classList.remove('hide');
     document.getElementById('title').value = title;
     document.getElementById('desc').value = desc;
     document.getElementById('due-dt').value = ddt;
     document.getElementById('todoForm').elements.priority.value = priority;
-    document.querySelector("select > option[value=\"".concat(project, "\"]")).selected = "true";
+    document.querySelector("select > option[value=\"".concat(project, "\"]")).selected = 'true';
     document.querySelector('.submit').value = 'Update TODO';
-    _base__WEBPACK_IMPORTED_MODULE_1__.prevProject[0] = projectName;
-    _base__WEBPACK_IMPORTED_MODULE_1__.prevProject[1] = tid;
-    _base__WEBPACK_IMPORTED_MODULE_1__.prevProject[2] = status;
+    _base_js__WEBPACK_IMPORTED_MODULE_1__.prevProject[0] = projectName;
+    _base_js__WEBPACK_IMPORTED_MODULE_1__.prevProject[1] = tid;
+    _base_js__WEBPACK_IMPORTED_MODULE_1__.prevProject[2] = status;
   });
 };
 
@@ -612,12 +589,12 @@ var paintTodoItem = function paintTodoItem(_ref) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
+/* harmony import */ var _base_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base.js */ "./src/js/base.js");
 
 
 var toggleAddProjectsForm = function toggleAddProjectsForm() {
-  _base__WEBPACK_IMPORTED_MODULE_0__.elements.addProjects.addEventListener('click', function (e) {
-    var formStyle = _base__WEBPACK_IMPORTED_MODULE_0__.elements.newProjectForm.style;
+  _base_js__WEBPACK_IMPORTED_MODULE_0__.elements.addProjects.addEventListener('click', function () {
+    var formStyle = _base_js__WEBPACK_IMPORTED_MODULE_0__.elements.newProjectForm.style;
     formStyle.display = formStyle.display === 'flex' ? 'none' : 'flex';
   });
 };
@@ -634,12 +611,12 @@ var toggleAddProjectsForm = function toggleAddProjectsForm() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
+/* harmony import */ var _base_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base.js */ "./src/js/base.js");
 
 
 var toggleMenu = function toggleMenu() {
-  _base__WEBPACK_IMPORTED_MODULE_0__.elements.menu.addEventListener('click', function () {
-    _base__WEBPACK_IMPORTED_MODULE_0__.elements.sidebar.classList.toggle('hide');
+  _base_js__WEBPACK_IMPORTED_MODULE_0__.elements.menu.addEventListener('click', function () {
+    _base_js__WEBPACK_IMPORTED_MODULE_0__.elements.sidebar.classList.toggle('hide');
   });
 };
 
@@ -655,16 +632,16 @@ var toggleMenu = function toggleMenu() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
-/* harmony import */ var _Project__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Project */ "./src/js/Project.js");
+/* harmony import */ var _base_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base.js */ "./src/js/base.js");
+/* harmony import */ var _Project_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Project.js */ "./src/js/Project.js");
 
 
 
 var updateSelectOptions = function updateSelectOptions() {
-  _base__WEBPACK_IMPORTED_MODULE_0__.elements.select.textContent = '';
-  Object.entries(_Project__WEBPACK_IMPORTED_MODULE_1__.default.read()).forEach(function (project) {
+  _base_js__WEBPACK_IMPORTED_MODULE_0__.elements.select.textContent = '';
+  Object.entries(_Project_js__WEBPACK_IMPORTED_MODULE_1__.default.read()).forEach(function (project) {
     var markup = "<option value=\"".concat(project[0], "\">").concat(project[0], "</option>");
-    _base__WEBPACK_IMPORTED_MODULE_0__.elements.select.insertAdjacentHTML("beforeend", markup);
+    _base_js__WEBPACK_IMPORTED_MODULE_0__.elements.select.insertAdjacentHTML('beforeend', markup);
   });
 };
 
@@ -682,18 +659,18 @@ var updateSelectOptions = function updateSelectOptions() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! uniqid */ "./node_modules/uniqid/index.js");
 /* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./src/js/base.js");
+/* harmony import */ var _base_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base.js */ "./src/js/base.js");
 
 
 
 var prepareFormUI = function prepareFormUI() {
-  _base__WEBPACK_IMPORTED_MODULE_1__.elements.main.classList.add('hide');
-  _base__WEBPACK_IMPORTED_MODULE_1__.elements.todoFormDiv.classList.remove('hide');
+  _base_js__WEBPACK_IMPORTED_MODULE_1__.elements.main.classList.add('hide');
+  _base_js__WEBPACK_IMPORTED_MODULE_1__.elements.todoFormDiv.classList.remove('hide');
 };
 
 var setDefaultOption = function setDefaultOption(title) {
   if (title !== 'All TODOs' && title !== 'Today') {
-    document.querySelector("select > option[value=\"".concat(title, "\"]")).selected = "true";
+    document.querySelector("select > option[value=\"".concat(title, "\"]")).selected = 'true';
   }
 };
 
@@ -701,7 +678,7 @@ var renderForm = function renderForm(title, id) {
   document.querySelector(".new-todo-".concat(id)).addEventListener('click', function () {
     prepareFormUI();
     setDefaultOption(title);
-    _base__WEBPACK_IMPORTED_MODULE_1__.elements.submit.value = 'Create TODO';
+    _base_js__WEBPACK_IMPORTED_MODULE_1__.elements.submit.value = 'Create TODO';
   });
 };
 
@@ -711,7 +688,7 @@ var updateProjectTitle = function updateProjectTitle(title) {
   category.textContent = '';
   var addIcon = title === 'All TODOs' || title === 'Today' ? 'hide' : '';
   var markup = "<div class=\"category-title\">".concat(title, "</div>\n                  <div class=\"new-todo new-todo-").concat(id, " ").concat(addIcon, "\"><i class=\"fas fa-plus\"></i></div>");
-  category.insertAdjacentHTML("beforeend", markup);
+  category.insertAdjacentHTML('beforeend', markup);
   renderForm(title, id);
 };
 
@@ -14488,12 +14465,12 @@ define(String.prototype, "padRight", "".padEnd);
   \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _stylesheets_style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./stylesheets/style.scss */ "./src/stylesheets/style.scss");
-/* harmony import */ var _js_today__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/today */ "./src/js/today.js");
-/* harmony import */ var _js_toggleMenu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/toggleMenu */ "./src/js/toggleMenu.js");
-/* harmony import */ var _js_toggleAddProjectForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/toggleAddProjectForm */ "./src/js/toggleAddProjectForm.js");
-/* harmony import */ var _js_updateSelectOptions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/updateSelectOptions */ "./src/js/updateSelectOptions.js");
-/* harmony import */ var _js_refreshProjectList__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/refreshProjectList */ "./src/js/refreshProjectList.js");
-/* harmony import */ var _js_runApp__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/runApp */ "./src/js/runApp.js");
+/* harmony import */ var _js_today_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/today.js */ "./src/js/today.js");
+/* harmony import */ var _js_toggleMenu_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/toggleMenu.js */ "./src/js/toggleMenu.js");
+/* harmony import */ var _js_toggleAddProjectForm_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/toggleAddProjectForm.js */ "./src/js/toggleAddProjectForm.js");
+/* harmony import */ var _js_updateSelectOptions_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/updateSelectOptions.js */ "./src/js/updateSelectOptions.js");
+/* harmony import */ var _js_refreshProjectList_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/refreshProjectList.js */ "./src/js/refreshProjectList.js");
+/* harmony import */ var _js_runApp_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/runApp.js */ "./src/js/runApp.js");
 
 
 
@@ -14503,12 +14480,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var init = function init() {
-  (0,_js_today__WEBPACK_IMPORTED_MODULE_1__.default)();
-  (0,_js_toggleMenu__WEBPACK_IMPORTED_MODULE_2__.default)();
-  (0,_js_toggleAddProjectForm__WEBPACK_IMPORTED_MODULE_3__.default)();
-  (0,_js_updateSelectOptions__WEBPACK_IMPORTED_MODULE_4__.default)();
-  (0,_js_refreshProjectList__WEBPACK_IMPORTED_MODULE_5__.default)();
-  (0,_js_runApp__WEBPACK_IMPORTED_MODULE_6__.default)();
+  (0,_js_today_js__WEBPACK_IMPORTED_MODULE_1__.default)();
+  (0,_js_toggleMenu_js__WEBPACK_IMPORTED_MODULE_2__.default)();
+  (0,_js_toggleAddProjectForm_js__WEBPACK_IMPORTED_MODULE_3__.default)();
+  (0,_js_updateSelectOptions_js__WEBPACK_IMPORTED_MODULE_4__.default)();
+  (0,_js_refreshProjectList_js__WEBPACK_IMPORTED_MODULE_5__.default)();
+  (0,_js_runApp_js__WEBPACK_IMPORTED_MODULE_6__.default)();
 };
 
 init();
