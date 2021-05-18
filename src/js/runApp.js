@@ -65,7 +65,7 @@ export const runApp = () => {
     if (document.querySelector('.submit').value === 'Create TODO'){
       todo.addTODO();
     }else{
-      todo.updateTODO(prevProject[0], project, prevProject[1], title, desc, ddt, priority)
+      todo.updateTODO(prevProject[0], project, prevProject[1], title, desc, ddt, priority, prevProject[2])
     }
 
     prepareMainUI();

@@ -1,5 +1,4 @@
 import uniqid from 'uniqid';
-import { projects } from './base'
 
 export default class Todo {
   constructor(project, title, desc, ddt, priority) {
@@ -13,49 +12,49 @@ export default class Todo {
   }
 
   addTODO() {
-    projects[this.project][this.tid] = {
+    let data = JSON.parse(localStorage.getItem('projects'));
+    data[this.project][this.tid] = {
       title: this.title,
       desc: this.desc,
       ddt: this.ddt,
       priority: this.priority,
       status: this.status
     }
-    this.persistData();
+    localStorage.setItem('projects', JSON.stringify(data));
   }
 
-  updateTODO(prevProject, newProject, tid, title, desc, ddt, priority){
+  updateTODO(prevProject, newProject, tid, title, desc, ddt, priority, status){
+    let data = JSON.parse(localStorage.getItem('projects'));
+
     if (prevProject === newProject){
-      this._update(prevProject,tid, title, desc, ddt, priority)
+      this._update(data, prevProject,tid, title, desc, ddt, priority, status)
     } else {
-      delete projects[prevProject][tid];
-      this._update(newProject,tid, title, desc, ddt, priority)
+      delete data[prevProject][tid];
+      this._update(data, newProject,tid, title, desc, ddt, priority, status)
     }
-    this.persistData();
+    localStorage.setItem('projects', JSON.stringify(data));
   }
 
   updateStatus(project, tid){
-    projects[project][tid].status = projects[project][tid].status === 'finish' ? 'pending' : 'finish';
-    this.persistData();
+    let data = JSON.parse(localStorage.getItem('projects'));
+    data[project][tid].status = data[project][tid].status === 'finish' ? 'pending' : 'finish';
+    localStorage.setItem('projects', JSON.stringify(data));
   }
 
   deleteTODO(project, tid){
-    delete projects[project][tid];
-    this.persistData();
+    let data = JSON.parse(localStorage.getItem('projects'));
+    delete data[project][tid];
+    localStorage.setItem('projects', JSON.stringify(data));
   }
 
-  _update(project, tid, title, desc, ddt, priority){
-    let st = projects[project][tid].status;
-    projects[project][tid] = {
+  _update(data, project, tid, title, desc, ddt, priority, status){
+    data[project][tid] = {
       title,
       desc,
       ddt,
       priority,
-      status: st
+      status
     }
-  }
-
-  persistData(){
-    localStorage.setItem('projects', JSON.stringify(projects));
   }
 
 }

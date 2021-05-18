@@ -1,13 +1,15 @@
-import {projects} from "./base";
-
 export default class Project {
   constructor(name){
     this.name = name;
   }
 
   addProject(){
-    projects[this.name] = {};
-    this.persistData();
+    let data = JSON.parse(localStorage.getItem('projects'));
+    if(data === null)
+      data = {}
+
+    data[this.name] = {};
+    localStorage.setItem('projects', JSON.stringify(data));
   }
 
   nameIsBlank(){
@@ -15,11 +17,11 @@ export default class Project {
   }
 
   checkUniqueness(){
-   return Object.entries(projects).every( project => project[0] !== this.name);
+    let data = JSON.parse(localStorage.getItem('projects'));
+    return Object.entries(data).every( project => project[0] !== this.name);
   }
 
-  persistData(){
-    localStorage.setItem('projects', JSON.stringify(projects));
-  }
-
+  // persistData(){
+  //   localStorage.setItem('projects', JSON.stringify(projects));
+  // }
 }

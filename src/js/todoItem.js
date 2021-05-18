@@ -80,6 +80,7 @@ const paintTodoItem = ({project, todo, parent}) => {
 
     prevProject[0] = projectName;
     prevProject[1] = tid
+    prevProject[2] = status
 
   })
 
