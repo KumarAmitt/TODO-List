@@ -12,11 +12,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ Project; }
 /* harmony export */ });
+/* harmony import */ var _Storage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Storage */ "./src/js/Storage.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
 
 var Project = /*#__PURE__*/function () {
   function Project(name) {
@@ -28,10 +31,9 @@ var Project = /*#__PURE__*/function () {
   _createClass(Project, [{
     key: "addProject",
     value: function addProject() {
-      var data = JSON.parse(localStorage.getItem('projects'));
-      if (data === null) data = {};
+      var data = _Storage__WEBPACK_IMPORTED_MODULE_0__.default.read();
       data[this.name] = {};
-      localStorage.setItem('projects', JSON.stringify(data));
+      _Storage__WEBPACK_IMPORTED_MODULE_0__.default.write(data);
     }
   }, {
     key: "nameIsBlank",
@@ -43,17 +45,56 @@ var Project = /*#__PURE__*/function () {
     value: function checkUniqueness() {
       var _this = this;
 
-      var data = JSON.parse(localStorage.getItem('projects'));
+      var data = _Storage__WEBPACK_IMPORTED_MODULE_0__.default.read();
       return Object.entries(data).every(function (project) {
         return project[0] !== _this.name;
       });
-    } // persistData(){
-    //   localStorage.setItem('projects', JSON.stringify(projects));
-    // }
-
+    }
   }]);
 
   return Project;
+}();
+
+
+
+/***/ }),
+
+/***/ "./src/js/Storage.js":
+/*!***************************!*\
+  !*** ./src/js/Storage.js ***!
+  \***************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ Storage; }
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Storage = /*#__PURE__*/function () {
+  function Storage() {
+    _classCallCheck(this, Storage);
+  }
+
+  _createClass(Storage, null, [{
+    key: "read",
+    value: function read() {
+      var data = JSON.parse(localStorage.getItem('projects'));
+      return data ? data : {};
+    }
+  }, {
+    key: "write",
+    value: function write(data) {
+      localStorage.setItem('projects', JSON.stringify(data));
+    }
+  }]);
+
+  return Storage;
 }();
 
 
@@ -73,11 +114,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! uniqid */ "./node_modules/uniqid/index.js");
 /* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Storage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Storage */ "./src/js/Storage.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -97,7 +140,7 @@ var Todo = /*#__PURE__*/function () {
   _createClass(Todo, [{
     key: "addTODO",
     value: function addTODO() {
-      var data = JSON.parse(localStorage.getItem('projects'));
+      var data = _Storage__WEBPACK_IMPORTED_MODULE_1__.default.read();
       data[this.project][this.tid] = {
         title: this.title,
         desc: this.desc,
@@ -105,12 +148,12 @@ var Todo = /*#__PURE__*/function () {
         priority: this.priority,
         status: this.status
       };
-      localStorage.setItem('projects', JSON.stringify(data));
+      _Storage__WEBPACK_IMPORTED_MODULE_1__.default.write(data);
     }
   }, {
     key: "updateTODO",
     value: function updateTODO(prevProject, newProject, tid, title, desc, ddt, priority, status) {
-      var data = JSON.parse(localStorage.getItem('projects'));
+      var data = _Storage__WEBPACK_IMPORTED_MODULE_1__.default.read();
 
       if (prevProject === newProject) {
         this._update(data, prevProject, tid, title, desc, ddt, priority, status);
@@ -120,21 +163,21 @@ var Todo = /*#__PURE__*/function () {
         this._update(data, newProject, tid, title, desc, ddt, priority, status);
       }
 
-      localStorage.setItem('projects', JSON.stringify(data));
+      _Storage__WEBPACK_IMPORTED_MODULE_1__.default.write(data);
     }
   }, {
     key: "updateStatus",
     value: function updateStatus(project, tid) {
-      var data = JSON.parse(localStorage.getItem('projects'));
+      var data = _Storage__WEBPACK_IMPORTED_MODULE_1__.default.read();
       data[project][tid].status = data[project][tid].status === 'finish' ? 'pending' : 'finish';
-      localStorage.setItem('projects', JSON.stringify(data));
+      _Storage__WEBPACK_IMPORTED_MODULE_1__.default.write(data);
     }
   }, {
     key: "deleteTODO",
     value: function deleteTODO(project, tid) {
-      var data = JSON.parse(localStorage.getItem('projects'));
+      var data = _Storage__WEBPACK_IMPORTED_MODULE_1__.default.read();
       delete data[project][tid];
-      localStorage.setItem('projects', JSON.stringify(data));
+      _Storage__WEBPACK_IMPORTED_MODULE_1__.default.write(data);
     }
   }, {
     key: "_update",
