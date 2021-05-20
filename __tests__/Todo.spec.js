@@ -40,4 +40,8 @@ describe('Should create a NEW Todo Object', () => {
     expect(t.project).toBe(project);
   });
 
+  test('should set the title property', () => {
+    expect(t.title).toBe(title);
+  });
+
 });
