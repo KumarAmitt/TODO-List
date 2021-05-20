@@ -48,4 +48,8 @@ describe('Should create a NEW Todo Object', () => {
     expect(t.desc).toBe(desc);
   });
 
+  test('should set the due-date property', () => {
+    expect(t.ddt).toBe(ddt);
+  });
+
 });
