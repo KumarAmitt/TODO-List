@@ -143,4 +143,8 @@ describe('toggle status', () => {
     expect(prevStatus).toBe('pending');
   });
 
+  test('current status should be finish if it was pending', () => {
+    expect(currStatus).toBe('finish');
+  });
+
 });
