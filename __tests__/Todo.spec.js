@@ -32,5 +32,8 @@ describe('Should create a NEW Todo Object', () => {
   const priority = 'high';
   const t = new Todo(project, title, desc, ddt, priority);
 
+  test('should generate tid', () => {
+    expect(typeof t.tid).toBe('string');
+  });
 
 });
