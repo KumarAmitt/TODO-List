@@ -71,5 +71,15 @@ describe('Add a TODO item in localStorage', () => {
   const priority = 'high';
   const t = new Todo(project, title, desc, ddt, priority);
 
+  test('should add a NEW TODO item', () => {
+    const { tid } = t;
+    t.addTODO();
+    const data = readData();
 
+    expect(data[project][tid]).toHaveProperty('title');
+    expect(data[project][tid]).toHaveProperty('desc');
+    expect(data[project][tid]).toHaveProperty('ddt');
+    expect(data[project][tid]).toHaveProperty('priority');
+    expect(data[project][tid]).toHaveProperty('status');
+  });
 });
