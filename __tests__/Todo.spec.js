@@ -139,4 +139,8 @@ describe('toggle status', () => {
   Todo.updateStatus('Project ONE', 'id01');
   const currStatus = readData()['Project ONE'].id01.status;
 
+  test('previous status should be pending', () => {
+    expect(prevStatus).toBe('pending');
+  });
+
 });
