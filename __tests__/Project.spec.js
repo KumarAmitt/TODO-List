@@ -29,4 +29,10 @@ describe('nameIsBlank', () => {
     expect(result).toBeTruthy();
   });
 
+  test('Returns false if the name of Project is is NOT blank', () => {
+    const result = new Project('My Project').nameIsBlank();
+    expect(result).toBeFalsy();
+  });
+
+
 });
