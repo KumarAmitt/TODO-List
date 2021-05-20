@@ -16,3 +16,9 @@ describe('should create a Project object', () => {
     expect(p.name).toBe('Project ONE');
   });
 });
+
+test('should add a NEW Project ', () => {
+  new Project('Project THREE').addProject();
+  const data = readData();
+  expect(data['Project THREE']).toEqual({});
+});
