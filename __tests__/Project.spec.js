@@ -22,3 +22,11 @@ test('should add a NEW Project ', () => {
   const data = readData();
   expect(data['Project THREE']).toEqual({});
 });
+
+describe('nameIsBlank', () => {
+  test('Returns true if the name of Project is blank', () => {
+    const result = new Project('').nameIsBlank();
+    expect(result).toBeTruthy();
+  });
+
+});
