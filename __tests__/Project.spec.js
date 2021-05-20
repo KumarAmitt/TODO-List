@@ -46,4 +46,9 @@ describe('checkUniqueness', () => {
     writeData(projects);
   });
 
+  test('Returns true if the name of Project is is unique', () => {
+    const result = new Project('My Project').checkUniqueness();
+    expect(result).toBeTruthy();
+  });
+
 });
