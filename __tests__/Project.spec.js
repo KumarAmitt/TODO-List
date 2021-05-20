@@ -33,8 +33,6 @@ describe('nameIsBlank', () => {
     const result = new Project('My Project').nameIsBlank();
     expect(result).toBeFalsy();
   });
-
-
 });
 
 describe('checkUniqueness', () => {
@@ -51,10 +49,8 @@ describe('checkUniqueness', () => {
     expect(result).toBeTruthy();
   });
 
-
   test('Returns false if the name of Project is is NOT unique', () => {
     const result = new Project('Project ONE').checkUniqueness();
     expect(result).toBeFalsy();
   });
-
 });
