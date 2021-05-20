@@ -59,9 +59,7 @@ describe('Should create a NEW Todo Object', () => {
   test('should set initial status property as PENDING', () => {
     expect(t.status).toBe('pending');
   });
-
 });
-
 
 describe('Add a TODO item in localStorage', () => {
   const project = 'Project ONE';
@@ -117,7 +115,6 @@ describe('Update the TODO item', () => {
     expect(data[prevProject].id01.ddt).toBe('30-05-2021T15:00');
   });
 
-
   test('should update the TODO PRIORITY', () => {
     Todo.updateTODO(prevProject, prevProject, tid, title, desc, ddt, 'low', status);
     const data = readData();
@@ -129,10 +126,7 @@ describe('Update the TODO item', () => {
     const data = readData();
     expect(data[prevProject].id01.status).toBe(status);
   });
-
-})
-
-
+});
 
 describe('toggle status', () => {
   const prevStatus = readData()['Project ONE'].id01.status;
@@ -146,5 +140,4 @@ describe('toggle status', () => {
   test('current status should be finish if it was pending', () => {
     expect(currStatus).toBe('finish');
   });
-
 });
