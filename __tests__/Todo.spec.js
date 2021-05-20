@@ -56,4 +56,8 @@ describe('Should create a NEW Todo Object', () => {
     expect(t.priority).toBe(priority);
   });
 
+  test('should set initial status property as PENDING', () => {
+    expect(t.status).toBe('pending');
+  });
+
 });
