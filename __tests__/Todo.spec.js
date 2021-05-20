@@ -83,3 +83,13 @@ describe('Add a TODO item in localStorage', () => {
     expect(data[project][tid]).toHaveProperty('status');
   });
 });
+
+describe('Update the TODO item', () => {
+  const prevProject = 'Project ONE';
+  const title = 'Conference';
+  const desc = 'Conference with Project Team';
+  const ddt = '20-05-2021T15:00';
+  const priority = 'high';
+  const status = 'pending';
+  const tid = 'id01';
+})
