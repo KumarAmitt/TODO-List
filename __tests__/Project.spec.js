@@ -51,4 +51,10 @@ describe('checkUniqueness', () => {
     expect(result).toBeTruthy();
   });
 
+
+  test('Returns false if the name of Project is is NOT unique', () => {
+    const result = new Project('Project ONE').checkUniqueness();
+    expect(result).toBeFalsy();
+  });
+
 });
