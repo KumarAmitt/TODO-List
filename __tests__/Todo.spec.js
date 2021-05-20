@@ -92,4 +92,11 @@ describe('Update the TODO item', () => {
   const priority = 'high';
   const status = 'pending';
   const tid = 'id01';
+
+  test('should update the TODO PROJECT category', () => {
+    Todo.updateTODO(prevProject, 'Project TWO', tid, title, desc, ddt, priority, status);
+    const data = readData();
+    expect(data['Project TWO'][tid].title).toBe(title);
+  });
+
 })
