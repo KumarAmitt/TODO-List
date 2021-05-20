@@ -36,4 +36,8 @@ describe('Should create a NEW Todo Object', () => {
     expect(typeof t.tid).toBe('string');
   });
 
+  test('should set the project property', () => {
+    expect(t.project).toBe(project);
+  });
+
 });
