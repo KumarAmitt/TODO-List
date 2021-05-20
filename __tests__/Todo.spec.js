@@ -131,3 +131,12 @@ describe('Update the TODO item', () => {
   });
 
 })
+
+
+
+describe('toggle status', () => {
+  const prevStatus = readData()['Project ONE'].id01.status;
+  Todo.updateStatus('Project ONE', 'id01');
+  const currStatus = readData()['Project ONE'].id01.status;
+
+});
