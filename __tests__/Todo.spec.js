@@ -117,4 +117,11 @@ describe('Update the TODO item', () => {
     expect(data[prevProject].id01.ddt).toBe('30-05-2021T15:00');
   });
 
+
+  test('should update the TODO PRIORITY', () => {
+    Todo.updateTODO(prevProject, prevProject, tid, title, desc, ddt, 'low', status);
+    const data = readData();
+    expect(data[prevProject].id01.priority).toBe('low');
+  });
+
 })
