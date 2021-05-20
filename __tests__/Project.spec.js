@@ -38,6 +38,12 @@ describe('nameIsBlank', () => {
 });
 
 describe('checkUniqueness', () => {
-
+  beforeEach(() => {
+    const projects = {
+      'Project ONE': {},
+      'Project TWO': {},
+    };
+    writeData(projects);
+  });
 
 });
