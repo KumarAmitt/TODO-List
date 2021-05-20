@@ -124,4 +124,10 @@ describe('Update the TODO item', () => {
     expect(data[prevProject].id01.priority).toBe('low');
   });
 
+  test('should NOT update the TODO status ', () => {
+    Todo.updateTODO(prevProject, prevProject, tid, title, desc, ddt, priority, status);
+    const data = readData();
+    expect(data[prevProject].id01.status).toBe(status);
+  });
+
 })
