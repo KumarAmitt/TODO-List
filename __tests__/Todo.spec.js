@@ -99,4 +99,10 @@ describe('Update the TODO item', () => {
     expect(data['Project TWO'][tid].title).toBe(title);
   });
 
+  test('should update the TODO TITLE', () => {
+    Todo.updateTODO(prevProject, prevProject, tid, 'New Title', desc, ddt, priority, status);
+    const data = readData();
+    expect(data[prevProject].id01.title).toBe('New Title');
+  });
+
 })
