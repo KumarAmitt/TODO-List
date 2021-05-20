@@ -36,3 +36,8 @@ describe('nameIsBlank', () => {
 
 
 });
+
+describe('checkUniqueness', () => {
+
+
+});
