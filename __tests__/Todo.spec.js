@@ -44,4 +44,8 @@ describe('Should create a NEW Todo Object', () => {
     expect(t.title).toBe(title);
   });
 
+  test('should set the description property', () => {
+    expect(t.desc).toBe(desc);
+  });
+
 });
