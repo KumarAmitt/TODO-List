@@ -52,4 +52,8 @@ describe('Should create a NEW Todo Object', () => {
     expect(t.ddt).toBe(ddt);
   });
 
+  test('should set the priority property', () => {
+    expect(t.priority).toBe(priority);
+  });
+
 });
