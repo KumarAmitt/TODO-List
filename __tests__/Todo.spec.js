@@ -61,3 +61,15 @@ describe('Should create a NEW Todo Object', () => {
   });
 
 });
+
+
+describe('Add a TODO item in localStorage', () => {
+  const project = 'Project ONE';
+  const title = 'Meeting';
+  const desc = 'Board Meeting';
+  const ddt = '20-05-2021T15:00';
+  const priority = 'high';
+  const t = new Todo(project, title, desc, ddt, priority);
+
+
+});
