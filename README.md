@@ -25,6 +25,7 @@ JavaScript Assignment.
 - SCSS
 - JAVASCRIPT
 - WEBPACK
+- JEST
 ```
 
 ## Getting Started
