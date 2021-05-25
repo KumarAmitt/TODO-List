@@ -25,6 +25,7 @@ JavaScript Assignment.
 - SCSS
 - JAVASCRIPT
 - WEBPACK
+- JEST
 ```
 
 ## Getting Started
@@ -60,6 +61,8 @@ Refer the following documentations to download the Text Editor of your choice:
 
 - If you wish to play around the codes, navigate to this Repository in the Text Editor of your choice.
 
+## Testing
+Run `npm run test` run all the tests.
 
 ## Author
 
