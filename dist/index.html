@@ -1,1 +1,127 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta http-equiv="X-UA-Compatible" content="ie=edge"><title>TODO List</title><script defer="defer" src="main.js"></script><link href="main.css" rel="stylesheet"></head><body><nav><div class="logo">// TODO</div><div class="menu"><i class="fas fa-bars"></i></div></nav><div class="sidebar hide"><ul class="sidebar-default"><li class="sb-df sb-item sb-all">All TODOs</li><li class="sb-df sb-item sb-today">Today</li></ul><div class="sidebar-projects"><div class="sb-p-title"><h3>Projects</h3><i class="fas fa-plus"></i></div><form class="new-project"><input name="projectName" placeholder="Project Name" maxlength="24"><div class="new-p-submit"><i class="fas fa-plus"></i></div></form><ul class="sb-p-items"></ul></div></div><main class="hide"><div class="category"></div><ul class="td-list"></ul></main><div class="todo-form hide"><form id="todoForm"><div class="todo-project"><select id="select" name="category"></select></div><div class="todo-title"><input name="title" id="title" placeholder="Title" maxlength="24" required></div><div class="todo-desc"><textarea name="desc" id="desc" placeholder="Write more about your TODO..." maxlength="300" required></textarea></div><div class="todo-ddt"><label for="due-dt">Due Date</label> <input type="datetime-local" id="due-dt" required></div><div class="todo-priority"><p>Select Priority of the Task</p><label class="pr-h"><input type="radio" name="priority" value="high" required> High</label> <label class="pr-m"><input type="radio" name="priority" value="medium"> Medium</label> <label class="pr-l"><input type="radio" name="priority" value="low"> Low</label></div><div class="todo-submit"><input class="submit" type="submit" value="Create TODO"></div></form></div><script src="https://kit.fontawesome.com/cec8e0eed3.js" crossorigin="anonymous"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>TODO List</title>
+<script defer src="main.js"></script><link href="main.css" rel="stylesheet"></head>
+<body>
+
+  <nav>
+    <div class="logo">// TODO</div>
+    <div class="menu">
+      <i class="fas fa-bars"></i>
+    </div>
+  </nav>
+
+  <div class="sidebar hide">
+    <ul class="sidebar-default">
+      <li class="sb-df sb-item sb-all">All TODOs</li>
+      <li class="sb-df sb-item sb-today">Today</li>
+    </ul>
+
+    <div class="sidebar-projects">
+      <div class="sb-p-title">
+        <h3>Projects</h3>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <form class="new-project">
+        <input type="text" name="projectName" placeholder="Project Name" maxlength="24">
+        <div class="new-p-submit"><i class="fas fa-plus"></i></div>
+      </form>
+      <ul class="sb-p-items">
+<!--        *** Placeholder Tag-->
+<!--        <li class="sb-p-item sb-item">Project ONE</li>-->
+      </ul>
+    </div>
+  </div>
+
+  <main class="hide">
+    <div class="category">
+<!--      *** Placeholder Tag-->
+<!--      <div class="category-title">Project ONE</div>-->
+<!--      <div class="new-todo"><i class="fas fa-plus"></i></div>-->
+    </div>
+
+    <ul class="td-list">
+<!--      *** Placeholder Tag-->
+
+<!--      <li class="td-list-item">-->
+<!--        <div class="check">-->
+<!--          <span class="status pr-h"><i class="fas fa-square"></i></span>-->
+<!--        </div>-->
+
+<!--        <div class="info">-->
+<!--          <div class="title">This is my first TODO...</div>-->
+<!--          <div class="info-secondary">-->
+<!--            <div class="due-dt"></div>-->
+<!--            <div class="btns">-->
+<!--              <span class="edit"><i class="fas fa-edit"></i></span>-->
+<!--              <span class="delete"><i class="fas fa-trash-alt"></i></span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="desc">-->
+<!--            hgytytytyty bghhhhhhh bghhhhhhhhhhh bghhhhhhhhhhh-->
+<!--            <span>Project ONE</span>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </li>-->
+
+    </ul>
+
+  </main>
+
+  <div class="todo-form hide">
+
+    <form id="todoForm">
+      <div class="todo-project">
+        <select id="select" name="category">
+<!--          *** Placeholder Tag-->
+<!--          <option value="Project ONE" selected>Project ONE</option>-->
+<!--          <option value="Project TWO">Project TWO</option>-->
+        </select>
+      </div>
+
+      <div class="todo-title">
+        <input type="text" name="title" id="title" placeholder="Title" maxlength="24" required>
+      </div>
+
+      <div class="todo-desc">
+        <textarea name="desc" id="desc" placeholder="Write more about your TODO..." maxlength="300" required></textarea>
+      </div>
+
+      <div class="todo-ddt">
+        <label for="due-dt">Due Date</label>
+        <input type="datetime-local" id="due-dt" required>
+      </div>
+
+      <div class="todo-priority">
+        <p>Select Priority of the Task</p>
+        <label class="pr-h">
+          <input type="radio" name="priority" value="high" required>
+          High
+        </label>
+        <label class="pr-m">
+          <input type="radio" name="priority" value="medium">
+          Medium
+        </label>
+        <label class="pr-l">
+          <input type="radio" name="priority" value="low">
+          Low
+        </label>
+      </div>
+      <div class="todo-submit">
+        <input class="submit" type="submit" value="Create TODO">
+      </div>
+
+    </form>
+  </div>
+
+
+
+
+
+<script src="https://kit.fontawesome.com/cec8e0eed3.js" crossorigin="anonymous"></script>
+</body>
+</html>
