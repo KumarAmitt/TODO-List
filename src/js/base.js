@@ -2,6 +2,7 @@ export const elements = {
   menu: document.querySelector('.menu'),
   sidebar: document.querySelector('.sidebar'),
   addProjects: document.querySelector('.sb-p-title'),
+  addProjectsIcon: document.querySelector('.sb-p-title i'),
   newProjectForm: document.querySelector('.new-project'),
   newPSubmit: document.querySelector('.new-p-submit'),
   projectUL: document.querySelector('.sb-p-items'),

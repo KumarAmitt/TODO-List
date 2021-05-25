@@ -219,6 +219,7 @@ var elements = {
   menu: document.querySelector('.menu'),
   sidebar: document.querySelector('.sidebar'),
   addProjects: document.querySelector('.sb-p-title'),
+  addProjectsIcon: document.querySelector('.sb-p-title i'),
   newProjectForm: document.querySelector('.new-project'),
   newPSubmit: document.querySelector('.new-p-submit'),
   projectUL: document.querySelector('.sb-p-items'),
@@ -594,8 +595,20 @@ __webpack_require__.r(__webpack_exports__);
 
 var toggleAddProjectsForm = function toggleAddProjectsForm() {
   _base_js__WEBPACK_IMPORTED_MODULE_0__.elements.addProjects.addEventListener('click', function () {
+    var upIcon = 'fa-chevron-up';
+    var downIcon = 'fa-chevron-down';
     var formStyle = _base_js__WEBPACK_IMPORTED_MODULE_0__.elements.newProjectForm.style;
-    formStyle.display = formStyle.display === 'flex' ? 'none' : 'flex';
+    var iconClass = _base_js__WEBPACK_IMPORTED_MODULE_0__.elements.addProjectsIcon.classList;
+
+    if (formStyle.display === 'flex') {
+      formStyle.display = 'none';
+      iconClass.remove(upIcon);
+      iconClass.add(downIcon);
+    } else {
+      formStyle.display = 'flex';
+      iconClass.remove(downIcon);
+      iconClass.add(upIcon);
+    }
   });
 };
 
